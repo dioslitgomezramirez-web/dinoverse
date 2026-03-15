@@ -1,7 +1,6 @@
 ﻿<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta name="google-site-verification" content="g_5Z88UeVw2dTf8MhMEGzzMwhIkMyiDC2mwCTvJbDg0" />
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -217,20 +216,23 @@ select {
 }
 
 .theme-toggle {
-  border: 1px solid var(--line);
-  background: linear-gradient(165deg, color-mix(in srgb, var(--forest) 58%, transparent), color-mix(in srgb, var(--bg-0) 80%, transparent));
+  border: 1px solid color-mix(in srgb, var(--sand) 28%, transparent);
+  background: linear-gradient(140deg, color-mix(in srgb, var(--forest) 38%, transparent), color-mix(in srgb, var(--bg-1) 78%, transparent));
   color: var(--ink);
   border-radius: 999px;
-  padding: 0.4rem 0.75rem;
+  padding: 0.5rem 0.9rem;
   cursor: pointer;
-  font-weight: 700;
-  transition: transform var(--fx-speed-fast) ease, border-color var(--fx-speed-fast) ease, box-shadow var(--fx-speed-fast) ease;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.18), inset 0 1px 0 color-mix(in srgb, var(--sand) 18%, transparent);
+  transition: transform var(--fx-speed-fast) ease, border-color var(--fx-speed-fast) ease, box-shadow var(--fx-speed-fast) ease, background var(--fx-speed-fast) ease;
 }
 
 .theme-toggle:hover {
   transform: translateY(-1px);
-  border-color: color-mix(in srgb, var(--fossil) 45%, transparent);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  border-color: color-mix(in srgb, var(--fossil) 38%, transparent);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.22), inset 0 1px 0 color-mix(in srgb, var(--sand) 26%, transparent);
+  background: linear-gradient(140deg, color-mix(in srgb, var(--forest) 46%, transparent), color-mix(in srgb, var(--bg-1) 84%, transparent));
 }
 
 #installAppBtn[hidden] {
@@ -775,42 +777,48 @@ h3 {
 .lyonix-loader-dots span:nth-child(2) { animation-delay: 120ms; }
 .lyonix-loader-dots span:nth-child(3) { animation-delay: 240ms; }
 
-.lyonix-global-btn {
-  position: fixed;
-  left: 1rem;
-  bottom: 1rem;
-  z-index: 82;
-  border: 1px solid color-mix(in srgb, var(--sand) 38%, transparent);
+.lyonix-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.55rem 0.75rem;
+  margin: 0.35rem 0 0.2rem;
   border-radius: 999px;
-  padding: 0.58rem 0.95rem;
-  background: linear-gradient(135deg, #1982b8, #2ccf99);
-  color: #eaffff;
-  font-weight: 800;
-  cursor: pointer;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+  background: linear-gradient(135deg, #0f7abf, #27c99a);
+  color: #eef6ff;
+  box-shadow: 0 12px 22px rgba(0, 0, 0, 0.16);
+  width: 100%;
+  max-width: 1100px;
+  grid-column: 1 / -1;
 }
 
-.to-top {
-  position: fixed;
-  right: 1rem;
-  bottom: 1.1rem;
-  z-index: 90;
-  border: 1px solid color-mix(in srgb, var(--sand) 30%, transparent);
-  border-radius: 999px;
-  padding: 0.5rem 0.9rem;
-  background: linear-gradient(135deg, #ffce78, #ff9f43);
-  color: #1f1a14;
+.lyonix-title-btn {
+  flex: 1;
+  text-align: center;
+  border: none;
+  background: transparent;
+  color: inherit;
   font-weight: 800;
+  letter-spacing: 0.03em;
+  padding: 0.5rem 0.6rem;
   cursor: pointer;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
-.to-top.visible {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateY(-2px);
+.lyonix-top-btn {
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  background: rgba(7, 22, 30, 0.22);
+  color: #f7fbff;
+  padding: 0.48rem 0.95rem;
+  border-radius: 999px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.lyonix-top-btn:hover {
+  transform: translateY(-1px);
+  background: rgba(7, 22, 30, 0.30);
+  box-shadow: 0 8px 14px rgba(0, 0, 0, 0.18);
 }
 
 .lyonix-global-modal {
@@ -2405,14 +2413,6 @@ footer {
     height: 3px;
   }
 
-  .lyonix-global-btn {
-    left: 0.75rem;
-    right: 0.75rem;
-    bottom: 1.6rem;
-    width: auto;
-    text-align: center;
-  }
-
   .to-top {
     right: 0.75rem;
     bottom: 0.75rem;
@@ -2618,6 +2618,12 @@ footer {
       <button id="settingsToggleBtn" class="theme-toggle" type="button" aria-label="Abrir configuracion" onclick="window.__dinoFallback && window.__dinoFallback.toggleSettings(event)">Config</button>
       <button id="installAppBtn" class="theme-toggle" type="button" hidden>Instalar app</button>
       <button id="themeToggle" class="theme-toggle" type="button" aria-label="Cambiar tema" onclick="window.__dinoFallback && window.__dinoFallback.toggleTheme(event)">Tema</button>
+      <button id="shareBtn" class="theme-toggle" type="button" aria-label="Compartir pagina">Compartir</button>
+    </div>
+
+    <div class="lyonix-bar">
+      <button id="lyonixGlobalBtn" class="lyonix-title-btn" type="button" aria-label="Abrir LYONIX intelligence">LYONIX IA</button>
+      <button id="toTop" class="lyonix-top-btn" type="button" aria-label="Subir arriba">Subir</button>
     </div>
   </header>
 
@@ -3196,8 +3202,6 @@ footer {
     </section>
   </main>
 
-  <button id="toTop" class="to-top" type="button" aria-label="Subir arriba">Subir</button>
-
   <div id="commandPalette" class="command-palette" hidden>
     <div class="command-dialog" role="dialog" aria-modal="true" aria-labelledby="commandTitle">
       <div class="command-head">
@@ -3249,10 +3253,6 @@ footer {
       </article>
     </div>
   </section>
-
-  <button id="lyonixGlobalBtn" class="lyonix-global-btn" type="button" aria-label="Abrir LYONIX intelligence">
-    LYONIX IA
-  </button>
 
   <div id="lyonixGlobalModal" class="lyonix-global-modal" hidden aria-hidden="true" style="display:none;">
     <div class="lyonix-global-dialog" role="dialog" aria-modal="true" aria-labelledby="lyonixGlobalTitle">
@@ -3444,6 +3444,7 @@ const screenSelect = $("screenSelect");
 const screenDots = $("screenDots");
 const quickSearchBtn = $("quickSearchBtn");
 const installAppBtn = $("installAppBtn");
+const shareBtn = $("shareBtn");
 const rankingList = $("rankingList");
 const randomDinoBtn = $("randomDinoBtn");
 const randomDinoCard = $("randomDinoCard");
@@ -4553,6 +4554,27 @@ function initAutoSave() {
   });
 }
 
+async function sharePage() {
+  const url = window.location.href;
+  const title = document.title || "DinoVerse";
+  const text = "Explora DinoVerse: enciclopedia y juegos de dinosaurios.";
+  if (navigator.share) {
+    try {
+      await navigator.share({ title, text, url });
+      showToast("Compartido");
+      return;
+    } catch (_err) {
+      // sigue a fallback
+    }
+  }
+  try {
+    await navigator.clipboard.writeText(url);
+    showToast("Enlace copiado");
+  } catch (_err) {
+    showToast("No se pudo compartir");
+  }
+}
+
 function updateLiveActivity() {
   if (liveXP) liveXP.textContent = String(explorerXP);
   if (liveMissions) liveMissions.textContent = String(completedMissions);
@@ -5539,7 +5561,7 @@ function updateReadingProgress() {
   const max = document.documentElement.scrollHeight - window.innerHeight;
   const progress = max <= 0 ? 0 : (scrollTop / max) * 100;
   readingProgress.style.width = `${progress}%`;
-  if (toTop) toTop.classList.toggle("visible", scrollTop > 360);
+  // boton fijo en header, sin toggle de visibilidad
 }
 
 function updateActiveNavLink(activeId) {
@@ -6238,6 +6260,10 @@ function initRuntimeStability() {
       stopTimelineAutoScroll();
     }
   });
+
+  if (shareBtn) {
+    shareBtn.addEventListener("click", sharePage);
+  }
 
   const bindAllImages = () => {
     document.querySelectorAll("img").forEach((img) => {
