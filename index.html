@@ -4662,6 +4662,8 @@ function safeGetStorage(key) {
 function saveAutoState() {
   const payload = {
     at: Date.now(),
+    theme: document.body.classList.contains("light") ? "light" : "dark",
+    customTheme: safeGetStorage(CUSTOM_THEME_KEY),
     visitorName: visitorNameInput?.value || visitorName || "",
     quickNote: quickNoteInput?.value || "",
     lastSearch: searchInput?.value || "",
@@ -4682,6 +4684,25 @@ function initAutoSave() {
   if (raw) {
     try {
       const saved = JSON.parse(raw);
+      if (saved?.theme === "light") {
+        document.body.classList.add("light");
+        safeSetStorage("dinoTheme", "light");
+      } else if (saved?.theme === "dark") {
+        document.body.classList.remove("light");
+        safeSetStorage("dinoTheme", "dark");
+      }
+      if (saved?.customTheme) {
+        safeSetStorage(CUSTOM_THEME_KEY, saved.customTheme);
+        try {
+          const parsed = JSON.parse(saved.customTheme);
+          applyCustomization({ ...defaultCustomization, ...parsed }, { persist: false });
+        } catch (_err) {
+          // Ignore malformed custom theme data.
+        }
+      }
+      if (themeToggle) {
+        themeToggle.textContent = document.body.classList.contains("light") ? "Oscuro" : "Claro";
+      }
       if (saved?.visitorName && visitorNameInput && !visitorNameInput.value) {
         visitorNameInput.value = saved.visitorName;
       }
@@ -5992,6 +6013,7 @@ function initThemeToggle() {
     const isLight = document.body.classList.contains("light");
     localStorage.setItem("dinoTheme", isLight ? "light" : "dark");
     themeToggle.textContent = isLight ? "Oscuro" : "Claro";
+    if (typeof saveAutoState === "function") saveAutoState();
   });
 }
 
