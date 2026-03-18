@@ -6,7 +6,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="format-detection" content="telephone=no">
   <title>DinoVerse | Museo Interactivo Prehistorico</title>
-  <meta name="description" content="Explora dinosaurios, periodos y juegos educativos en una experiencia inmersiva.">
+  <meta name="description" content="Explora dinosaurios, periodos, mapa paleo, modo historia, LYONIX IA y juegos educativos en una experiencia inmersiva V4.0.">
   <meta name="theme-color" content="#0b141b">
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -139,6 +139,7 @@ section[id] {
   border-bottom: 1px solid color-mix(in srgb, var(--sand) 26%, transparent);
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
   overflow: hidden;
+  transition: transform var(--fx-speed-mid) var(--fx-ease), opacity var(--fx-speed-fast) ease, box-shadow var(--fx-speed-fast) ease;
 }
 
 .header-actions {
@@ -267,6 +268,22 @@ select {
   background: linear-gradient(158deg, color-mix(in srgb, var(--bg-0) 48%, transparent), color-mix(in srgb, var(--bg-2) 58%, transparent));
   backdrop-filter: blur(calc(8px * var(--glass-factor))) saturate(120%);
   -webkit-backdrop-filter: blur(calc(8px * var(--glass-factor))) saturate(120%);
+  position: sticky;
+  top: calc(0.45rem + 72px);
+  z-index: 18;
+  transition: transform var(--fx-speed-mid) var(--fx-ease), opacity var(--fx-speed-fast) ease;
+}
+
+.main-header.is-hidden {
+  transform: translateY(-110%);
+  opacity: 0;
+  box-shadow: none;
+}
+
+.screen-switcher.is-hidden {
+  transform: translateY(-1rem);
+  opacity: 0;
+  pointer-events: none;
 }
 
 .screen-center {
@@ -337,6 +354,51 @@ select {
   border-color: color-mix(in srgb, var(--fossil) 82%, transparent);
 }
 
+.quick-access {
+  position: fixed;
+  right: clamp(0.8rem, 2vw, 1.4rem);
+  bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+  display: grid;
+  gap: 0.7rem;
+  z-index: 26;
+}
+
+.quick-access-btn {
+  min-width: 132px;
+  border: 1px solid color-mix(in srgb, var(--sand) 28%, transparent);
+  border-radius: 999px;
+  padding: 0.85rem 1.15rem;
+  color: #fff9ef;
+  font-weight: 900;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  box-shadow: 0 18px 34px rgba(0, 0, 0, 0.24);
+  backdrop-filter: blur(calc(12px * var(--glass-factor))) saturate(135%);
+  -webkit-backdrop-filter: blur(calc(12px * var(--glass-factor))) saturate(135%);
+  transition: transform var(--fx-speed-fast) ease, box-shadow var(--fx-speed-fast) ease, border-color var(--fx-speed-fast) ease;
+}
+
+.quick-access-btn:hover {
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: 0 22px 38px rgba(0, 0, 0, 0.28);
+  border-color: color-mix(in srgb, var(--fossil) 42%, transparent);
+}
+
+.quick-access-btn:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--fossil) 78%, transparent);
+  outline-offset: 3px;
+}
+
+.quick-access-lyonix {
+  background: linear-gradient(135deg, rgba(18, 130, 206, 0.92), rgba(24, 202, 151, 0.9));
+}
+
+.quick-access-top {
+  background: linear-gradient(135deg, rgba(196, 126, 52, 0.92), rgba(235, 180, 97, 0.9));
+  color: #1d130c;
+}
+
 main {
   width: min(1200px, 92vw);
   margin: 0 auto;
@@ -350,6 +412,11 @@ main {
   align-items: center;
   gap: 0.8rem;
   padding: 1rem 0 0.6rem;
+}
+
+.hero-copy {
+  display: grid;
+  gap: 0.95rem;
 }
 
 .eyebrow {
@@ -391,64 +458,6 @@ h3 {
   margin-top: 1.15rem;
 }
 
-.hero-showcase,
-.hero-showcase-image,
-.hero-showcase-overlay,
-.hero-showcase::before,
-.hero-showcase::after {
-  display: none !important;
-}
-
-.hero-showcase-image {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-
-.hero-showcase:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 24px 34px rgba(0, 0, 0, 0.28), inset 0 1px 0 color-mix(in srgb, var(--sand) 30%, transparent);
-}
-
-.hero-showcase::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.12) 0%, rgba(0, 0, 0, 0.6) 95%);
-}
-
-.hero-showcase.is-changing {
-  opacity: 0.78;
-}
-
-.hero-showcase-overlay {
-  position: absolute;
-  inset: auto 0 0 0;
-  padding: 1rem;
-  color: #fff1dc;
-  z-index: 1;
-}
-
-.hero-showcase-kicker {
-  margin: 0 0 0.3rem;
-  font-size: 0.78rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  opacity: 0.9;
-}
-
-.hero-showcase-overlay h3 {
-  margin: 0;
-  line-height: 1;
-}
-
-.hero-showcase-overlay p {
-  margin: 0.35rem 0 0;
-}
-
 .btn {
   border-radius: 12px;
   border: 1px solid transparent;
@@ -473,33 +482,6 @@ h3 {
   background: color-mix(in srgb, var(--forest) 28%, transparent);
   color: color-mix(in srgb, var(--ink) 92%, white);
   border-color: color-mix(in srgb, var(--sand) 38%, transparent);
-}
-
-.hero-art {
-  display: none !important;
-}
-
-.sun {
-  position: absolute;
-  right: 8%;
-  top: 2%;
-  width: 180px;
-  aspect-ratio: 1 / 1;
-  background: radial-gradient(circle, #ffdca6 0%, #de9d50 60%, transparent 75%);
-  filter: blur(1px);
-}
-
-.hero-art-image {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  width: min(100%, 500px);
-  max-height: 280px;
-  object-fit: cover;
-  border-radius: 20px;
-  border: 1px solid color-mix(in srgb, var(--sand) 24%, transparent);
-  box-shadow: var(--shadow);
-  animation: bob 4s ease-in-out infinite;
 }
 
 .stats {
@@ -776,50 +758,6 @@ h3 {
 
 .lyonix-loader-dots span:nth-child(2) { animation-delay: 120ms; }
 .lyonix-loader-dots span:nth-child(3) { animation-delay: 240ms; }
-
-.lyonix-bar {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  padding: 0.55rem 0.75rem;
-  margin: 0.35rem 0 0.2rem;
-  border-radius: 999px;
-  background: linear-gradient(135deg, #0f7abf, #27c99a);
-  color: #eef6ff;
-  box-shadow: 0 12px 22px rgba(0, 0, 0, 0.16);
-  width: 100%;
-  max-width: 1100px;
-  grid-column: 1 / -1;
-}
-
-.lyonix-title-btn {
-  flex: 1;
-  text-align: center;
-  border: none;
-  background: transparent;
-  color: inherit;
-  font-weight: 800;
-  letter-spacing: 0.03em;
-  padding: 0.5rem 0.6rem;
-  cursor: pointer;
-}
-
-.lyonix-top-btn {
-  border: 1px solid rgba(255, 255, 255, 0.45);
-  background: rgba(7, 22, 30, 0.22);
-  color: #f7fbff;
-  padding: 0.48rem 0.95rem;
-  border-radius: 999px;
-  font-weight: 800;
-  cursor: pointer;
-  transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
-}
-
-.lyonix-top-btn:hover {
-  transform: translateY(-1px);
-  background: rgba(7, 22, 30, 0.30);
-  box-shadow: 0 8px 14px rgba(0, 0, 0, 0.18);
-}
 
 .lyonix-global-modal {
   position: fixed;
@@ -1914,6 +1852,7 @@ body.compact-ui select {
 
 .command-dialog {
   width: min(760px, 100%);
+  max-height: min(84svh, 760px);
   border: 1px solid color-mix(in srgb, var(--sand) 30%, transparent);
   border-radius: 16px;
   background: color-mix(in srgb, var(--bg-0) 80%, transparent);
@@ -1924,6 +1863,9 @@ body.compact-ui select {
   transform: translateY(-18px) scale(0.98);
   opacity: 0;
   transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1), opacity 220ms ease;
+  overflow: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
 }
 
 .command-palette.is-open {
@@ -2007,6 +1949,8 @@ body.compact-ui select {
   transform: translateX(100%);
   transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
   overflow: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
 }
 
 .settings-drawer.open .settings-panel {
@@ -2189,6 +2133,205 @@ footer {
   to { opacity: 1; transform: scale(1) translateY(0); filter: saturate(1) blur(0); }
 }
 
+.story-layout,
+.timeline-tools,
+.map-layers,
+.ecosystem-live-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.story-layout {
+  grid-template-columns: 320px minmax(0, 1fr);
+  align-items: start;
+}
+
+.story-card,
+.ecosystem-card {
+  border: 1px solid var(--line);
+  border-radius: calc(var(--radius) + 4px);
+  background: linear-gradient(160deg, color-mix(in srgb, var(--card) 92%, transparent), color-mix(in srgb, var(--bg-2) 28%, transparent));
+  box-shadow: var(--shadow);
+  padding: 1rem;
+}
+
+.story-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.story-chapter {
+  position: relative;
+  padding: 1rem;
+  border-radius: var(--radius);
+  border: 1px solid color-mix(in srgb, var(--sand) 22%, transparent);
+  background: linear-gradient(160deg, color-mix(in srgb, var(--bg-0) 60%, transparent), color-mix(in srgb, var(--forest) 12%, transparent));
+}
+
+.story-chapter.active {
+  border-color: color-mix(in srgb, var(--fossil) 52%, transparent);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--fossil) 32%, transparent), var(--shadow);
+}
+
+.story-chapter.done::after {
+  content: "Completado";
+  position: absolute;
+  top: 0.85rem;
+  right: 0.85rem;
+  padding: 0.18rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  background: color-mix(in srgb, var(--forest) 56%, transparent);
+}
+
+.story-switch {
+  display: inline-flex;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+}
+
+.timeline-tools {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  margin-bottom: 0.8rem;
+}
+
+.timeline-zoom {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.time-card {
+  min-width: calc(260px * var(--timeline-zoom, 1));
+}
+
+.time-card small {
+  display: inline-flex;
+  margin-top: 0.55rem;
+  padding: 0.16rem 0.5rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--forest) 26%, transparent);
+}
+
+.map-layers {
+  margin-top: 0.9rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid color-mix(in srgb, var(--sand) 20%, transparent);
+}
+
+.map-layers label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.92rem;
+}
+
+.prehistoric-map-box {
+  position: relative;
+  overflow: hidden;
+}
+
+.map-pins {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.map-pin {
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
+.map-pin-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--sand) 78%, white);
+  box-shadow: 0 0 0 4px rgba(255, 226, 190, 0.14);
+}
+
+.map-pin-dot.active {
+  background: color-mix(in srgb, var(--fossil) 82%, white);
+}
+
+.map-pin-ring {
+  position: absolute;
+  inset: -12px;
+  border: 2px solid color-mix(in srgb, var(--fossil) 56%, transparent);
+  border-radius: 50%;
+  animation: mapPulse 1.8s ease-out infinite;
+}
+
+.map-pin-label {
+  margin-top: 0.4rem;
+  font-size: 0.74rem;
+  font-weight: 800;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
+}
+
+.ecosystem-live-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-bottom: 1rem;
+}
+
+.ecosystem-bar {
+  margin-top: 0.6rem;
+}
+
+.ecosystem-bar span {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.82rem;
+  margin-bottom: 0.25rem;
+}
+
+.ecosystem-bar-track {
+  height: 10px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--bg-0) 84%, transparent);
+  overflow: hidden;
+}
+
+.ecosystem-bar-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--forest) 84%, white), color-mix(in srgb, var(--fossil) 76%, white));
+}
+
+.body-reading,
+body.reading-mode {
+  --font-scale: 1.06;
+}
+
+body.reading-mode .panel,
+body.reading-mode .story-card,
+body.reading-mode .ecosystem-card,
+body.reading-mode .release-card {
+  max-width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+body.reduce-effects *,
+body.perf-lite * {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.12s !important;
+  scroll-behavior: auto !important;
+}
+
+body.view-lab .mist-1,
+body.view-lab .mist-2 {
+  opacity: 0.12;
+  filter: blur(34px);
+}
+
+body.view-lab {
+  background: radial-gradient(circle at 84% 8%, #355879 0%, var(--bg-1) 32%, #081018 100%);
+}
+
 @media (max-width: 1280px) and (min-width: 981px) {
   :root {
     --header-offset: 96px;
@@ -2265,10 +2408,14 @@ footer {
   }
 
   .main-header {
-    grid-template-columns: 1fr auto;
+    grid-template-columns: minmax(0, 1fr) auto;
     justify-content: space-between;
     align-items: center;
     gap: 0.5rem;
+  }
+
+  .logo {
+    min-width: 0;
   }
 
   .menu-toggle {
@@ -2277,12 +2424,15 @@ footer {
 
   .header-actions {
     grid-column: 1 / -1;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    justify-content: stretch;
+    width: 100%;
   }
 
   .header-actions .theme-toggle {
-    flex: 1 1 120px;
-    min-width: 120px;
+    min-width: 0;
+    width: 100%;
   }
 
   .main-header nav {
@@ -2329,6 +2479,7 @@ footer {
   .screen-switcher {
     margin-top: 0.45rem;
     align-items: flex-start;
+    top: calc(0.35rem + 64px);
   }
 
   .hero-art {
@@ -2398,6 +2549,24 @@ footer {
   .fossil-detail {
     grid-template-columns: 1fr;
   }
+
+  .story-layout,
+  .ecosystem-live-grid,
+  .story-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .quick-access {
+    right: 0.9rem;
+    bottom: calc(0.9rem + env(safe-area-inset-bottom, 0px));
+    gap: 0.55rem;
+  }
+
+  .quick-access-btn {
+    min-width: 118px;
+    padding: 0.72rem 0.95rem;
+    font-size: 0.88rem;
+  }
 }
 
 @media (max-width: 640px) {
@@ -2412,14 +2581,31 @@ footer {
   #quickSearchBtn,
   #settingsToggleBtn,
   #installAppBtn,
-  #themeToggle {
+  #themeToggle,
+  #shareBtn {
     padding: 0.35rem 0.6rem;
     font-size: 0.82rem;
+  }
+
+  .header-actions {
+    gap: 0.35rem;
   }
 
   .screen-switcher {
     flex-wrap: wrap;
     justify-content: center;
+    top: calc(0.3rem + 60px);
+  }
+
+  .command-dialog,
+  .lyonix-global-dialog {
+    width: min(100%, calc(100vw - 1rem));
+    padding: 0.85rem;
+  }
+
+  .settings-panel {
+    width: 100vw;
+    border-left: none;
   }
 
   #screenPrevBtn,
@@ -2477,21 +2663,21 @@ footer {
     grid-template-columns: 1fr;
   }
 
-  .hero-art {
-    min-height: 180px;
+  .timeline-tools {
+    grid-template-columns: 1fr;
   }
 
-  .hero-showcase {
-    min-height: 170px;
+  .quick-access {
+    right: 0.7rem;
+    left: 0.7rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .sun {
-    width: 130px;
+  .quick-access-btn {
+    min-width: 0;
+    width: 100%;
   }
 
-  .hero-art-image {
-    max-height: 200px;
-  }
 }
 
 @media (max-width: 420px) {
@@ -2505,9 +2691,10 @@ footer {
     height: 3px;
   }
 
-  .to-top {
-    right: 0.75rem;
-    bottom: 0.75rem;
+  .quick-access {
+    left: 0.6rem;
+    right: 0.6rem;
+    bottom: calc(0.7rem + env(safe-area-inset-bottom, 0px));
   }
 }
 
@@ -2540,11 +2727,16 @@ footer {
   #quickSearchBtn,
   #settingsToggleBtn,
   #themeToggle,
-  #installAppBtn {
+  #installAppBtn,
+  #shareBtn {
     min-height: 40px;
     width: 100%;
     font-size: 0.86rem;
     padding: 0.45rem 0.5rem;
+  }
+
+  .header-actions {
+    grid-template-columns: 1fr 1fr;
   }
 
   .screen-switcher {
@@ -2560,10 +2752,6 @@ footer {
 
   .hero {
     padding-top: 0.85rem;
-  }
-
-  .hero-showcase {
-    min-height: 176px;
   }
 
   .panel {
@@ -2690,9 +2878,10 @@ footer {
     <button id="menuToggle" class="menu-toggle" type="button" aria-expanded="false" aria-controls="mainNav" onclick="window.__dinoFallback && window.__dinoFallback.toggleMenu(event)">Menu</button>
     <nav id="mainNav">
       <a href="#estado">Estado</a>
-      <a href="#novedades">Novedades V3.0</a>
+      <a href="#novedades">Novedades V4.0</a>
       <a href="#ultra">Ultra rendimiento</a>
       <a href="#expediciones">Expediciones</a>
+      <a href="#historia">Historia</a>
       <a href="#enciclopedia">Enciclopedia</a>
       <a href="#timeline">Timeline</a>
       <a href="#mapa">Mapa</a>
@@ -2710,13 +2899,8 @@ footer {
       <button id="quickSearchBtn" class="theme-toggle" type="button" aria-label="Busqueda rapida" onclick="window.__dinoFallback && window.__dinoFallback.toggleSearch(event)">Buscar</button>
       <button id="settingsToggleBtn" class="theme-toggle" type="button" aria-label="Abrir configuracion" onclick="window.__dinoFallback && window.__dinoFallback.toggleSettings(event)">Config</button>
       <button id="installAppBtn" class="theme-toggle" type="button" hidden>Instalar app</button>
-      <button id="themeToggle" class="theme-toggle" type="button" aria-label="Cambiar tema" onclick="window.__dinoFallback && window.__dinoFallback.toggleTheme(event)">Tema</button>
+      <button id="themeToggle" class="theme-toggle" type="button" aria-label="Cambiar tema" onclick="window.__dinoFallback && window.__dinoFallback.toggleTheme(event)">Claro</button>
       <button id="shareBtn" class="theme-toggle" type="button" aria-label="Compartir pagina">Compartir</button>
-    </div>
-
-    <div class="lyonix-bar">
-      <button id="lyonixGlobalBtn" class="lyonix-title-btn" type="button" aria-label="Abrir LYONIX intelligence">LYONIX IA</button>
-      <button id="toTop" class="lyonix-top-btn" type="button" aria-label="Subir arriba">Subir</button>
     </div>
   </header>
 
@@ -2741,18 +2925,6 @@ footer {
           <a href="#timeline" class="btn btn-secondary" onclick="window.__dinoFallback && window.__dinoFallback.gotoSection(event,'timeline')">Ver timeline</a>
           <a href="#juego" class="btn btn-secondary" onclick="window.__dinoFallback && window.__dinoFallback.gotoSection(event,'juego')">Jugar quiz</a>
         </div>
-        <div id="heroShowcase" class="hero-showcase" aria-label="Galeria de dinosaurios">
-          <img id="heroShowcaseImage" class="hero-showcase-image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Tyrannosaurus_AMNH_5027.jpg/1280px-Tyrannosaurus_AMNH_5027.jpg" onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Tyrannosaurus_AMNH_5027.jpg/1280px-Tyrannosaurus_AMNH_5027.jpg';" alt="Imagen destacada de dinosaurios" loading="eager" referrerpolicy="no-referrer">
-          <div class="hero-showcase-overlay">
-            <p class="hero-showcase-kicker">Destacado</p>
-            <h3 id="heroShowcaseTitle">Era Mesozoica</h3>
-            <p id="heroShowcaseCaption">Imagenes prehistoricas en rotacion</p>
-          </div>
-        </div>
-      </div>
-      <div class="hero-art" aria-hidden="true">
-        <div class="sun"></div>
-        <img class="hero-art-image" src="https://upload.wikimedia.org/wikipedia/commons/8/86/Spinosaurus_aegyptiacus_restoration.jpg" onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Tyrannosaurus_AMNH_5027.jpg/1280px-Tyrannosaurus_AMNH_5027.jpg';" alt="Ilustracion realista de dinosaurio" loading="lazy" referrerpolicy="no-referrer">
       </div>
     </section>
 
@@ -2803,40 +2975,40 @@ footer {
     <section id="novedades" class="panel reveal">
       <div class="section-title">
         <p class="eyebrow">Release</p>
-        <h2>Lanzamiento V3.0</h2>
+        <h2>Lanzamiento V4.0</h2>
       </div>
-      <p class="result-meta">Version 3.0 con mas contenido, estilos renovados y personalizacion avanzada para una experiencia mas inmersiva.</p>
+      <p class="result-meta">Version 4.0 con modo historia, museo interactivo, capas paleo, ecosistemas vivos, personalizacion avanzada y nuevas herramientas de estudio.</p>
       <div class="release-grid">
         <article class="release-card">
-          <h3>Exploracion 3.0</h3>
-          <p>Nueva seccion de expediciones con rutas, biomas y puntos clave por continente.</p>
+          <h3>Museo 4D</h3>
+          <p>Cada panel tiene ambiente propio con color, luz y ritmo visual segun el tema explorado.</p>
         </article>
         <article class="release-card">
-          <h3>Catalogo ampliado</h3>
-          <p>Mas especies en la enciclopedia con datos de habitat, fuerza y velocidad.</p>
+          <h3>Modo Historia</h3>
+          <p>Recorrido por capitulos con progreso, narrativa y logros por avance.</p>
         </article>
         <article class="release-card">
-          <h3>Personalizacion Pro</h3>
-          <p>Nuevos presets, controles de ambiente y ajustes de animaciones.</p>
+          <h3>Mapa por capas</h3>
+          <p>Clima, flora, migraciones y fosiles para interpretar regiones con mas contexto.</p>
         </article>
         <article class="release-card">
-          <h3>Estilos V3</h3>
-          <p>Paleta renovada, glass mas limpio y tarjetas con brillo sutil.</p>
+          <h3>Timeline expandido</h3>
+          <p>Zoom por millones de anios y microeventos destacados en cada era.</p>
         </article>
         <article class="release-card">
-          <h3>Modo alta frecuencia</h3>
-          <p>Ajustes para pantallas de 120 Hz con menor latencia visual y respuesta mas fluida.</p>
+          <h3>Personalizacion V4</h3>
+          <p>Modo lectura, guardar tema, reducir efectos y constructor visual mas serio.</p>
         </article>
         <article class="release-card">
-          <h3>Rendimiento estable</h3>
-          <p>Optimizaciones para mantener fluidez con mas contenido en pantalla.</p>
+          <h3>Rendimiento inteligente</h3>
+          <p>FPS en vivo, auto-optimizacion y restauracion exacta del punto donde quedo el usuario.</p>
         </article>
       </div>
     </section>
 
     <section id="ultra" class="panel reveal">
       <div class="section-title">
-        <p class="eyebrow">V3.0</p>
+        <p class="eyebrow">V4.0</p>
         <h2>Centro de ultra rendimiento</h2>
       </div>
       <div class="season-grid">
@@ -2859,6 +3031,21 @@ footer {
           <h3>Blur adaptativo</h3>
           <button id="blurModeBtn" class="btn btn-secondary" type="button">Reducir blur</button>
           <p id="blurModeStatus" class="result-meta">Normal</p>
+        </article>
+        <article class="season-card">
+          <h3>FPS en vivo</h3>
+          <p id="fpsText" class="fact">Midiendo...</p>
+          <p class="result-meta">Promedio aproximado de fotogramas por segundo.</p>
+        </article>
+        <article class="season-card">
+          <h3>Auto-optimizacion</h3>
+          <button id="autoOptimizeBtn" class="btn btn-secondary" type="button">Analizar y optimizar</button>
+          <p id="autoOptimizeStatus" class="result-meta">Pendiente</p>
+        </article>
+        <article class="season-card">
+          <h3>Volver al punto exacto</h3>
+          <button id="restorePointBtn" class="btn btn-secondary" type="button">Restaurar sesion</button>
+          <p id="restorePointStatus" class="result-meta">Usa el ultimo autoguardado completo.</p>
         </article>
       </div>
       <article class="mission-card" style="margin-top:0.8rem;">
@@ -2922,6 +3109,37 @@ footer {
       </div>
     </section>
 
+    <section id="historia" class="panel reveal">
+      <div class="section-title">
+        <p class="eyebrow">Modo guiado</p>
+        <h2>Museo 4D e historia</h2>
+      </div>
+      <div class="story-layout">
+        <article class="story-card">
+          <div class="grid-footer">
+            <div>
+              <h3>Vista activa</h3>
+              <p id="viewModeStatus" class="result-meta">Museo</p>
+            </div>
+            <div class="story-switch">
+              <button id="museumModeBtn" class="metric-btn active" type="button">Museo</button>
+              <button id="labModeBtn" class="metric-btn" type="button">Laboratorio</button>
+            </div>
+          </div>
+          <p id="storySummary" class="result-meta">Explora por capitulos para desbloquear contexto y rutas recomendadas.</p>
+          <div class="xp-track">
+            <div id="storyProgressBar" class="xp-bar"></div>
+          </div>
+          <p id="storyProgressText" class="result-meta">Capitulo 1 de 4</p>
+          <div class="grid-footer">
+            <button id="storyStartBtn" class="btn btn-primary" type="button">Iniciar recorrido</button>
+            <button id="storyNextBtn" class="btn btn-secondary" type="button">Siguiente capitulo</button>
+          </div>
+        </article>
+        <div id="storyChapterGrid" class="story-grid"></div>
+      </div>
+    </section>
+
     <section id="enciclopedia" class="panel reveal">
       <div class="section-title">
         <p class="eyebrow">Enciclopedia</p>
@@ -2930,11 +3148,11 @@ footer {
       <article id="lyonixPanel" class="lyonix-panel" aria-live="polite">
         <div class="lyonix-head">
           <h3>LYONIX intelligence</h3>
-          <p class="result-meta">Asistente con Gemini para responder cualquier pregunta, incluyendo dinosaurios.</p>
+          <p class="result-meta">Asistente en espanol con respuestas por habitat, dieta, tamano, curiosidades y comparaciones.</p>
           <p id="lyonixBackendBadge" class="lyonix-status">Gemini: desconectado</p>
         </div>
         <div class="lyonix-controls">
-          <input id="lyonixInput" type="search" placeholder="Pregunta lo que quieras: dinosaurios, ciencia, historia...">
+          <input id="lyonixInput" type="search" placeholder="Pregunta o compara: T. rex, Spinosaurus vs Carcharodontosaurus, explicalo facil...">
           <button id="lyonixSearchBtn" class="btn btn-secondary" type="button">Preguntar</button>
         </div>
         <article id="lyonixResult" class="lyonix-result">
@@ -3036,6 +3254,13 @@ footer {
         <p class="eyebrow">Cronologia</p>
         <h2>Linea del tiempo prehistorica</h2>
       </div>
+      <div class="timeline-tools">
+        <label class="timeline-zoom">
+          <span>Zoom temporal</span>
+          <input id="timelineZoomInput" type="range" min="0.85" max="1.45" step="0.05" value="1">
+        </label>
+        <p id="timelineZoomLabel" class="result-meta">Zoom 100%</p>
+      </div>
       <p class="hint">Arrastra horizontalmente para navegar eventos.</p>
       <div id="timelineTrack" class="timeline-track" role="region" aria-label="Linea del tiempo prehistorica"></div>
     </section>
@@ -3053,6 +3278,12 @@ footer {
           <button class="region-btn" data-region="Asia">Asia</button>
           <button class="region-btn" data-region="Africa">Africa</button>
           <button class="region-btn" data-region="Antartida">Antartida</button>
+          <div class="map-layers">
+            <label><input id="layerClimate" type="checkbox" checked> Clima</label>
+            <label><input id="layerFlora" type="checkbox" checked> Flora</label>
+            <label><input id="layerRoutes" type="checkbox" checked> Migraciones</label>
+            <label><input id="layerFossils" type="checkbox" checked> Fosiles</label>
+          </div>
         </div>
         <div class="map-stage">
           <div class="prehistoric-map-box">
@@ -3064,8 +3295,9 @@ footer {
               loading="lazy"
               referrerpolicy="no-referrer"
             >
+            <div id="mapPins" class="map-pins" aria-hidden="true"></div>
           </div>
-          <p class="result-meta">Mapa paleogeografico real cargado con imagen optimizada.</p>
+          <p id="mapLayerStatus" class="result-meta">Mapa paleogeografico real con capas interactivas activas.</p>
           <article class="map-info" id="mapInfo"></article>
         </div>
       </div>
@@ -3076,6 +3308,7 @@ footer {
         <p class="eyebrow">Ambientes</p>
         <h2>Ecosistemas y periodos</h2>
       </div>
+      <div id="ecosystemLiveGrid" class="ecosystem-live-grid"></div>
       <div class="period-grid">
         <article>
           <h3>Triasico</h3>
@@ -3104,10 +3337,15 @@ footer {
         <h2>Top dinosaurios</h2>
       </div>
       <div class="metric-switches">
+        <button id="rankingScopeLocal" class="metric-btn active" type="button">Ranking local</button>
+        <button id="rankingScopeWeekly" class="metric-btn" type="button">Ranking semanal</button>
+      </div>
+      <div class="metric-switches">
         <button class="metric-btn active" data-metric="length" type="button">Mas grandes</button>
         <button class="metric-btn" data-metric="speed" type="button">Mas rapidos</button>
         <button class="metric-btn" data-metric="power" type="button">Mas fuertes</button>
       </div>
+      <p id="rankingStatus" class="result-meta">Top local basado en tu base actual.</p>
       <div id="rankingList" class="ranking-list"></div>
     </section>
 
@@ -3149,7 +3387,7 @@ footer {
     <section id="funciones" class="panel reveal">
       <div class="section-title">
         <p class="eyebrow">Utilidades Pro</p>
-        <h2>45 funciones rapidas</h2>
+        <h2>52 funciones rapidas</h2>
       </div>
       <p class="result-meta">Acciones listas para explorar, estudiar y personalizar tu experiencia.</p>
       <div id="toolsGrid" class="tools-grid"></div>
@@ -3226,7 +3464,7 @@ footer {
         </article>
 
         <article class="custom-card">
-          <h3>Ambiente V3.0</h3>
+          <h3>Ambiente V4.0</h3>
           <div class="custom-row switch-row">
             <label for="ambientToggle">Modo ambiente</label>
             <input id="ambientToggle" type="checkbox">
@@ -3241,6 +3479,24 @@ footer {
             <label for="motionInput">Ritmo de animaciones</label>
             <input id="motionInput" type="range" min="0.7" max="1.3" step="0.01" value="1">
             <span id="motionValue">100%</span>
+          </div>
+        </article>
+
+        <article class="custom-card">
+          <h3>Estudio V4.0</h3>
+          <div class="custom-row switch-row">
+            <label for="readingModeToggle">Modo lectura</label>
+            <input id="readingModeToggle" type="checkbox">
+          </div>
+          <p id="readingModeStatus" class="result-meta">Desactivado</p>
+          <div class="custom-row switch-row">
+            <label for="reduceEffectsToggle">Reducir efectos</label>
+            <input id="reduceEffectsToggle" type="checkbox">
+          </div>
+          <p id="reduceEffectsStatus" class="result-meta">Normal</p>
+          <div class="grid-footer">
+            <button id="saveThemeBtn" class="btn btn-secondary" type="button">Guardar tema V4</button>
+            <button id="applySavedThemeBtn" class="btn btn-secondary" type="button">Aplicar guardado</button>
           </div>
         </article>
       </div>
@@ -3278,9 +3534,10 @@ footer {
     <section id="juego" class="panel reveal">
       <div class="section-title">
         <p class="eyebrow">Juego educativo</p>
-        <h2>Quiz de dinosaurios</h2>
+        <h2>Quiz y retos de dinosaurios</h2>
       </div>
       <div id="quizBox" class="quiz-box"></div>
+      <p id="quizAdaptiveStatus" class="result-meta">Dificultad adaptativa: inicial.</p>
       <div class="guess-game">
         <h3>Adivina la especie</h3>
         <p id="guessClue" class="hint"></p>
@@ -3296,6 +3553,13 @@ footer {
           <p id="memoryStats" class="result-meta"></p>
           <button id="resetMemoryBtn" class="btn btn-secondary" type="button">Reiniciar memoria</button>
         </div>
+      </div>
+      <div class="guess-game">
+        <h3>Cazador de fosiles</h3>
+        <p id="fossilHunterClue" class="hint"></p>
+        <div id="fossilHunterOptions" class="quiz-options"></div>
+        <p id="fossilHunterFeedback" class="result-meta"></p>
+        <button id="newFossilHunterBtn" class="btn btn-secondary" type="button">Nueva pista</button>
       </div>
     </section>
 
@@ -3382,15 +3646,24 @@ footer {
     </div>
   </section>
 
+  <div class="quick-access" aria-label="Accesos rapidos">
+    <button id="lyonixGlobalBtn" class="quick-access-btn quick-access-lyonix" type="button" aria-label="Abrir LYONIX IA">
+      LYONIX IA
+    </button>
+    <button id="toTop" class="quick-access-btn quick-access-top" type="button" aria-label="Subir al inicio">
+      Subir
+    </button>
+  </div>
+
   <div id="lyonixGlobalModal" class="lyonix-global-modal" hidden aria-hidden="true" style="display:none;">
     <div class="lyonix-global-dialog" role="dialog" aria-modal="true" aria-labelledby="lyonixGlobalTitle">
       <div class="lyonix-global-head">
         <h3 id="lyonixGlobalTitle">LYONIX intelligence</h3>
         <button id="lyonixGlobalCloseBtn" class="fav-remove" type="button">Cerrar</button>
       </div>
-      <p class="result-meta">Asistente global en espanol. Pregunta por cualquier dinosaurio.</p>
+      <p class="result-meta">Asistente global en espanol. Puede responder, comparar especies y explicar en modo profesor.</p>
       <div class="lyonix-global-controls">
-        <input id="lyonixGlobalInput" type="search" placeholder="Pregunta general o sobre dinosaurios...">
+        <input id="lyonixGlobalInput" type="search" placeholder="Ejemplo: explicame el Triceratops o compara T. rex vs Giganotosaurus">
         <button id="lyonixGlobalSearchBtn" class="btn btn-secondary" type="button">Preguntar</button>
       </div>
       <article id="lyonixGlobalResult" class="lyonix-global-result">
@@ -3405,6 +3678,7 @@ footer {
   <script>
 window.__dinoFallback = {
   toggleMenu(event) {
+    if (window.__dinoBootReady === "1") return;
     event?.preventDefault?.();
     const header = document.querySelector(".main-header");
     const btn = document.getElementById("menuToggle");
@@ -3413,6 +3687,7 @@ window.__dinoFallback = {
     btn.setAttribute("aria-expanded", String(open));
   },
   toggleTheme(event) {
+    if (window.__dinoBootReady === "1") return;
     event?.preventDefault?.();
     const body = document.body;
     if (!body) return;
@@ -3421,6 +3696,7 @@ window.__dinoFallback = {
     if (t) t.textContent = body.classList.contains("light") ? "Oscuro" : "Claro";
   },
   toggleSearch(event) {
+    if (window.__dinoBootReady === "1") return;
     event?.preventDefault?.();
     const modal = document.getElementById("commandPalette");
     if (!modal) return;
@@ -3430,6 +3706,7 @@ window.__dinoFallback = {
     modal.classList.toggle("is-open", hidden);
   },
   toggleSettings(event) {
+    if (window.__dinoBootReady === "1") return;
     event?.preventDefault?.();
     const drawer = document.getElementById("settingsDrawer");
     if (!drawer) return;
@@ -3580,6 +3857,8 @@ const compareB = $("compareB");
 const compareResult = $("compareResult");
 const quizBox = $("quizBox");
 const readingProgress = $("readingProgress");
+const mainHeader = document.querySelector(".main-header");
+const screenSwitcher = $("screenSwitcher");
 const mapInfo = $("mapInfo");
 const mapPins = $("mapPins");
 const themeToggle = $("themeToggle");
@@ -3661,12 +3940,17 @@ const appVersionHint = $("appVersionHint");
 const appBuildDate = $("appBuildDate");
 const appCacheLabel = $("appCacheLabel");
 const refreshRateText = $("refreshRateText");
+const fpsText = $("fpsText");
 const hzModeBtn = $("hzModeBtn");
 const hzModeStatus = $("hzModeStatus");
 const compactModeBtn = $("compactModeBtn");
 const compactModeStatus = $("compactModeStatus");
 const blurModeBtn = $("blurModeBtn");
 const blurModeStatus = $("blurModeStatus");
+const autoOptimizeBtn = $("autoOptimizeBtn");
+const autoOptimizeStatus = $("autoOptimizeStatus");
+const restorePointBtn = $("restorePointBtn");
+const restorePointStatus = $("restorePointStatus");
 const quickNoteInput = $("quickNoteInput");
 const clearQuickNoteBtn = $("clearQuickNoteBtn");
 const ambientToggle = $("ambientToggle");
@@ -3675,6 +3959,37 @@ const contrastToggle = $("contrastToggle");
 const contrastStatus = $("contrastStatus");
 const motionInput = $("motionInput");
 const motionValue = $("motionValue");
+const museumModeBtn = $("museumModeBtn");
+const labModeBtn = $("labModeBtn");
+const viewModeStatus = $("viewModeStatus");
+const storySummary = $("storySummary");
+const storyProgressBar = $("storyProgressBar");
+const storyProgressText = $("storyProgressText");
+const storyStartBtn = $("storyStartBtn");
+const storyNextBtn = $("storyNextBtn");
+const storyChapterGrid = $("storyChapterGrid");
+const timelineZoomInput = $("timelineZoomInput");
+const timelineZoomLabel = $("timelineZoomLabel");
+const layerClimate = $("layerClimate");
+const layerFlora = $("layerFlora");
+const layerRoutes = $("layerRoutes");
+const layerFossils = $("layerFossils");
+const mapLayerStatus = $("mapLayerStatus");
+const ecosystemLiveGrid = $("ecosystemLiveGrid");
+const rankingScopeLocal = $("rankingScopeLocal");
+const rankingScopeWeekly = $("rankingScopeWeekly");
+const rankingStatus = $("rankingStatus");
+const readingModeToggle = $("readingModeToggle");
+const readingModeStatus = $("readingModeStatus");
+const reduceEffectsToggle = $("reduceEffectsToggle");
+const reduceEffectsStatus = $("reduceEffectsStatus");
+const saveThemeBtn = $("saveThemeBtn");
+const applySavedThemeBtn = $("applySavedThemeBtn");
+const quizAdaptiveStatus = $("quizAdaptiveStatus");
+const fossilHunterClue = $("fossilHunterClue");
+const fossilHunterOptions = $("fossilHunterOptions");
+const fossilHunterFeedback = $("fossilHunterFeedback");
+const newFossilHunterBtn = $("newFossilHunterBtn");
 
 let qIndex = 0;
 let score = 0;
@@ -3685,6 +4000,7 @@ let bestStreak = Number(localStorage.getItem("dinoBestStreak") || "0");
 let displayLimit = 12;
 const PAGE_STEP = 12;
 let currentMetric = "length";
+let currentRankingScope = "local";
 let currentGuessAnswer = "";
 let guessScore = Number(localStorage.getItem("dinoGuessScore") || "0");
 let favorites = JSON.parse(localStorage.getItem("dinoFavorites") || "[]");
@@ -3712,6 +4028,10 @@ let albumRenderToken = 0;
 const wikiImageCache = new Map();
 let screenSections = [];
 let currentScreenIndex = 0;
+let storyChapterIndex = Number(localStorage.getItem("dinoStoryChapter") || "0");
+let currentQuizRuntime = null;
+let currentQuizDuration = 20;
+let fossilHunterState = null;
 const CUSTOM_THEME_KEY = "dinoCustomTheme";
 const LAST_SCREEN_KEY = "dinoLastScreen";
 const PERF_MODE_KEY = "dinoPerfMode";
@@ -3722,6 +4042,12 @@ const QUICK_NOTE_KEY = "dinoQuickNote";
 const AMBIENT_MODE_KEY = "dinoAmbientMode";
 const CONTRAST_MODE_KEY = "dinoContrastMode";
 const MOTION_SCALE_KEY = "dinoMotionScale";
+const VIEW_MODE_KEY = "dinoViewMode";
+const READING_MODE_KEY = "dinoReadingMode";
+const REDUCE_EFFECTS_KEY = "dinoReduceEffects";
+const SAVED_THEME_SLOT_KEY = "dinoSavedThemeV4";
+const TIMELINE_ZOOM_KEY = "dinoTimelineZoom";
+const MAP_LAYERS_KEY = "dinoMapLayers";
 const fossilImageCache = new Map();
 const lyonixCache = new Map();
 let filterInputTimer = null;
@@ -3857,12 +4183,40 @@ const weeklyChallenges = [
   "Explora 2 expediciones y registra una nota rapida."
 ];
 
-const SEASON_RELEASE_DATE = "2026-03-16";
+const storyChapters = [
+  { title: "Capitulo 1 · Triasico inicial", text: "El museo abre con la aparicion de los primeros dinosaurios y la recuperacion de ecosistemas tras grandes extinciones.", target: "timeline" },
+  { title: "Capitulo 2 · Auge del Jurasico", text: "Gigantes herbivoros y depredadores dominan biomas humedos con nuevos nichos ecologicos.", target: "ecosistemas" },
+  { title: "Capitulo 3 · Expansion del Cretacico", text: "La diversidad explota: ceratopsidos, tiranosaurios y titanios ocupan regiones separadas por mares.", target: "mapa" },
+  { title: "Capitulo 4 · Ciencia y legado", text: "Fosiles, comparaciones y laboratorio muestran como reconstruimos el pasado con evidencia real.", target: "fosiles" }
+];
+
+const ecosystemProfiles = [
+  { name: "Triasico", climate: 72, flora: 48, water: 36, fauna: "Primeros dinosaurios" },
+  { name: "Jurasico", climate: 84, flora: 79, water: 66, fauna: "Sauropodos y teropodos" },
+  { name: "Cretacico", climate: 77, flora: 88, water: 58, fauna: "Ceratopsidos y tiranosaurios" }
+];
+
+const fossilHunterPrompts = [
+  { clue: "Este fosil suele asociarse a un gran herbivoro con tres cuernos.", answer: "Craneo de Triceratops", options: ["Craneo de Triceratops", "Garra de Deinonychus", "Vertebra de Spinosaurus"] },
+  { clue: "Pista: pertenece a un depredador agil de gran garra en el pie.", answer: "Garra de Deinonychus", options: ["Huevo fosilizado", "Garra de Deinonychus", "Craneo de Pachycephalosaurus"] },
+  { clue: "Resto asociado a dinosaurios con posible vida semiacuatica.", answer: "Vertebra de Spinosaurus", options: ["Vertebra de Spinosaurus", "Diente de Mosasaurio", "Costilla de Diplodocus"] }
+];
+
+const mapLayerProfiles = {
+  Norteamerica: { climate: "Bosques templados y llanuras humedas", flora: "Coniferas, helechos y angiospermas tempranas", routes: "Rutas norte-sur por corredores internos", fossils: "Ceratopsidos, hadrosaurios y tiranosauridos" },
+  Sudamerica: { climate: "Zonas calidas con estepas y humedales", flora: "Gimnospermas resistentes y vegetacion baja", routes: "Intercambios regionales aislados por mares", fossils: "Titanosaurios, abelisauridos y megaraptores" },
+  Europa: { climate: "Archipielagos calidos y zonas costeras", flora: "Bosques fragmentados y plantas con semillas", routes: "Islas con fauna enana y dispersion costera", fossils: "Iguanodontes, dromeosaurios y nodosaurios" },
+  Asia: { climate: "Desiertos, bosques frios y cuencas interiores", flora: "Coniferas, ginkgos y plantas florales", routes: "Migraciones este-oeste en llanuras continentales", fossils: "Velociraptor, Tarbosaurus y protoceratopsios" },
+  Africa: { climate: "Regiones calidas con rios extensos", flora: "Vegetacion riberenia y coniferas secas", routes: "Corredores fluviales y zonas humedas", fossils: "Spinosaurus, Carcharodontosaurus y Rebbachisaurus" },
+  Antartida: { climate: "Bosques templados frios en latitudes polares", flora: "Helechos y arboles resistentes al frio", routes: "Conexiones antiguas con Gondwana", fossils: "Cryolophosaurus y fauna adaptada a luz estacional" }
+};
+
+const SEASON_RELEASE_DATE = "2026-03-18";
 const SEASON_DURATION_DAYS = 60;
-const APP_MAJOR_VERSION = 3;
+const APP_MAJOR_VERSION = 4;
 const APP_MINOR_VERSION = 0;
 const DEFAULT_DINO_IMAGE = "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Tyrannosaurus_AMNH_5027.jpg/1280px-Tyrannosaurus_AMNH_5027.jpg";
-const DEFAULT_FOSSIL_IMAGE = "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Tyrannosaurus_AMNH_5027.jpg/1280px-Tyrannosaurus_AMNH_5027.jpg";
+const DEFAULT_FOSSIL_IMAGE = createFossilImage("Archivo fosil", "#ba7d38");
 
 function getSemanticVersion() {
   return `V${APP_MAJOR_VERSION}.${APP_MINOR_VERSION}`;
@@ -4146,7 +4500,17 @@ const albumImageByCommon = {
   "Torvosaurus": "https://commons.wikimedia.org/wiki/Special:FilePath/Torvosaurus.jpg",
   "Sinoceratops": "https://commons.wikimedia.org/wiki/Special:FilePath/Sinoceratops_zhuchengensis.jpg",
   "Dreadnoughtus": "https://commons.wikimedia.org/wiki/Special:FilePath/Dreadnoughtus_NT_small.jpg",
-  "Majungasaurus": "https://commons.wikimedia.org/wiki/Special:FilePath/Majungasaurus_crenatissimus.jpg"
+  "Majungasaurus": "https://commons.wikimedia.org/wiki/Special:FilePath/Majungasaurus_crenatissimus.jpg",
+  "Therizinosaurus": "https://commons.wikimedia.org/wiki/Special:FilePath/Therizinosaurus_BW.jpg",
+  "Utahraptor": "https://commons.wikimedia.org/wiki/Special:FilePath/Utahraptor_ostrommaysorum_reconstruction.png",
+  "Yutyrannus": "https://commons.wikimedia.org/wiki/Special:FilePath/Yutyrannus_huali_reconstruction.png",
+  "Suchomimus": "https://commons.wikimedia.org/wiki/Special:FilePath/Suchomimus_tenerensis_BW.jpg",
+  "Mapusaurus": "https://commons.wikimedia.org/wiki/Special:FilePath/Mapusaurus_roseae_BW.jpg",
+  "Edmontosaurus": "https://commons.wikimedia.org/wiki/Special:FilePath/Edmontosaurus_BW.jpg",
+  "Mamenchisaurus": "https://commons.wikimedia.org/wiki/Special:FilePath/Mamenchisaurus_hochuanensis_BW.jpg",
+  "Shunosaurus": "https://commons.wikimedia.org/wiki/Special:FilePath/Shunosaurus_lii_BW.jpg",
+  "Minmi": "https://commons.wikimedia.org/wiki/Special:FilePath/Minmi_BW.jpg",
+  "Megalosaurus": "https://commons.wikimedia.org/wiki/Special:FilePath/Megalosaurus_BW.jpg"
 };
 
 function slugifyName(value) {
@@ -4316,18 +4680,50 @@ function buildLyonixLocalReply(query, local, external) {
   const q = normalizeText(query);
   if (!q) return "Escribe una pregunta y te ayudo.";
 
+  const professorMode = /(explica|ensen|profesor|facil|simple|avanzad)/.test(q);
+  const compareMode = /(compar|diferenc|vs\b|versus)/.test(q);
+
   if (local?.dino) {
     const d = local.dino;
-    return `${d.common} (${d.name}) vivio en el ${d.period}. Era ${d.diet.toLowerCase()} y se encontro principalmente en ${d.continent}. Tamano aproximado: ${d.length} m. Dato clave: ${d.fact}`;
+    const compareTarget = compareMode
+      ? dinosaurs.find((candidate) => candidate.name !== d.name && scoreDinoSearch(q, candidate) > 0)
+      : null;
+    const intro = professorMode
+      ? `${d.common} explicado de forma clara:`
+      : `Ficha rapida de ${d.common}:`;
+    let response = [
+      intro,
+      `Nombre cientifico: ${d.name}`,
+      `Periodo: ${d.period}`,
+      `Dieta: ${d.diet}`,
+      `Habitat: ${d.habitat}`,
+      `Region principal: ${d.continent}`,
+      `Tamano aproximado: ${d.length} m`,
+      `Velocidad estimada: ${d.speed} km/h`,
+      `Curiosidad: ${d.fact}`
+    ];
+    if (compareTarget) {
+      response = response.concat([
+        "",
+        `Comparacion con ${compareTarget.common}:`,
+        `Tamano: ${d.length} m vs ${compareTarget.length} m`,
+        `Velocidad: ${d.speed} km/h vs ${compareTarget.speed} km/h`,
+        `Fuerza: ${d.power} vs ${compareTarget.power}`
+      ]);
+    }
+    if (professorMode) {
+      response.push("", "Resumen: fue una especie importante dentro de su ecosistema y ayuda a entender como evolucionaron los dinosaurios.");
+    }
+    return response.join("\n");
   }
 
   if (external?.extract) {
     const langNote = external.lang === "es" ? "" : " (fuente en ingles)";
-    return `${external.extract}${langNote}`;
+    return `Resumen externo${langNote}:\n${external.extract}`;
   }
 
   if (/^(hola|buenas|hello|hi)\b/.test(q)) {
-    return "Hola. Soy LYONIX en modo local. Puedo ayudarte con dinosaurios, ciencia basica, estudio y preguntas generales.";
+    return "Hola. Soy LYONIX en modo local.\nPuedo ayudarte con dinosaurios, comparaciones, estudio guiado y preguntas generales.";
   }
 
   if (q.includes("hora")) {
@@ -4664,6 +5060,11 @@ function saveAutoState() {
     at: Date.now(),
     theme: document.body.classList.contains("light") ? "light" : "dark",
     customTheme: safeGetStorage(CUSTOM_THEME_KEY),
+    savedThemeSlot: safeGetStorage(SAVED_THEME_SLOT_KEY),
+    viewMode: safeGetStorage(VIEW_MODE_KEY) || "museo",
+    readingMode: safeGetStorage(READING_MODE_KEY) || "0",
+    reduceEffects: safeGetStorage(REDUCE_EFFECTS_KEY) || "0",
+    timelineZoom: safeGetStorage(TIMELINE_ZOOM_KEY) || "1",
     visitorName: visitorNameInput?.value || visitorName || "",
     quickNote: quickNoteInput?.value || "",
     lastSearch: searchInput?.value || "",
@@ -4700,6 +5101,11 @@ function initAutoSave() {
           // Ignore malformed custom theme data.
         }
       }
+      if (saved?.savedThemeSlot) safeSetStorage(SAVED_THEME_SLOT_KEY, saved.savedThemeSlot);
+      if (saved?.viewMode) safeSetStorage(VIEW_MODE_KEY, saved.viewMode);
+      if (saved?.readingMode) safeSetStorage(READING_MODE_KEY, saved.readingMode);
+      if (saved?.reduceEffects) safeSetStorage(REDUCE_EFFECTS_KEY, saved.reduceEffects);
+      if (saved?.timelineZoom) safeSetStorage(TIMELINE_ZOOM_KEY, saved.timelineZoom);
       if (themeToggle) {
         themeToggle.textContent = document.body.classList.contains("light") ? "Oscuro" : "Claro";
       }
@@ -4969,7 +5375,7 @@ function buildToolsActions() {
     { label: "32 Cambiar a tema Fosil", run: () => applyPreset("fosil") },
     { label: "33 Cambiar a tema Oceano", run: () => applyPreset("oceano") },
     { label: "34 Resetear tema", run: () => { localStorage.removeItem(CUSTOM_THEME_KEY); applyCustomization(defaultCustomization); setToolStatus("Tema restablecido."); } },
-    { label: "35 Ir a Novedades V3.0", run: () => scrollToSection("novedades") },
+    { label: "35 Ir a Novedades V4.0", run: () => scrollToSection("novedades") },
     { label: "36 Pantalla aleatoria", run: () => {
       if (!screenSections.length) return;
       const next = Math.floor(Math.random() * screenSections.length);
@@ -5005,7 +5411,14 @@ function buildToolsActions() {
     { label: "42 Activar ambiente", run: () => applyAmbientMode(true) },
     { label: "43 Desactivar ambiente", run: () => applyAmbientMode(false) },
     { label: "44 Contraste alto", run: () => applyContrastMode(true) },
-    { label: "45 Contraste normal", run: () => applyContrastMode(false) }
+    { label: "45 Contraste normal", run: () => applyContrastMode(false) },
+    { label: "46 Iniciar Modo Historia", run: () => storyStartBtn?.click() },
+    { label: "47 Vista Museo", run: () => applyViewMode("museo") },
+    { label: "48 Vista Laboratorio", run: () => applyViewMode("lab") },
+    { label: "49 Guardar tema V4", run: saveThemeSnapshot },
+    { label: "50 Aplicar tema guardado", run: applySavedThemeSnapshot },
+    { label: "51 Restaurar punto exacto", run: restoreExactPoint },
+    { label: "52 Auto-optimizacion", run: autoOptimizeExperience }
   ];
 }
 
@@ -5015,7 +5428,7 @@ function initToolsPanel() {
   toolsGrid.innerHTML = actions
     .map((action, index) => `<button class="tool-btn" data-tool-index="${index}" type="button">${action.label}</button>`)
     .join("");
-  setToolStatus(`Funciones activas: ${actions.length}/45`);
+  setToolStatus(`Funciones activas: ${actions.length}/${actions.length}`);
 
   toolsGrid.addEventListener("click", (e) => {
     const target = e.target.closest("[data-tool-index]");
@@ -5102,6 +5515,8 @@ function unlockAchievements(reason) {
   if (guessScore >= 5) unlock("guesser", "Paleontologo intuitivo: 5 aciertos");
   if (completedMissions >= 3) unlock("missioner", "Constante: 3 misiones completadas");
   if (reason === "memory-win") unlock("memory", "Memoria ancestral: gana una ronda");
+  if (reason === "story") unlock("story", "Cronista del museo: completa el recorrido guiado");
+  if (reason === "fossil-hunter") unlock("hunter", "Cazador de fosiles: acierta una pista");
 }
 
 function renderAchievements() {
@@ -5109,7 +5524,9 @@ function renderAchievements() {
     collector: "Coleccionista: 3 favoritos",
     guesser: "Paleontologo intuitivo: 5 aciertos",
     missioner: "Constante: 3 misiones completadas",
-    memory: "Memoria ancestral: gana una ronda"
+    memory: "Memoria ancestral: gana una ronda",
+    story: "Cronista del museo: completa el recorrido guiado",
+    hunter: "Cazador de fosiles: acierta una pista"
   };
   if (!unlockedAchievements.length) {
     achievementsList.innerHTML = "<li>Aun no hay logros desbloqueados.</li>";
@@ -5201,24 +5618,34 @@ function renderFossils() {
       const index = card ? Number(card.dataset.fossilIndex) : -1;
       const fossil = fossilArtifacts[index];
       if (img.dataset.retrying === "1") {
-        img.src = DEFAULT_FOSSIL_IMAGE;
+        img.src = img.dataset.fallback || DEFAULT_FOSSIL_IMAGE;
         return;
       }
       img.dataset.retrying = "1";
       const recovered = await resolveFossilOnlineImage(fossil);
-      img.src = recovered || DEFAULT_FOSSIL_IMAGE || img.dataset.fallback || img.src;
+      img.src = recovered || img.dataset.fallback || DEFAULT_FOSSIL_IMAGE || img.src;
     }, { once: true });
   });
   renderFossilDetail(0);
 }
 
+function getDinoFallbackImage(dino) {
+  if (!dino) return createHeroImage("DinoVerse", "#6d8f55");
+  const accentByDiet = {
+    Carnivoro: "#c98840",
+    Herbivoro: "#7ca860",
+    Omnivoro: "#5ca8b2"
+  };
+  return createHeroImage(dino.common, accentByDiet[dino.diet] || "#6d8f55");
+}
+
 function resolveDinoAlbumImage(dino) {
-  if (!dino) return createHeroImage("Dinosaurio", "#8aa966");
+  if (!dino) return getDinoFallbackImage(dino);
   const key = dino.name;
   if (wikiImageCache.has(key)) return wikiImageCache.get(key);
   const byCommon = albumImageByCommon[dino.common];
   const byGenus = albumImageByCommon[dino.name.split(" ")[0]];
-  const src = normalizeImageUrl(byCommon || byGenus || DEFAULT_DINO_IMAGE, 1200);
+  const src = normalizeImageUrl(byCommon || byGenus || getDinoFallbackImage(dino), 1200);
   wikiImageCache.set(key, src);
   return src;
 }
@@ -5268,7 +5695,7 @@ function renderAlbum() {
 
   dinoAlbumGrid.innerHTML = list.map((d, idx) => `
     <article class="album-card">
-      <img id="albumImg${idx}" class="album-image" src="${resolveDinoAlbumImage(d)}" alt="Imagen de ${d.common}" loading="lazy" referrerpolicy="no-referrer">
+      <img id="albumImg${idx}" class="album-image" src="${resolveDinoAlbumImage(d)}" data-fallback="${getDinoFallbackImage(d)}" alt="Imagen de ${d.common}" loading="lazy" referrerpolicy="no-referrer">
       <div class="album-meta">
         <h3>${d.common}</h3>
         <p class="latin">${d.name}</p>
@@ -5281,6 +5708,7 @@ function renderAlbum() {
   list.forEach((dino, idx) => {
     const img = document.getElementById(`albumImg${idx}`);
     if (!img) return;
+    const fallback = getDinoFallbackImage(dino);
     const hasMapping = albumImageByCommon[dino.common] || albumImageByCommon[dino.name.split(" ")[0]];
     if (!hasMapping) {
       const token = albumRenderToken;
@@ -5291,12 +5719,12 @@ function renderAlbum() {
     }
     img.addEventListener("error", async () => {
       if (img.dataset.retrying === "1") {
-        img.src = DEFAULT_DINO_IMAGE;
+        img.src = fallback || DEFAULT_DINO_IMAGE;
         return;
       }
       img.dataset.retrying = "1";
       const recovered = await tryResolveMissingAlbumImage(dino);
-      img.src = recovered || DEFAULT_DINO_IMAGE;
+      img.src = recovered || fallback || DEFAULT_DINO_IMAGE;
     }, { once: true });
   });
 }
@@ -5322,12 +5750,12 @@ function renderFossilDetail(index) {
   if (detailImg) {
     detailImg.addEventListener("error", async () => {
       if (detailImg.dataset.retrying === "1") {
-        detailImg.src = DEFAULT_FOSSIL_IMAGE;
+        detailImg.src = detailImg.dataset.fallback || DEFAULT_FOSSIL_IMAGE;
         return;
       }
       detailImg.dataset.retrying = "1";
       const recovered = await resolveFossilOnlineImage(fossil);
-      detailImg.src = recovered || DEFAULT_FOSSIL_IMAGE || detailImg.dataset.fallback || detailImg.src;
+      detailImg.src = recovered || detailImg.dataset.fallback || DEFAULT_FOSSIL_IMAGE || detailImg.src;
     }, { once: true });
   }
 }
@@ -5450,6 +5878,7 @@ function renderTimeline() {
       <p class="time-age">${e.age}</p>
       <h3>${e.title}</h3>
       <p>${e.detail}</p>
+      <small>${e.age.includes("Ma") ? "Microevento geologico" : "Evento clave"}</small>
     </article>
   `).join("");
 }
@@ -5471,6 +5900,174 @@ function renderExpeditions() {
   if (expeditionTip && expeditions.length) {
     const featured = expeditions[Math.floor(Math.random() * expeditions.length)];
     expeditionTip.textContent = `Ruta destacada: ${featured.title} (${featured.region}).`;
+  }
+}
+
+function getActiveMapLayers() {
+  return {
+    climate: !!layerClimate?.checked,
+    flora: !!layerFlora?.checked,
+    routes: !!layerRoutes?.checked,
+    fossils: !!layerFossils?.checked
+  };
+}
+
+function persistMapLayers() {
+  safeSetStorage(MAP_LAYERS_KEY, JSON.stringify(getActiveMapLayers()));
+}
+
+function applyTimelineZoom(value, { persist = true } = {}) {
+  const zoom = clamp(Number(value) || 1, 0.85, 1.45);
+  document.documentElement.style.setProperty("--timeline-zoom", String(zoom));
+  if (timelineZoomInput) timelineZoomInput.value = zoom.toFixed(2);
+  if (timelineZoomLabel) timelineZoomLabel.textContent = `Zoom ${Math.round(zoom * 100)}%`;
+  if (persist) safeSetStorage(TIMELINE_ZOOM_KEY, zoom.toFixed(2));
+}
+
+function applyViewMode(mode, { persist = true } = {}) {
+  const next = mode === "lab" ? "lab" : "museo";
+  document.body.classList.toggle("view-lab", next === "lab");
+  museumModeBtn?.classList.toggle("active", next === "museo");
+  labModeBtn?.classList.toggle("active", next === "lab");
+  if (viewModeStatus) viewModeStatus.textContent = next === "lab" ? "Laboratorio" : "Museo";
+  if (persist) safeSetStorage(VIEW_MODE_KEY, next);
+}
+
+function renderStoryMode() {
+  if (!storyChapterGrid) return;
+  storyChapterIndex = clamp(storyChapterIndex, 0, storyChapters.length - 1);
+  storyChapterGrid.innerHTML = storyChapters.map((chapter, index) => `
+    <article class="story-chapter ${index === storyChapterIndex ? "active" : ""} ${index < storyChapterIndex ? "done" : ""}">
+      <h3>${chapter.title}</h3>
+      <p>${chapter.text}</p>
+      <button class="btn-mini" data-story-target="${chapter.target}" type="button">Abrir capitulo</button>
+    </article>
+  `).join("");
+  const progress = ((storyChapterIndex + 1) / storyChapters.length) * 100;
+  if (storyProgressBar) storyProgressBar.style.width = `${progress}%`;
+  if (storyProgressText) storyProgressText.textContent = `Capitulo ${storyChapterIndex + 1} de ${storyChapters.length}`;
+  if (storySummary) storySummary.textContent = storyChapters[storyChapterIndex]?.text || "";
+  safeSetStorage("dinoStoryChapter", String(storyChapterIndex));
+}
+
+function renderEcosystems() {
+  if (!ecosystemLiveGrid) return;
+  ecosystemLiveGrid.innerHTML = ecosystemProfiles.map((item) => `
+    <article class="ecosystem-card">
+      <h3>${item.name}</h3>
+      <p class="result-meta">${item.fauna}</p>
+      <div class="ecosystem-bar">
+        <span><strong>Clima</strong><strong>${item.climate}%</strong></span>
+        <div class="ecosystem-bar-track"><div class="ecosystem-bar-fill" style="width:${item.climate}%"></div></div>
+      </div>
+      <div class="ecosystem-bar">
+        <span><strong>Flora</strong><strong>${item.flora}%</strong></span>
+        <div class="ecosystem-bar-track"><div class="ecosystem-bar-fill" style="width:${item.flora}%"></div></div>
+      </div>
+      <div class="ecosystem-bar">
+        <span><strong>Agua</strong><strong>${item.water}%</strong></span>
+        <div class="ecosystem-bar-track"><div class="ecosystem-bar-fill" style="width:${item.water}%"></div></div>
+      </div>
+    </article>
+  `).join("");
+}
+
+function applyReadingMode(enabled, { persist = true } = {}) {
+  document.body.classList.toggle("reading-mode", !!enabled);
+  if (readingModeToggle) readingModeToggle.checked = !!enabled;
+  if (readingModeStatus) readingModeStatus.textContent = enabled ? "Activado" : "Desactivado";
+  if (persist) safeSetStorage(READING_MODE_KEY, enabled ? "1" : "0");
+}
+
+function applyReduceEffects(enabled, { persist = true } = {}) {
+  document.body.classList.toggle("reduce-effects", !!enabled);
+  if (reduceEffectsToggle) reduceEffectsToggle.checked = !!enabled;
+  if (reduceEffectsStatus) reduceEffectsStatus.textContent = enabled ? "Reducidos" : "Normal";
+  if (persist) safeSetStorage(REDUCE_EFFECTS_KEY, enabled ? "1" : "0");
+}
+
+function saveThemeSnapshot() {
+  const cfg = getCustomizationFromInputs();
+  safeSetStorage(SAVED_THEME_SLOT_KEY, JSON.stringify(cfg));
+  showToast("Tema V4 guardado.");
+}
+
+function applySavedThemeSnapshot() {
+  const raw = safeGetStorage(SAVED_THEME_SLOT_KEY);
+  if (!raw) {
+    showToast("No hay un tema V4 guardado.");
+    return;
+  }
+  try {
+    const cfg = JSON.parse(raw);
+    applyCustomization({ ...defaultCustomization, ...cfg });
+    showToast("Tema V4 restaurado.");
+  } catch (_err) {
+    showToast("No se pudo restaurar el tema guardado.");
+  }
+}
+
+function renderFossilHunterRound() {
+  if (!fossilHunterClue || !fossilHunterOptions || !fossilHunterFeedback) return;
+  fossilHunterState = pick(fossilHunterPrompts);
+  fossilHunterClue.textContent = fossilHunterState.clue;
+  fossilHunterFeedback.textContent = "Elige la pieza correcta para ganar XP.";
+  fossilHunterOptions.innerHTML = fossilHunterState.options
+    .sort(() => Math.random() - 0.5)
+    .map((option) => `<button class="quiz-option" data-fossil-hunter="${escapeHtml(option)}" type="button">${option}</button>`)
+    .join("");
+}
+
+function initFpsMonitor() {
+  if (!fpsText) return;
+  const samples = [];
+  let previous = performance.now();
+  const tick = (now) => {
+    const delta = now - previous;
+    previous = now;
+    if (delta > 4 && delta < 100) {
+      samples.push(1000 / delta);
+      if (samples.length > 24) samples.shift();
+      const avg = samples.reduce((sum, value) => sum + value, 0) / samples.length;
+      fpsText.textContent = `${Math.round(avg)} FPS aprox.`;
+    }
+    requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+}
+
+function autoOptimizeExperience() {
+  const hasLowMemory = typeof navigator.deviceMemory === "number" && navigator.deviceMemory <= 4;
+  const hasLowCores = typeof navigator.hardwareConcurrency === "number" && navigator.hardwareConcurrency <= 4;
+  const shouldOptimize = hasLowMemory || hasLowCores;
+  applyPerformanceMode(shouldOptimize);
+  applyLowBlurMode(shouldOptimize);
+  if (shouldOptimize) applyReduceEffects(true);
+  if (autoOptimizeStatus) {
+    autoOptimizeStatus.textContent = shouldOptimize
+      ? "Optimizacion aplicada: menos blur y menos efectos."
+      : "Equipo estable: se mantuvo la experiencia completa.";
+  }
+  showToast(shouldOptimize ? "Auto-optimizacion aplicada" : "Tu equipo ya esta en modo completo");
+}
+
+function restoreExactPoint() {
+  const raw = safeGetStorage(AUTOSAVE_KEY);
+  if (!raw) {
+    if (restorePointStatus) restorePointStatus.textContent = "No hay sesion guardada.";
+    return;
+  }
+  try {
+    const saved = JSON.parse(raw);
+    if (saved?.lastScreen) activateScreenById(saved.lastScreen, { scroll: false });
+    requestAnimationFrame(() => {
+      if (Number.isFinite(saved?.scrollY)) {
+        window.scrollTo({ top: saved.scrollY, behavior: "smooth" });
+      }
+    });
+    if (restorePointStatus) restorePointStatus.textContent = `Sesion restaurada: ${saved?.lastScreen || "pantalla actual"}.`;
+  } catch (_err) {
+    if (restorePointStatus) restorePointStatus.textContent = "No se pudo leer el autoguardado.";
   }
 }
 
@@ -5549,14 +6146,14 @@ function updateQuizTimerUI() {
   const barEl = $("quizTimerBar");
   if (valueEl) valueEl.textContent = `${quizTimerValue}s`;
   if (barEl) {
-    const pct = Math.max(0, Math.min(100, (quizTimerValue / 20) * 100));
+    const pct = Math.max(0, Math.min(100, (quizTimerValue / Math.max(currentQuizDuration, 1)) * 100));
     barEl.style.width = `${pct}%`;
   }
 }
 
 function startQuizTimer() {
   stopQuizTimer();
-  quizTimerValue = 20;
+  quizTimerValue = currentQuizDuration;
   updateQuizTimerUI();
   quizTimerHandle = setInterval(() => {
     quizTimerValue -= 1;
@@ -5602,18 +6199,36 @@ function renderQuiz() {
     return;
   }
 
-  const item = quizData[qIndex];
+  const baseItem = quizData[qIndex];
+  const difficulty = streak >= 4 ? "Experto" : streak >= 2 ? "Avanzado" : "Inicial";
+  const extraOptions = streak >= 4 ? 2 : streak >= 2 ? 1 : 0;
+  const distractors = quizData
+    .flatMap((entry) => entry.o)
+    .filter((option) => !baseItem.o.includes(option))
+    .sort(() => Math.random() - 0.5)
+    .slice(0, extraOptions);
+  const runtimeOptions = [...baseItem.o, ...distractors].sort(() => Math.random() - 0.5);
+  currentQuizRuntime = {
+    correct: baseItem.o[baseItem.a],
+    difficulty,
+    options: runtimeOptions
+  };
+  currentQuizDuration = streak >= 4 ? 12 : streak >= 2 ? 16 : 20;
+  if (quizAdaptiveStatus) {
+    quizAdaptiveStatus.textContent = `Dificultad adaptativa: ${difficulty}. Tiempo actual ${currentQuizDuration}s.`;
+  }
   quizBox.innerHTML = `
     <div class="quiz-meta">
       <span>Pregunta ${qIndex + 1} de ${quizData.length}</span>
       <span>Racha: ${streak}</span>
+      <span>Nivel: ${difficulty}</span>
       <span>Mejor: ${bestStreak}</span>
-      <span>Tiempo: <strong id="quizTimerValue">20s</strong></span>
+      <span>Tiempo: <strong id="quizTimerValue">${currentQuizDuration}s</strong></span>
     </div>
     <div class="quiz-timer"><div id="quizTimerBar" class="quiz-timer-bar"></div></div>
-    <h3>${item.q}</h3>
+    <h3>${baseItem.q}</h3>
     <div class="quiz-options">
-      ${item.o.map((op, i) => `<button class="quiz-option" data-i="${i}" type="button">${op}</button>`).join("")}
+      ${runtimeOptions.map((op) => `<button class="quiz-option" data-option="${escapeHtml(op)}" type="button">${op}</button>`).join("")}
     </div>
   `;
   startQuizTimer();
@@ -5622,10 +6237,11 @@ function renderQuiz() {
 function onQuizClick(e) {
   if (!e.target.classList.contains("quiz-option")) return;
   stopQuizTimer();
-  const selected = Number(e.target.dataset.i);
-  if (selected === quizData[qIndex].a) {
+  const selected = e.target.dataset.option || "";
+  if (selected === currentQuizRuntime?.correct) {
     score++;
     streak++;
+    addXP(10, "quiz");
     if (streak > bestStreak) {
       bestStreak = streak;
       localStorage.setItem("dinoBestStreak", String(bestStreak));
@@ -5640,13 +6256,25 @@ function onQuizClick(e) {
 function renderRegion(region) {
   if (!mapInfo) return;
   const list = dinosaurs.filter((d) => d.continent === region).map((d) => d.common);
+  const layers = getActiveMapLayers();
+  const profile = mapLayerProfiles[region];
+  const layerDetails = [];
+  if (layers.climate && profile?.climate) layerDetails.push(`<p><strong>Clima:</strong> ${profile.climate}</p>`);
+  if (layers.flora && profile?.flora) layerDetails.push(`<p><strong>Flora:</strong> ${profile.flora}</p>`);
+  if (layers.routes && profile?.routes) layerDetails.push(`<p><strong>Rutas migratorias:</strong> ${profile.routes}</p>`);
+  if (layers.fossils && profile?.fossils) layerDetails.push(`<p><strong>Fosiles clave:</strong> ${profile.fossils}</p>`);
   mapInfo.innerHTML = `
     <h3>${region}</h3>
     <p>Registros relevantes en esta region: ${list.length} especies dentro de esta base.</p>
+    ${layerDetails.join("")}
     <ul class="map-list">
       ${list.slice(0, 8).map((d) => `<li>${d}</li>`).join("")}
     </ul>
   `;
+  if (mapLayerStatus) {
+    const active = Object.entries(layers).filter(([, enabled]) => enabled).map(([name]) => name).join(", ");
+    mapLayerStatus.textContent = `Capas activas: ${active || "ninguna"}.`;
+  }
   renderMapPins(region);
 }
 
@@ -5663,11 +6291,12 @@ function renderMapPins(activeRegion) {
 
   mapPins.innerHTML = Object.entries(coords).map(([name, point]) => {
     const isActive = name === activeRegion;
+    const total = dinosaurs.filter((d) => d.continent === name).length;
     return `
       <div class="map-pin" style="left:${point.x}%; top:${point.y}%;">
         <div class="map-pin-dot ${isActive ? "active" : ""}"></div>
         ${isActive ? `<div class="map-pin-ring"></div>` : ""}
-        <div class="map-pin-label">${name}</div>
+        <div class="map-pin-label">${name} · ${total}</div>
       </div>
     `;
   }).join("");
@@ -5682,6 +6311,13 @@ function bindRegionButtons() {
       renderRegion(btn.dataset.region);
     });
   });
+  [layerClimate, layerFlora, layerRoutes, layerFossils].filter(Boolean).forEach((toggle) => {
+    toggle.addEventListener("change", () => {
+      persistMapLayers();
+      const active = buttons.find((btn) => btn.classList.contains("active"))?.dataset.region || "Norteamerica";
+      renderRegion(active);
+    });
+  });
   renderRegion("Norteamerica");
 }
 
@@ -5693,7 +6329,10 @@ function renderRanking(metric) {
     speed: "km/h",
     power: "pts de fuerza"
   };
-  const top = dinosaurs.slice().sort((a, b) => b[metric] - a[metric]).slice(0, 8);
+  const source = currentRankingScope === "weekly"
+    ? dinosaurs.slice().sort((a, b) => ((b[metric] + b.speed + b.power) - (a[metric] + a.speed + a.power)))
+    : dinosaurs.slice().sort((a, b) => b[metric] - a[metric]);
+  const top = source.slice(0, 8);
   rankingList.innerHTML = top.map((d, i) => `
     <article class="ranking-item">
       <div class="rank-num">${i + 1}</div>
@@ -5704,6 +6343,11 @@ function renderRanking(metric) {
       <div class="rank-metric">${d[metric]} ${titleMap[metric]}</div>
     </article>
   `).join("");
+  if (rankingStatus) {
+    rankingStatus.textContent = currentRankingScope === "weekly"
+      ? "Ranking semanal estimado con mezcla de tamano, velocidad y fuerza."
+      : "Top local basado en tu base actual.";
+  }
 }
 
 function bindMetricButtons() {
@@ -5718,6 +6362,24 @@ function bindMetricButtons() {
     });
   });
   renderRanking(currentMetric);
+}
+
+function bindRankingScopeButtons() {
+  if (!rankingScopeLocal || !rankingScopeWeekly) return;
+  const sync = () => {
+    rankingScopeLocal.classList.toggle("active", currentRankingScope === "local");
+    rankingScopeWeekly.classList.toggle("active", currentRankingScope === "weekly");
+    renderRanking(currentMetric);
+  };
+  rankingScopeLocal.addEventListener("click", () => {
+    currentRankingScope = "local";
+    sync();
+  });
+  rankingScopeWeekly.addEventListener("click", () => {
+    currentRankingScope = "weekly";
+    sync();
+  });
+  sync();
 }
 
 function renderRandomDino() {
@@ -5816,6 +6478,7 @@ function getScreenSections() {
     "ultra",
     "expediciones",
     "experiencia",
+    "historia",
     "enciclopedia",
     "album",
     "timeline",
@@ -6292,6 +6955,100 @@ async function initUltraPerformancePanel() {
   }
 }
 
+function initV4Experience() {
+  const savedZoom = parseFloat(safeGetStorage(TIMELINE_ZOOM_KEY) || "1");
+  applyTimelineZoom(Number.isFinite(savedZoom) ? savedZoom : 1, { persist: false });
+  timelineZoomInput?.addEventListener("input", () => applyTimelineZoom(timelineZoomInput.value));
+
+  const savedLayersRaw = safeGetStorage(MAP_LAYERS_KEY);
+  if (savedLayersRaw) {
+    try {
+      const savedLayers = JSON.parse(savedLayersRaw);
+      if (layerClimate) layerClimate.checked = savedLayers.climate !== false;
+      if (layerFlora) layerFlora.checked = savedLayers.flora !== false;
+      if (layerRoutes) layerRoutes.checked = savedLayers.routes !== false;
+      if (layerFossils) layerFossils.checked = savedLayers.fossils !== false;
+    } catch (_err) {
+      // ignore
+    }
+  }
+
+  const savedView = safeGetStorage(VIEW_MODE_KEY) || "museo";
+  applyViewMode(savedView, { persist: false });
+  museumModeBtn?.addEventListener("click", () => applyViewMode("museo"));
+  labModeBtn?.addEventListener("click", () => applyViewMode("lab"));
+
+  if (storyChapterGrid) {
+    storyChapterGrid.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-story-target]");
+      if (!button) return;
+      const target = button.dataset.storyTarget;
+      scrollToSection(target);
+    });
+  }
+  storyStartBtn?.addEventListener("click", () => {
+    storyChapterIndex = 0;
+    renderStoryMode();
+    scrollToSection(storyChapters[0].target);
+    showToast("Modo Historia iniciado");
+  });
+  storyNextBtn?.addEventListener("click", () => {
+    storyChapterIndex = clamp(storyChapterIndex + 1, 0, storyChapters.length - 1);
+    renderStoryMode();
+    const chapter = storyChapters[storyChapterIndex];
+    if (chapter) scrollToSection(chapter.target);
+    if (storyChapterIndex === storyChapters.length - 1) unlockAchievements("story");
+  });
+  renderStoryMode();
+  renderEcosystems();
+  renderFossilHunterRound();
+
+  const readingSaved = safeGetStorage(READING_MODE_KEY) === "1";
+  applyReadingMode(readingSaved, { persist: false });
+  const reduceSaved = safeGetStorage(REDUCE_EFFECTS_KEY) === "1";
+  applyReduceEffects(reduceSaved, { persist: false });
+  readingModeToggle?.addEventListener("change", () => applyReadingMode(readingModeToggle.checked));
+  reduceEffectsToggle?.addEventListener("change", () => applyReduceEffects(reduceEffectsToggle.checked));
+  saveThemeBtn?.addEventListener("click", saveThemeSnapshot);
+  applySavedThemeBtn?.addEventListener("click", applySavedThemeSnapshot);
+
+  autoOptimizeBtn?.addEventListener("click", autoOptimizeExperience);
+  restorePointBtn?.addEventListener("click", restoreExactPoint);
+
+  newFossilHunterBtn?.addEventListener("click", renderFossilHunterRound);
+  fossilHunterOptions?.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-fossil-hunter]");
+    if (!button || !fossilHunterState) return;
+    fossilHunterOptions.querySelectorAll(".quiz-option").forEach((option) => {
+      option.disabled = true;
+    });
+    const selected = button.dataset.fossilHunter || "";
+    if (selected === fossilHunterState.answer) {
+      fossilHunterFeedback.textContent = "Correcto. +15 XP";
+      addXP(15, "fossil-hunter");
+      unlockAchievements("fossil-hunter");
+    } else {
+      fossilHunterFeedback.textContent = `Incorrecto. Respuesta: ${fossilHunterState.answer}`;
+    }
+  });
+
+  initFpsMonitor();
+
+  window.addEventListener("keydown", (event) => {
+    const target = event.target;
+    const typing = target instanceof HTMLElement && /input|textarea|select/i.test(target.tagName);
+    if (typing) return;
+    if (event.altKey && event.key === "ArrowRight") {
+      event.preventDefault();
+      screenNextBtn?.click();
+    }
+    if (event.altKey && event.key === "ArrowLeft") {
+      event.preventDefault();
+      screenPrevBtn?.click();
+    }
+  });
+}
+
 
 function getCommandItems() {
   const openSettingsFromCommand = (viewId) => {
@@ -6304,14 +7061,16 @@ function getCommandItems() {
   const sectionItems = [
     { label: "Ir a Estado", type: "Seccion", action: () => openSettingsFromCommand("estado") },
     { label: "Ir a Version", type: "Seccion", action: () => openSettingsFromCommand("version") },
-    { label: "Ir a Novedades V3.0", type: "Seccion", action: () => scrollToSection("novedades") },
+    { label: "Ir a Novedades V4.0", type: "Seccion", action: () => scrollToSection("novedades") },
     { label: "Ir a Ultra rendimiento", type: "Seccion", action: () => scrollToSection("ultra") },
     { label: "Ir a Expediciones", type: "Seccion", action: () => scrollToSection("expediciones") },
+    { label: "Ir a Modo Historia", type: "Seccion", action: () => scrollToSection("historia") },
     { label: "Ir a LYONIX intelligence", type: "Seccion", action: () => scrollToSection("enciclopedia") },
     { label: "Ir a Enciclopedia", type: "Seccion", action: () => scrollToSection("enciclopedia") },
     { label: "Ir a Album", type: "Seccion", action: () => scrollToSection("album") },
     { label: "Ir a Timeline", type: "Seccion", action: () => scrollToSection("timeline") },
     { label: "Ir a Mapa", type: "Seccion", action: () => scrollToSection("mapa") },
+    { label: "Ir a Ecosistemas", type: "Seccion", action: () => scrollToSection("ecosistemas") },
     { label: "Ir a Centro de experiencia", type: "Seccion", action: () => scrollToSection("experiencia") },
     { label: "Ir a Ranking", type: "Seccion", action: () => scrollToSection("ranking") },
     { label: "Ir a Nosotros", type: "Seccion", action: () => scrollToSection("nosotros") },
@@ -6542,8 +7301,17 @@ function initRuntimeStability() {
     shareBtn.addEventListener("click", sharePage);
   }
 
+  const optimizeImageElement = (img, index = 0) => {
+    if (!(img instanceof HTMLImageElement)) return;
+    if (!img.hasAttribute("decoding")) img.decoding = "async";
+    if (!img.hasAttribute("loading")) img.loading = index < 3 ? "eager" : "lazy";
+    if (!img.hasAttribute("fetchpriority")) img.setAttribute("fetchpriority", index < 2 ? "high" : "auto");
+    if (!img.hasAttribute("referrerpolicy")) img.referrerPolicy = "no-referrer";
+  };
+
   const bindAllImages = () => {
-    document.querySelectorAll("img").forEach((img) => {
+    document.querySelectorAll("img").forEach((img, index) => {
+      optimizeImageElement(img, index);
       const fallback = img.classList.contains("fossil-image") ? DEFAULT_FOSSIL_IMAGE : DEFAULT_DINO_IMAGE;
       bindImageRecovery(img, fallback);
     });
@@ -6556,10 +7324,12 @@ function initRuntimeStability() {
         mutation.addedNodes.forEach((node) => {
           if (!(node instanceof Element)) return;
           if (node.tagName === "IMG") {
+            optimizeImageElement(node);
             const fallback = node.classList.contains("fossil-image") ? DEFAULT_FOSSIL_IMAGE : DEFAULT_DINO_IMAGE;
             bindImageRecovery(node, fallback);
           }
           node.querySelectorAll?.("img").forEach((img) => {
+            optimizeImageElement(img);
             const fallback = img.classList.contains("fossil-image") ? DEFAULT_FOSSIL_IMAGE : DEFAULT_DINO_IMAGE;
             bindImageRecovery(img, fallback);
           });
@@ -6575,8 +7345,9 @@ function applyHeroSlide(index) {
   if (!slide || !heroShowcase || !heroShowcaseImage) return;
   heroShowcase.classList.add("is-changing");
   setTimeout(() => {
+    heroShowcaseImage.dataset.fallback = slide.fallback || DEFAULT_DINO_IMAGE;
     heroShowcaseImage.onerror = () => {
-      heroShowcaseImage.src = DEFAULT_DINO_IMAGE;
+      heroShowcaseImage.src = slide.fallback || DEFAULT_DINO_IMAGE;
       heroShowcaseImage.onerror = null;
     };
     heroShowcaseImage.src = normalizeImageUrl(slide.image, 1400);
@@ -6590,6 +7361,7 @@ function bindImageRecovery(img, fallback = DEFAULT_DINO_IMAGE) {
   if (!img || img.dataset.imgBound === "1") return;
   img.dataset.imgBound = "1";
   img.addEventListener("error", () => {
+    const bestFallback = img.dataset.fallback || fallback || (img.classList.contains("fossil-image") ? DEFAULT_FOSSIL_IMAGE : DEFAULT_DINO_IMAGE);
     const stage = Number(img.dataset.imgStage || "0");
     if (stage === 0) {
       img.dataset.imgStage = "1";
@@ -6601,13 +7373,15 @@ function bindImageRecovery(img, fallback = DEFAULT_DINO_IMAGE) {
     }
     if (stage <= 1) {
       img.dataset.imgStage = "2";
-      if (img.src !== fallback) {
-        img.src = fallback;
+      if (img.src !== bestFallback) {
+        img.src = bestFallback;
         return;
       }
     }
     img.dataset.imgStage = "3";
-    img.src = createHeroImage("DinoVerse", "#6d8f55");
+    img.src = img.classList.contains("fossil-image")
+      ? DEFAULT_FOSSIL_IMAGE
+      : createHeroImage("DinoVerse", "#6d8f55");
   });
 }
 
@@ -6754,12 +7528,35 @@ if (memoryBoard) {
 
 if (resetMemoryBtn) resetMemoryBtn.addEventListener("click", initMemoryGame);
 
+let lastScrollY = window.scrollY;
+let chromeHidden = false;
+
+function updateChromeVisibility(scrollY) {
+  const nextY = Math.max(0, scrollY);
+  const delta = nextY - lastScrollY;
+  const shouldHide = nextY > 140 && delta > 8;
+  const shouldShow = nextY < 80 || delta < -6;
+
+  if (shouldHide && !chromeHidden) {
+    mainHeader?.classList.add("is-hidden");
+    screenSwitcher?.classList.add("is-hidden");
+    chromeHidden = true;
+  } else if (shouldShow && chromeHidden) {
+    mainHeader?.classList.remove("is-hidden");
+    screenSwitcher?.classList.remove("is-hidden");
+    chromeHidden = false;
+  }
+
+  lastScrollY = nextY;
+}
+
 let scrollTicking = false;
 window.addEventListener("scroll", () => {
   if (scrollTicking) return;
   scrollTicking = true;
   requestAnimationFrame(() => {
     updateReadingProgress();
+    updateChromeVisibility(window.scrollY || window.pageYOffset || 0);
     scrollTicking = false;
   });
 }, { passive: true });
@@ -6771,8 +7568,6 @@ renderExpeditions();
 enableTimelineDrag();
 fillCompareSelects();
 renderQuiz();
-bindRegionButtons();
-bindMetricButtons();
 renderRandomDino();
 renderFavorites();
 renderDailyMission();
@@ -6792,13 +7587,18 @@ initPersonalizationExtras();
 initPerformanceMode();
 initUltraPerformancePanel();
 initMobileNav();
-initScreenNavigation();
 initCommandPalette();
 initSettingsDrawer();
+initScreenNavigation();
+initV4Experience();
+bindRegionButtons();
+bindMetricButtons();
+bindRankingScopeButtons();
 initPWA();
 initRuntimeStability();
 initHeroShowcase();
 updateReadingProgress();
+updateChromeVisibility(window.scrollY || window.pageYOffset || 0);
 initVisitorProfile();
 initAutoSave();
 initQuickTour();
@@ -6807,10 +7607,12 @@ initLyonixIntelligence();
 updateLiveActivity();
 updateSessionTimer();
 sessionTimerInterval = setInterval(updateSessionTimer, 1000);
+window.__dinoBootReady = "1";
 
 </script>
 <script>
 (() => {
+  if (window.__dinoBootReady === "1") return;
   // Fallback de compatibilidad movil: asegura controles base en iPhone
   const byId = (id) => document.getElementById(id);
   const header = document.querySelector(".main-header");
