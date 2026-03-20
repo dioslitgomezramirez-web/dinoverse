@@ -1539,6 +1539,9 @@ select option {
 }
 
 .fossil-card {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  align-content: start;
   border: 1px solid color-mix(in srgb, var(--sand) 16%, transparent);
   border-radius: 14px;
   background: linear-gradient(160deg, color-mix(in srgb, var(--bg-0) 58%, transparent), color-mix(in srgb, var(--bg-2) 52%, transparent));
@@ -1561,13 +1564,40 @@ select option {
 .fossil-image {
   width: 100%;
   height: 130px;
+  display: block;
   object-fit: cover;
+  object-position: center;
   border-radius: 10px;
   border: 1px solid color-mix(in srgb, var(--sand) 14%, transparent);
+  background: linear-gradient(145deg, color-mix(in srgb, var(--bg-0) 72%, transparent), color-mix(in srgb, var(--bg-2) 64%, transparent));
 }
 
 .fossil-meta {
   padding: 0.55rem 0.25rem 0.15rem;
+  display: grid;
+  gap: 0.45rem;
+  min-width: 0;
+}
+
+.fossil-meta h3 {
+  margin: 0;
+  display: block;
+  min-width: 0;
+  font-size: clamp(1rem, 1.7vw, 1.42rem);
+  line-height: 1.03;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.fossil-meta h3::before {
+  content: none;
+}
+
+.fossil-meta .result-meta {
+  margin: 0;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .fossil-detail {
@@ -2761,11 +2791,25 @@ body.view-lab {
 
 @media (max-width: 640px) {
   :root {
-    --header-offset: 84px;
+    --header-offset: 86px;
+    --panel-pad: 0.9rem;
+  }
+
+  body {
+    padding-bottom: calc(6.8rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  .main-header {
+    padding: 0.7rem 0.8rem;
+    border-bottom-left-radius: 18px;
+    border-bottom-right-radius: 18px;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.65rem;
   }
 
   .logo {
-    font-size: 1.6rem;
+    font-size: 1.55rem;
+    line-height: 1;
   }
 
   #quickSearchBtn,
@@ -2773,19 +2817,40 @@ body.view-lab {
   #installAppBtn,
   #themeToggle,
   #shareBtn {
-    padding: 0.35rem 0.6rem;
-    font-size: 0.82rem;
+    min-height: 48px;
+    padding: 0.55rem 0.7rem;
+    font-size: 0.9rem;
+    border-radius: 18px;
   }
 
   .header-actions {
-    gap: 0.35rem;
+    gap: 0.55rem;
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .menu-toggle {
+    min-width: 88px;
+    min-height: 48px;
+    padding: 0.55rem 0.9rem;
+    border-radius: 20px;
+  }
+
   .screen-switcher {
-    flex-wrap: wrap;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
     top: calc(0.3rem + 60px);
+    gap: 0.6rem;
+    padding: 0.7rem;
+    border-radius: 24px;
+  }
+
+  #screenPrevBtn,
+  #screenNextBtn {
+    min-width: 0;
+    width: 100%;
+    min-height: 48px;
+    border-radius: 18px;
   }
 
   .command-dialog,
@@ -2807,11 +2872,37 @@ body.view-lab {
   .screen-center {
     width: 100%;
     order: -1;
+    grid-column: 1 / -1;
+    gap: 0.6rem;
   }
 
   .screen-select {
     min-width: 0;
     width: 100%;
+    min-height: 52px;
+    font-size: 1rem;
+    border-radius: 18px;
+  }
+
+  .screen-topline {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: start;
+    gap: 0.45rem;
+  }
+
+  .screen-label {
+    font-size: 0.74rem;
+    letter-spacing: 0.1em;
+  }
+
+  .screen-switcher .result-meta {
+    text-align: left;
+    font-size: 0.94rem;
+  }
+
+  .screen-dots {
+    justify-content: flex-start;
   }
 
   .stats {
@@ -2842,6 +2933,29 @@ body.view-lab {
     grid-template-columns: 1fr;
   }
 
+  .hero {
+    gap: 1rem;
+    padding-top: 0.7rem;
+  }
+
+  .hero-copy {
+    gap: 0.8rem;
+  }
+
+  .hero-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.65rem;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+    min-height: 56px;
+    border-radius: 20px;
+    justify-content: center;
+    font-size: 1.02rem;
+  }
+
   .memory-board {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -2859,15 +2973,27 @@ body.view-lab {
   }
 
   .quick-access {
-    right: 0.7rem;
-    left: 0.7rem;
+    right: 0.75rem;
+    left: 0.75rem;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     max-width: none;
+    gap: 0.65rem;
+    padding: 0.65rem;
+    border: 1px solid color-mix(in srgb, var(--sand) 18%, transparent);
+    border-radius: 24px;
+    background: linear-gradient(160deg, color-mix(in srgb, var(--bg-0) 82%, transparent), color-mix(in srgb, var(--bg-2) 78%, transparent));
+    backdrop-filter: blur(calc(14px * var(--glass-factor))) saturate(130%);
+    -webkit-backdrop-filter: blur(calc(14px * var(--glass-factor))) saturate(130%);
+    box-shadow: 0 18px 34px rgba(0, 0, 0, 0.24);
   }
 
   .quick-access-btn {
     min-width: 0;
     width: 100%;
+    min-height: 54px;
+    border-radius: 18px;
+    padding: 0.8rem 0.9rem;
+    font-size: 1rem;
   }
 
 }
@@ -2887,6 +3013,7 @@ body.view-lab {
     left: 0.6rem;
     right: 0.6rem;
     bottom: calc(0.7rem + env(safe-area-inset-bottom, 0px));
+    padding: 0.55rem;
   }
 }
 
@@ -3011,7 +3138,7 @@ body.view-lab {
 }
 
 .fossil-card h3::before {
-  border-style: dashed;
+  content: none;
 }
 
 .mission-card h3::before {
@@ -4789,35 +4916,35 @@ const fossilArtifacts = [
     name: "Costilla de Spinosaurus",
     era: "Cretacico",
     text: "Fragmento oseo asociado a grandes depredadores riberenios.",
-    image: "https://commons.wikimedia.org/wiki/Special:FilePath/Spinosaurus_bones.jpg",
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/Spinosaurus_vertebrae_Schiele.jpg",
     fallback: createFossilImage("Costilla de Spinosaurus", "#53aab0")
   },
   {
     name: "Cresta de Parasaurolophus",
     era: "Cretacico",
     text: "Parte craneal hueca vinculada a comunicacion sonora.",
-    image: "https://commons.wikimedia.org/wiki/Special:FilePath/Parasaurolophus_skull.jpg",
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/Parasaurolophus_skull_NHM.jpg",
     fallback: createFossilImage("Cresta de Parasaurolophus", "#8fcf7e")
   },
   {
     name: "Craneo de Pachycephalosaurus",
     era: "Cretacico",
     text: "Domo oseo grueso que probablemente se uso en exhibicion o choques.",
-    image: "https://commons.wikimedia.org/wiki/Special:FilePath/Pachycephalosaurus_wyomingensis_skull.jpg",
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/AMNH_1696_Pachycephalosaurus.jpg",
     fallback: createFossilImage("Craneo de Pachycephalosaurus", "#c98d49")
   },
   {
     name: "Huevo de Maiasaura",
     era: "Cretacico",
     text: "Evidencia clave de anidacion colonial y cuidado de crias.",
-    image: "https://commons.wikimedia.org/wiki/Special:FilePath/Maiasaura_peeblesorum_nest.jpg",
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/MaiasauraNestNHM.jpg",
     fallback: createFossilImage("Huevo de Maiasaura", "#a2be72")
   },
   {
     name: "Placa caudal de Ankylosaurus",
     era: "Cretacico",
     text: "Armadura dorsal y caudal adaptada a defensa pesada.",
-    image: "https://commons.wikimedia.org/wiki/Special:FilePath/Ankylosaurus_tail_club.jpg",
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/WDC_-_Ankylosaurus_tail_club.jpg",
     fallback: createFossilImage("Placa caudal de Ankylosaurus", "#aa7a41")
   }
 ];
@@ -6205,7 +6332,7 @@ function renderFossils() {
   if (!fossilGallery || !fossilDetail) return;
   fossilGallery.innerHTML = fossilArtifacts.map((f, idx) => `
     <article class="fossil-card" data-fossil-index="${idx}">
-      <img class="fossil-image" src="${normalizeImageUrl(f.image, 1100)}" data-fallback="${f.fallback}" alt="${f.name}" loading="lazy" referrerpolicy="no-referrer">
+      <img class="fossil-image" src="${normalizeImageUrl(f.image, 1100) || f.fallback}" data-fallback="${f.fallback}" alt="${f.name}" loading="lazy" referrerpolicy="no-referrer">
       <div class="fossil-meta">
         <h3>${f.name}</h3>
         <p class="result-meta">${f.era}</p>
@@ -6213,10 +6340,15 @@ function renderFossils() {
     </article>
   `).join("");
   fossilGallery.querySelectorAll(".fossil-image").forEach((img) => {
+    const card = img.closest("[data-fossil-index]");
+    const index = card ? Number(card.dataset.fossilIndex) : -1;
+    const fossil = fossilArtifacts[index];
+    if (fossil && !normalizeImageUrl(fossil.image, 1100)) {
+      resolveFossilOnlineImage(fossil).then((recovered) => {
+        if (recovered) img.src = recovered;
+      });
+    }
     img.addEventListener("error", async () => {
-      const card = img.closest("[data-fossil-index]");
-      const index = card ? Number(card.dataset.fossilIndex) : -1;
-      const fossil = fossilArtifacts[index];
       if (img.dataset.retrying === "1") {
         img.src = img.dataset.fallback || DEFAULT_FOSSIL_IMAGE;
         return;
@@ -6338,7 +6470,7 @@ function renderFossilDetail(index) {
   });
   fossilDetail.innerHTML = `
     <div class="fossil-detail">
-      <img class="fossil-image fossil-image-large" src="${normalizeImageUrl(fossil.image, 1200)}" data-fallback="${fossil.fallback}" alt="${fossil.name}" referrerpolicy="no-referrer">
+      <img class="fossil-image fossil-image-large" src="${normalizeImageUrl(fossil.image, 1200) || fossil.fallback}" data-fallback="${fossil.fallback}" alt="${fossil.name}" referrerpolicy="no-referrer">
       <div>
         <h3>${fossil.name}</h3>
         <p><strong>Era:</strong> ${fossil.era}</p>
@@ -6348,6 +6480,11 @@ function renderFossilDetail(index) {
   `;
   const detailImg = fossilDetail.querySelector(".fossil-image-large");
   if (detailImg) {
+    if (!normalizeImageUrl(fossil.image, 1200)) {
+      resolveFossilOnlineImage(fossil).then((recovered) => {
+        if (recovered) detailImg.src = recovered;
+      });
+    }
     detailImg.addEventListener("error", async () => {
       if (detailImg.dataset.retrying === "1") {
         detailImg.src = detailImg.dataset.fallback || DEFAULT_FOSSIL_IMAGE;
