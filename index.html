@@ -6,7 +6,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="format-detection" content="telephone=no">
   <title>DinoVerse | Museo Interactivo Prehistorico</title>
-  <meta name="description" content="Explora dinosaurios, periodos, mapa paleo, modo historia, LYONIX IA, arbol evolutivo, simulaciones educativas y rutas inteligentes en la version final de DinoVerse V5.0.">
+<meta name="description" content="Explora dinosaurios, periodos, mapa paleo, modo historia, LYONIX IA, arbol evolutivo, simulaciones educativas, rutas inteligentes y nuevas innovaciones en DinoVerse V5.1.">
   <meta name="theme-color" content="#0b141b">
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -151,6 +151,23 @@ section[id] {
   justify-content: flex-end;
 }
 
+.theme-toggle {
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--sand) 28%, transparent);
+  background: linear-gradient(145deg, color-mix(in srgb, var(--bg-0) 34%, transparent), color-mix(in srgb, var(--forest) 18%, transparent));
+  color: var(--ink);
+  padding: 0.5rem 0.8rem;
+  font-weight: 800;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.12);
+  transition: transform var(--fx-speed-fast) ease, border-color var(--fx-speed-fast) ease, background var(--fx-speed-fast) ease;
+}
+
+.theme-toggle:hover {
+  transform: translateY(-1px);
+  border-color: color-mix(in srgb, var(--fossil) 44%, transparent);
+  background: linear-gradient(145deg, color-mix(in srgb, var(--sand) 16%, transparent), color-mix(in srgb, var(--forest) 24%, transparent));
+}
+
 .main-header::after {
   content: "";
   position: absolute;
@@ -185,11 +202,14 @@ nav a {
   padding: 0.4rem 0.75rem;
   border-radius: 999px;
   font-size: 0.9rem;
-  transition: background var(--fx-speed-fast) ease, transform var(--fx-speed-fast) ease;
+  border: 1px solid transparent;
+  background: linear-gradient(145deg, color-mix(in srgb, var(--bg-0) 24%, transparent), color-mix(in srgb, var(--bg-2) 24%, transparent));
+  transition: background var(--fx-speed-fast) ease, transform var(--fx-speed-fast) ease, border-color var(--fx-speed-fast) ease;
 }
 
 nav a:hover {
   background: color-mix(in srgb, var(--sand) 18%, transparent);
+  border-color: color-mix(in srgb, var(--sand) 34%, transparent);
   transform: translateY(-1px);
 }
 
@@ -276,6 +296,15 @@ select {
   transition: transform var(--fx-speed-mid) var(--fx-ease), opacity var(--fx-speed-fast) ease;
 }
 
+.screen-switcher::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(110deg, transparent 8%, rgba(255,255,255,0.06) 40%, transparent 70%);
+  opacity: 0.65;
+}
+
 .main-header.is-hidden {
   transform: translateY(-110%);
   opacity: 0;
@@ -288,11 +317,19 @@ select {
   pointer-events: none;
 }
 
+body.options-collapsed .main-header,
+body.options-collapsed .screen-switcher {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transform: translateY(-130%) scale(0.96) !important;
+}
+
 .screen-center {
   flex: 1;
   min-width: 0;
   display: grid;
   gap: 0.35rem;
+  padding-inline: 0.25rem;
 }
 
 .screen-topline {
@@ -402,6 +439,22 @@ select {
   color: #1d130c;
 }
 
+.quick-access-menu {
+  background: linear-gradient(135deg, rgba(57, 82, 104, 0.94), rgba(92, 145, 170, 0.9));
+}
+
+body:not(.options-collapsed) #showOptionsBtn {
+  display: none !important;
+}
+
+body.options-collapsed #showOptionsBtn {
+  position: fixed;
+  top: calc(0.9rem + env(safe-area-inset-top, 0px));
+  right: clamp(0.8rem, 2vw, 1.4rem);
+  bottom: auto;
+  animation: menuPeekIn 300ms var(--fx-ease);
+}
+
 main {
   width: var(--shell-width);
   margin: 0 auto;
@@ -424,6 +477,7 @@ main {
 .hero-copy {
   display: grid;
   gap: 0.95rem;
+  align-content: start;
 }
 
 .hero > * {
@@ -467,6 +521,15 @@ h3 {
   flex-wrap: wrap;
   gap: 0.7rem;
   margin-top: 1.15rem;
+  align-items: stretch;
+}
+
+.hero-actions .btn {
+  min-height: 54px;
+  border-radius: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn {
@@ -508,6 +571,7 @@ h3 {
   border-radius: var(--radius);
   padding: 0.9rem;
   box-shadow: var(--shadow);
+  min-height: 100%;
 }
 
 .stats h3 {
@@ -533,10 +597,54 @@ h3 {
   transition: border-color var(--fx-speed-mid) ease, box-shadow var(--fx-speed-mid) ease, transform var(--fx-speed-mid) var(--fx-ease);
 }
 
+.panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at top right, rgba(255, 219, 140, 0.1), transparent 24%),
+    linear-gradient(120deg, transparent 0%, rgba(255, 255, 255, 0.035) 34%, transparent 58%);
+  pointer-events: none;
+}
+
+.panel::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  pointer-events: none;
+  border: 1px solid rgba(255, 255, 255, 0.035);
+}
+
 .panel:hover {
   border-color: color-mix(in srgb, var(--fossil) 42%, transparent);
   box-shadow: 0 28px 44px rgba(0, 0, 0, 0.28), inset 0 1px 0 color-mix(in srgb, var(--sand) 34%, transparent);
   transform: translateY(-2px);
+}
+
+body.design-solid .panel,
+body.design-solid .main-header,
+body.design-solid .screen-switcher {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  background: linear-gradient(160deg, color-mix(in srgb, var(--bg-0) 90%, #000 10%), color-mix(in srgb, var(--bg-2) 88%, #000 12%));
+}
+
+body.design-cinematic .panel,
+body.design-cinematic .main-header,
+body.design-cinematic .screen-switcher {
+  box-shadow: 0 28px 54px rgba(0, 0, 0, 0.34), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  border-color: color-mix(in srgb, var(--fossil) 46%, transparent);
+}
+
+body.layout-airy .panel {
+  margin: 3.4rem 0;
+  padding: clamp(1.2rem, 2.8vw, 2.35rem);
+}
+
+body.layout-compact .panel {
+  margin: 2rem 0;
+  padding: clamp(0.95rem, 1.8vw, 1.45rem);
 }
 
 .panel-screen {
@@ -592,6 +700,23 @@ h3 {
   padding: 0.9rem;
   background: linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.24), 0 14px 24px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.lyonix-panel::before {
+  content: "";
+  position: absolute;
+  inset: -30% -10% auto;
+  height: 220px;
+  background: radial-gradient(circle, rgba(93, 224, 255, 0.18), transparent 62%);
+  pointer-events: none;
+  animation: lyonixAura 7s ease-in-out infinite;
+}
+
+.lyonix-panel > * {
+  position: relative;
+  z-index: 1;
 }
 
 .lyonix-head h3 {
@@ -623,6 +748,7 @@ h3 {
 .lyonix-status.is-online::before {
   background: #28c76f;
   box-shadow: 0 0 0 2px rgba(40, 199, 111, 0.28);
+  animation: lyonixPulse 1.6s ease-in-out infinite;
 }
 
 .lyonix-controls {
@@ -636,6 +762,57 @@ h3 {
   margin-top: 0.75rem;
 }
 
+.lyonix-native-shell {
+  margin-top: 0.75rem;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 0.7rem;
+}
+
+.lyonix-shell-card {
+  border: 1px solid color-mix(in srgb, var(--sand) 22%, transparent);
+  border-radius: 14px;
+  padding: 0.8rem;
+  background:
+    radial-gradient(circle at top right, rgba(124, 233, 255, 0.13), transparent 34%),
+    linear-gradient(150deg, color-mix(in srgb, var(--bg-0) 68%, transparent), color-mix(in srgb, var(--bg-2) 58%, transparent));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  animation: lyonixShellFloat 6.4s ease-in-out infinite;
+}
+
+.lyonix-shell-card h3 {
+  margin: 0.1rem 0 0.35rem;
+}
+
+.lyonix-shell-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.55rem;
+  margin-bottom: 0.55rem;
+}
+
+.lyonix-shell-stat {
+  border: 1px solid color-mix(in srgb, var(--sand) 20%, transparent);
+  border-radius: 12px;
+  padding: 0.55rem 0.6rem;
+  background: color-mix(in srgb, var(--bg-0) 58%, transparent);
+}
+
+.lyonix-shell-stat strong,
+.lyonix-shell-stat span {
+  display: block;
+}
+
+.lyonix-shell-stat strong {
+  font-size: 1rem;
+}
+
+.lyonix-shell-stat span {
+  margin-top: 0.12rem;
+  font-size: 0.78rem;
+  color: color-mix(in srgb, var(--ink) 76%, transparent);
+}
+
 .lyonix-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -647,6 +824,7 @@ h3 {
   border-radius: 14px;
   padding: 0.8rem;
   background: color-mix(in srgb, var(--bg-0) 58%, transparent);
+  animation: lyonixCardIn 480ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .lyonix-image {
@@ -1320,6 +1498,28 @@ select option {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.8rem;
+}
+
+.innovation-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.innovation-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.innovation-card::after {
+  content: "";
+  position: absolute;
+  inset: auto -10% -35% auto;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 198, 107, 0.16), transparent 68%);
+  pointer-events: none;
 }
 
 .season-card {
@@ -2229,6 +2429,26 @@ footer {
   to { opacity: 1; transform: scale(1) translateY(0); filter: saturate(1) blur(0); }
 }
 
+@keyframes lyonixAura {
+  0%, 100% { transform: translate3d(-4%, 0, 0) scale(0.96); opacity: 0.45; }
+  50% { transform: translate3d(6%, 12px, 0) scale(1.08); opacity: 0.82; }
+}
+
+@keyframes lyonixPulse {
+  0%, 100% { transform: scale(1); opacity: 0.95; }
+  50% { transform: scale(1.18); opacity: 1; }
+}
+
+@keyframes lyonixShellFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+@keyframes lyonixCardIn {
+  from { opacity: 0; transform: translateY(10px) scale(0.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
 .story-layout,
 .timeline-tools,
 .map-layers,
@@ -2474,26 +2694,30 @@ body.view-lab {
 
   .main-header {
     grid-template-columns: auto minmax(0, 1fr) auto;
-    gap: 0.7rem;
+    gap: 0.9rem;
+    align-items: start;
   }
 
   .header-actions {
-    display: grid;
-    grid-template-columns: repeat(5, minmax(0, auto));
+    display: flex;
+    flex-wrap: wrap;
     align-items: center;
+    justify-content: flex-end;
+    max-width: 420px;
   }
 
   nav {
     justify-content: flex-start;
+    gap: 0.4rem;
   }
 
   .screen-switcher {
     gap: 0.55rem;
-    padding-inline: 0.45rem;
+    padding: 0.5rem 0.7rem;
   }
 
   .screen-select {
-    min-width: min(320px, 46vw);
+    min-width: min(360px, 42vw);
   }
 
   .story-layout {
@@ -2502,6 +2726,11 @@ body.view-lab {
 
   .map-layout {
     grid-template-columns: minmax(220px, 260px) minmax(0, 1fr);
+  }
+
+  .hero {
+    grid-template-columns: minmax(0, 1.02fr) minmax(380px, 0.98fr);
+    gap: 1.7rem;
   }
 }
 
@@ -2534,6 +2763,7 @@ body.view-lab {
 
   .stats,
   .season-grid,
+  .innovation-grid,
   .mission-grid,
   .lab-grid,
   .experience-grid,
@@ -2699,6 +2929,19 @@ body.view-lab {
     align-items: flex-start;
     top: calc(0.35rem + 64px);
     width: min(96vw, 980px);
+    flex-direction: column;
+    gap: 0.8rem;
+    padding: 0.8rem;
+  }
+
+  .screen-center {
+    width: 100%;
+    gap: 0.55rem;
+  }
+
+  .screen-topline,
+  .screen-dots {
+    justify-content: flex-start;
   }
 
   .hero-art {
@@ -2741,7 +2984,8 @@ body.view-lab {
     grid-template-columns: 1fr;
   }
 
-  .season-grid {
+  .season-grid,
+  .innovation-grid {
     grid-template-columns: 1fr;
   }
 
@@ -2835,6 +3079,12 @@ body.view-lab {
     border-radius: 20px;
   }
 
+  .main-header nav a {
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+  }
+
   .screen-switcher {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -2914,6 +3164,11 @@ body.view-lab {
   }
 
   .lyonix-controls {
+    grid-template-columns: 1fr;
+  }
+
+  .lyonix-native-shell,
+  .lyonix-shell-stats {
     grid-template-columns: 1fr;
   }
 
@@ -3014,6 +3269,7 @@ body.view-lab {
     right: 0.6rem;
     bottom: calc(0.7rem + env(safe-area-inset-bottom, 0px));
     padding: 0.55rem;
+    grid-template-columns: 1fr;
   }
 }
 
@@ -3197,9 +3453,10 @@ body.view-lab {
     <button id="menuToggle" class="menu-toggle" type="button" aria-expanded="false" aria-controls="mainNav" onclick="window.__dinoFallback && window.__dinoFallback.toggleMenu(event)">Menu</button>
     <nav id="mainNav">
       <a href="#estado">Estado</a>
-      <a href="#novedades">Novedades V5.0</a>
+      <a href="#novedades">Novedades V5.1</a>
       <a href="#ultra">Ultra rendimiento</a>
-      <a href="#release-center">Centro 5.0</a>
+      <a href="#release-center">Centro 5.1</a>
+      <a href="#innovation-hub">Innovacion</a>
       <a href="#expediciones">Expediciones</a>
       <a href="#historia">Historia</a>
       <a href="#enciclopedia">Enciclopedia</a>
@@ -3218,6 +3475,7 @@ body.view-lab {
       <a href="#juego">Juegos</a>
     </nav>
     <div class="header-actions">
+      <button id="optionsToggleBtn" class="theme-toggle" type="button" aria-label="Ocultar menu de opciones">Ocultar menu</button>
       <button id="quickSearchBtn" class="theme-toggle" type="button" aria-label="Busqueda rapida" onclick="window.__dinoFallback && window.__dinoFallback.toggleSearch(event)">Buscar</button>
       <button id="settingsToggleBtn" class="theme-toggle" type="button" aria-label="Abrir configuracion" onclick="window.__dinoFallback && window.__dinoFallback.toggleSettings(event)">Config</button>
       <button id="installAppBtn" class="theme-toggle" type="button" hidden>Instalar app</button>
@@ -3330,7 +3588,7 @@ body.view-lab {
 
     <section id="ultra" class="panel reveal">
       <div class="section-title">
-        <p class="eyebrow">V5.0</p>
+        <p class="eyebrow">V5.1</p>
         <h2>Centro de ultra rendimiento</h2>
       </div>
       <div class="season-grid">
@@ -3382,20 +3640,20 @@ body.view-lab {
 
     <section id="release-center" class="panel reveal">
       <div class="section-title">
-        <p class="eyebrow">Version 5.0</p>
-        <h2>Centro 5.0</h2>
+        <p class="eyebrow">Version 5.1</p>
+        <h2>Centro 5.1</h2>
       </div>
       <div class="story-layout">
         <article class="story-card">
-          <h3>Estado de la version final</h3>
+          <h3>Estado del lanzamiento 5.1</h3>
           <p id="releaseCountdownText" class="fact">Cargando estado de lanzamiento...</p>
-          <p class="result-meta">Esta version concentra estabilidad visual, mejor organizacion del contenido y una experiencia mas limpia al navegar en escritorio y movil.</p>
+          <p class="result-meta">Esta version concentra innovacion visual, mas inteligencia local, mejor adaptacion de pantallas y nuevas rutas de exploracion para que DinoVerse se sienta mas vivo.</p>
           <div class="lyonix-chip-row">
-            <span id="releaseBuildChip" class="lyonix-chip">Build 5.0</span>
+            <span id="releaseBuildChip" class="lyonix-chip">Build 5.1</span>
             <span id="releaseQualityChip" class="lyonix-chip">Calidad final</span>
           </div>
           <div class="grid-footer">
-            <button id="releaseFocusBtn" class="btn btn-primary" type="button">Ver foco 5.0</button>
+            <button id="releaseFocusBtn" class="btn btn-primary" type="button">Ver foco 5.1</button>
             <button id="releaseResetTourBtn" class="btn btn-secondary" type="button">Reiniciar ruta V5</button>
           </div>
         </article>
@@ -3403,9 +3661,38 @@ body.view-lab {
           <div id="releaseRoadmapGrid" class="story-grid"></div>
           <article class="story-card" style="margin-top:1rem;">
             <h3>Sprint actual</h3>
-            <p id="releaseSprintText" class="result-meta">Aplicando mejoras finales de catalogo, navegacion y rendimiento visual.</p>
+            <p id="releaseSprintText" class="result-meta">Aplicando mejoras de innovacion, nuevas especies, exploracion guiada y pulido visual general.</p>
           </article>
         </div>
+      </div>
+    </section>
+
+    <section id="innovation-hub" class="panel reveal">
+      <div class="section-title">
+        <p class="eyebrow">V5.1</p>
+        <h2>Innovation Hub</h2>
+      </div>
+      <div class="innovation-grid">
+        <article class="mission-card innovation-card">
+          <h3>Radar inteligente</h3>
+          <p id="innovationRadarText" class="fact">Analizando especies destacadas...</p>
+          <div id="innovationRadarChips" class="lyonix-chip-row"></div>
+          <p class="result-meta">Resume velocidad, fuerza, rareza y foco actual del museo en una sola lectura.</p>
+        </article>
+        <article class="mission-card innovation-card">
+          <h3>Ruta adaptativa 5.1</h3>
+          <p id="innovationRouteText" class="fact">Preparando recorrido...</p>
+          <div class="grid-footer">
+            <button id="innovationRouteBtn" class="btn btn-primary" type="button">Generar ruta</button>
+            <button id="innovationJumpBtn" class="btn btn-secondary" type="button">Abrir primera parada</button>
+          </div>
+          <p class="result-meta">Crea una ruta corta segun tus favoritos, tu historial y el contenido mas fuerte de la pagina.</p>
+        </article>
+        <article class="mission-card innovation-card">
+          <h3>Snapshot del museo</h3>
+          <div id="innovationSnapshot" class="lyonix-shell-stats"></div>
+          <p id="innovationSnapshotText" class="result-meta">Cargando resumen en vivo...</p>
+        </article>
       </div>
     </section>
 
@@ -3512,16 +3799,16 @@ body.view-lab {
       <article id="lyonixPanel" class="lyonix-panel" aria-live="polite">
         <div class="lyonix-head">
           <h3>LYONIX intelligence</h3>
-          <p class="result-meta">Asistente en espanol con respuestas por habitat, dieta, tamano, curiosidades y comparaciones.</p>
-          <p id="lyonixBackendBadge" class="lyonix-status">Gemini: desconectado</p>
+          <p class="result-meta">Asistente inteligente del museo que combina la base local de DinoVerse con informacion externa sobre dinosaurios para responder mejor en espanol.</p>
+          <p id="lyonixBackendBadge" class="lyonix-status">LYONIX local: activo</p>
         </div>
         <div class="lyonix-controls">
-          <input id="lyonixInput" type="search" placeholder="Pregunta o compara: T. rex, Spinosaurus vs Carcharodontosaurus, explicalo facil...">
+          <input id="lyonixInput" type="search" placeholder="Pregunta normal: cual era mas fuerte, T. rex o Spinosaurus?">
           <button id="lyonixSearchBtn" class="btn btn-secondary" type="button">Preguntar</button>
         </div>
         <div class="grid-footer">
           <select id="lyonixModeSelect" class="screen-select" aria-label="Modo de LYONIX">
-            <option value="auto">Modo automatico</option>
+            <option value="auto">Modo inteligente web</option>
             <option value="simple">Modo simple</option>
             <option value="profesor">Modo profesor</option>
             <option value="comparador">Modo comparador</option>
@@ -3531,8 +3818,26 @@ body.view-lab {
         </div>
         <div id="lyonixPromptRow" class="lyonix-prompt-row"></div>
         <div id="lyonixHistory" class="lyonix-history"></div>
+        <section class="lyonix-native-shell" aria-label="Consola nativa de LYONIX">
+          <article class="lyonix-shell-card">
+            <p class="eyebrow">Estado de sesion</p>
+            <h3 id="lyonixCommandEcho">Esperando pregunta para LYONIX</h3>
+            <p class="result-meta">Escribe preguntas normales. LYONIX interpreta la consulta, busca coincidencias en la base local y amplia la respuesta con una fuente externa de dinosaurios.</p>
+            <div class="lyonix-chip-row">
+              <span class="lyonix-chip">Analisis local</span>
+              <span class="lyonix-chip">Fuente externa</span>
+              <span class="lyonix-chip">Memoria de sesion</span>
+              <span class="lyonix-chip">Base DinoVerse</span>
+            </div>
+          </article>
+          <article class="lyonix-shell-card">
+            <p class="eyebrow">Estado interno</p>
+            <div id="lyonixKnowledgeStats" class="lyonix-shell-stats"></div>
+            <p id="lyonixMemoryState" class="result-meta">Sin contexto guardado todavia.</p>
+          </article>
+        </section>
         <article id="lyonixResult" class="lyonix-result">
-          <p class="result-meta">Escribe una pregunta y pulsa Preguntar.</p>
+          <p class="result-meta">Prueba: <strong>Que comia el Triceratops?</strong></p>
         </article>
         <article class="lyonix-studio">
           <h3>LYONIX Studio</h3>
@@ -3809,6 +4114,22 @@ body.view-lab {
 
         <article class="custom-card">
           <h3>Ajustes visuales</h3>
+          <div class="custom-row">
+            <label for="designModeSelect">Estilo de interfaz</label>
+            <select id="designModeSelect">
+              <option value="cinematic">Cinematico</option>
+              <option value="solid">Solido</option>
+              <option value="glass">Liquid glass</option>
+            </select>
+          </div>
+          <div class="custom-row">
+            <label for="layoutModeSelect">Densidad de layout</label>
+            <select id="layoutModeSelect">
+              <option value="airy">Amplio</option>
+              <option value="balanced">Balanceado</option>
+              <option value="compact">Compacto</option>
+            </select>
+          </div>
           <div class="custom-row custom-range">
             <label for="fontScaleInput">Tamano de texto</label>
             <input id="fontScaleInput" type="range" min="0.9" max="1.2" step="0.01" value="1">
@@ -4084,6 +4405,9 @@ body.view-lab {
   </section>
 
   <div class="quick-access" aria-label="Accesos rapidos">
+    <button id="showOptionsBtn" class="quick-access-btn quick-access-menu" type="button" aria-label="Mostrar menu de opciones">
+      Menu
+    </button>
     <button id="lyonixGlobalBtn" class="quick-access-btn quick-access-lyonix" type="button" aria-label="Abrir LYONIX IA">
       LYONIX IA
     </button>
@@ -4098,9 +4422,9 @@ body.view-lab {
         <h3 id="lyonixGlobalTitle">LYONIX intelligence</h3>
         <button id="lyonixGlobalCloseBtn" class="fav-remove" type="button">Cerrar</button>
       </div>
-      <p class="result-meta">Asistente global en espanol. Puede responder, comparar especies y explicar en modo profesor.</p>
+      <p class="result-meta">Asistente global en espanol basado en la base de conocimiento de DinoVerse y una fuente externa para ampliar la informacion sobre dinosaurios.</p>
       <div class="lyonix-global-controls">
-        <input id="lyonixGlobalInput" type="search" placeholder="Ejemplo: explicame el Triceratops o compara T. rex vs Giganotosaurus">
+        <input id="lyonixGlobalInput" type="search" placeholder="Ejemplo: explica el Triceratops o compara T. rex vs Giganotosaurus">
         <button id="lyonixGlobalSearchBtn" class="btn btn-secondary" type="button">Preguntar</button>
       </div>
       <div id="lyonixGlobalPromptRow" class="lyonix-prompt-row"></div>
@@ -4224,7 +4548,11 @@ const dinosaurs = [
   { name: "Monolophosaurus jiangi", common: "Monolophosaurus", period: "Jurasico", diet: "Carnivoro", size: "Mediano", continent: "Asia", length: 5.5, speed: 31, power: 63, habitat: "Cuencas aluviales", fact: "Lucia una sola cresta osea sobre el craneo." },
   { name: "Psittacosaurus mongoliensis", common: "Psittacosaurus", period: "Cretacico", diet: "Herbivoro", size: "Pequenio", continent: "Asia", length: 2, speed: 18, power: 26, habitat: "Bosques abiertos", fact: "Poseia un pico parecido al de un loro." },
   { name: "Lambeosaurus lambei", common: "Lambeosaurus", period: "Cretacico", diet: "Herbivoro", size: "Gigante", continent: "Norteamerica", length: 9.4, speed: 24, power: 61, habitat: "Llanuras inundables", fact: "Su cresta hueca probablemente amplificaba sonidos." },
-  { name: "Saltasaurus loricatus", common: "Saltasaurus", period: "Cretacico", diet: "Herbivoro", size: "Mediano", continent: "Sudamerica", length: 12.8, speed: 15, power: 57, habitat: "Llanuras secas y matorrales", fact: "Fue un sauropodo con placas oseas en la piel." }
+  { name: "Saltasaurus loricatus", common: "Saltasaurus", period: "Cretacico", diet: "Herbivoro", size: "Mediano", continent: "Sudamerica", length: 12.8, speed: 15, power: 57, habitat: "Llanuras secas y matorrales", fact: "Fue un sauropodo con placas oseas en la piel." },
+  { name: "Concavenator corcovatus", common: "Concavenator", period: "Cretacico", diet: "Carnivoro", size: "Mediano", continent: "Europa", length: 6, speed: 33, power: 67, habitat: "Llanuras costeras", fact: "Su lomo mostraba una joroba o elevacion muy distintiva." },
+  { name: "Pachyrhinosaurus lakustai", common: "Pachyrhinosaurus", period: "Cretacico", diet: "Herbivoro", size: "Gigante", continent: "Norteamerica", length: 6.6, speed: 18, power: 69, habitat: "Llanuras frias", fact: "En lugar de grandes cuernos nasales tenia una gran masa osea sobre el hocico." },
+  { name: "Rugops primus", common: "Rugops", period: "Cretacico", diet: "Carnivoro", size: "Mediano", continent: "Africa", length: 6, speed: 27, power: 61, habitat: "Planicies secas", fact: "Fue un abelisaurido ligero con craneo ornamentado." },
+  { name: "Leaellynasaura amicagraphica", common: "Leaellynasaura", period: "Cretacico", diet: "Herbivoro", size: "Pequenio", continent: "Australia", length: 2.4, speed: 21, power: 24, habitat: "Bosques polares", fact: "Vivio en latitudes muy altas con largos periodos de oscuridad." }
 ];
 
 const events = [
@@ -4277,6 +4605,9 @@ const lyonixResetBtn = $("lyonixResetBtn");
 const lyonixPromptRow = $("lyonixPromptRow");
 const lyonixHistory = $("lyonixHistory");
 const lyonixPanel = $("lyonixPanel");
+const lyonixCommandEcho = $("lyonixCommandEcho");
+const lyonixMemoryState = $("lyonixMemoryState");
+const lyonixKnowledgeStats = $("lyonixKnowledgeStats");
 const expeditionGrid = $("expeditionGrid");
 const expeditionTip = $("expeditionTip");
 const lyonixGlobalBtn = $("lyonixGlobalBtn");
@@ -4314,6 +4645,8 @@ const screenSwitcher = $("screenSwitcher");
 const mapInfo = $("mapInfo");
 const mapPins = $("mapPins");
 const themeToggle = $("themeToggle");
+const optionsToggleBtn = $("optionsToggleBtn");
+const showOptionsBtn = $("showOptionsBtn");
 const toTop = $("toTop");
 const menuToggle = $("menuToggle");
 const mainNav = $("mainNav");
@@ -4371,6 +4704,8 @@ const accentColorInput = $("accentColorInput");
 const forestColorInput = $("forestColorInput");
 const bgColorInput = $("bgColorInput");
 const inkColorInput = $("inkColorInput");
+const designModeSelect = $("designModeSelect");
+const layoutModeSelect = $("layoutModeSelect");
 const fontScaleInput = $("fontScaleInput");
 const radiusInput = $("radiusInput");
 const glassInput = $("glassInput");
@@ -4413,6 +4748,13 @@ const releaseSprintText = $("releaseSprintText");
 const releaseFocusBtn = $("releaseFocusBtn");
 const releaseResetTourBtn = $("releaseResetTourBtn");
 const releaseRoadmapGrid = $("releaseRoadmapGrid");
+const innovationRadarText = $("innovationRadarText");
+const innovationRadarChips = $("innovationRadarChips");
+const innovationRouteText = $("innovationRouteText");
+const innovationRouteBtn = $("innovationRouteBtn");
+const innovationJumpBtn = $("innovationJumpBtn");
+const innovationSnapshot = $("innovationSnapshot");
+const innovationSnapshotText = $("innovationSnapshotText");
 const quickNoteInput = $("quickNoteInput");
 const clearQuickNoteBtn = $("clearQuickNoteBtn");
 const ambientToggle = $("ambientToggle");
@@ -4521,6 +4863,8 @@ const TIMELINE_ZOOM_KEY = "dinoTimelineZoom";
 const MAP_LAYERS_KEY = "dinoMapLayers";
 const LYONIX_HISTORY_KEY = "dinoLyonixHistory";
 const LYONIX_SESSION_KEY = "dinoLyonixSessionId";
+const LYONIX_NATIVE_CONTEXT_KEY = "dinoLyonixNativeContext";
+let lyonixBackendState = { ok: false, geminiReady: false, provider: "lyonix-native", model: "" };
 const fossilImageCache = new Map();
 const lyonixCache = new Map();
 let filterInputTimer = null;
@@ -4532,7 +4876,9 @@ const defaultCustomization = {
   ink: "#e9f6ff",
   fontScale: 1,
   radius: 18,
-  glass: 1
+  glass: 1,
+  designMode: "cinematic",
+  layoutMode: "balanced"
 };
 
 function clamp(value, min, max) {
@@ -4700,10 +5046,53 @@ const mapLayerProfiles = {
   Antartida: { climate: "Bosques templados frios en latitudes polares", flora: "Helechos y arboles resistentes al frio", routes: "Conexiones antiguas con Gondwana", fossils: "Cryolophosaurus y fauna adaptada a luz estacional" }
 };
 
+const lyonixKnowledge = {
+  periods: {
+    Triasico: "El Triasico fue la etapa de arranque de los dinosaurios. Predominaron formas pequenas y medianas en climas calidos y secos, con ecosistemas en recuperacion tras una gran extincion.",
+    Jurasico: "El Jurasico vio la expansion de gigantes herbivoros y depredadores grandes. Hubo bosques humedos, abundancia de coniferas y una fuerte especializacion de nichos.",
+    Cretacico: "El Cretacico fue una era de maxima diversidad. Aparecieron ceratopsidos, hadrosaurios y grandes tiranosauridos, junto con ecosistemas mas complejos y plantas con flor."
+  },
+  diets: {
+    Carnivoro: "Los carnivoros se especializaron en caza, carroñeo o emboscada. En DinoVerse se distinguen por velocidad, fuerza y adaptaciones craneales o de garras.",
+    Herbivoro: "Los herbivoros dominaron enormes porciones del registro fosil. Presentaban cuellos largos, picos, baterias dentales o armaduras para resistir a depredadores.",
+    Omnivoro: "Los omnivoros aprovecharon dietas mixtas, lo que les dio flexibilidad para cambiar entre vegetacion, pequenos animales, huevos o carroña."
+  },
+  continents: {
+    Norteamerica: "Norteamerica concentro tiranosauridos, hadrosaurios y ceratopsidos famosos. Fue una region clave del Cretacico tardio.",
+    Sudamerica: "Sudamerica destaco por abelisauridos, gigantes como Argentinosaurus y grandes carnivoros como Giganotosaurus y Mapusaurus.",
+    Europa: "Europa tuvo ambientes insulares y fauna fragmentada, con ejemplos de enanismo evolutivo como Europasaurus.",
+    Asia: "Asia reunio dromeosauridos, protoceratopsios, tiranosauridos pluma-dos y especies muy bien preservadas por desiertos y sedimentos finos.",
+    Africa: "Africa fue hogar de depredadores singulares como Spinosaurus y Carcharodontosaurus, ademas de ecosistemas riberenios extensos.",
+    Antartida: "Antartida aporta evidencia de dinosaurios adaptados a climas frios estacionales, como Cryolophosaurus.",
+    Australia: "Australia preserva especies pequenas y blindadas adaptadas a ambientes aislados."
+  },
+  sections: {
+    enciclopedia: "La enciclopedia concentra fichas filtrables por periodo, dieta, tamano y continente.",
+    timeline: "El timeline resume eventos desde el Triasico hasta el Cretacico con hechos y transiciones importantes.",
+    mapa: "El mapa conecta regiones con clima, flora, rutas migratorias y especies fosiles.",
+    fosiles: "La galeria de fosiles reune piezas destacadas y permite abrir un detalle ampliado de cada evidencia.",
+    laboratorio: "El laboratorio sirve para explorar aleatorios, favoritos y comparaciones rapidas.",
+    simulador: "El simulador cruza depredador, herbivoro, clima y periodo para estimar equilibrio y riesgo.",
+    juego: "La zona de juegos integra quiz, memoria y retos de exploracion."
+  },
+  languageExamples: [
+    "Que comia el T. rex?",
+    "Explica el Triceratops",
+    "Compara T. rex vs Spinosaurus",
+    "Que dinosaurios hubo en el Cretacico?",
+    "Cuales eran carnivoros?",
+    "Que especies habia en Asia?",
+    "Que fosiles de Triceratops hay?",
+    "Cual fue el dinosaurio mas rapido?",
+    "Dame una lista de carnivoros de Africa",
+    "Que recuerdas de mi ultima consulta?"
+  ]
+};
+
 const SEASON_RELEASE_DATE = "2026-03-20";
 const SEASON_DURATION_DAYS = 60;
 const APP_MAJOR_VERSION = 5;
-const APP_MINOR_VERSION = 0;
+const APP_MINOR_VERSION = 1;
 const APP_CHANNEL = "";
 const DEFAULT_DINO_IMAGE = "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Tyrannosaurus_AMNH_5027.jpg/1280px-Tyrannosaurus_AMNH_5027.jpg";
 const DEFAULT_FOSSIL_IMAGE = createFossilImage("Archivo fosil", "#ba7d38");
@@ -4923,14 +5312,14 @@ const fossilArtifacts = [
     name: "Cresta de Parasaurolophus",
     era: "Cretacico",
     text: "Parte craneal hueca vinculada a comunicacion sonora.",
-    image: "https://commons.wikimedia.org/wiki/Special:FilePath/Parasaurolophus_skull_NHM.jpg",
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/Parasaurolophus_skull_FMNH.jpg",
     fallback: createFossilImage("Cresta de Parasaurolophus", "#8fcf7e")
   },
   {
     name: "Craneo de Pachycephalosaurus",
     era: "Cretacico",
     text: "Domo oseo grueso que probablemente se uso en exhibicion o choques.",
-    image: "https://commons.wikimedia.org/wiki/Special:FilePath/AMNH_1696_Pachycephalosaurus.jpg",
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/Pachycephalosaurus_Skull_AMNH.jpg",
     fallback: createFossilImage("Craneo de Pachycephalosaurus", "#c98d49")
   },
   {
@@ -5066,41 +5455,105 @@ function getRoarProfile(dinoName) {
   return { start: 130, end: 48, duration: 0.6, volume: 0.16 };
 }
 
+function createNoiseBuffer(audio, duration) {
+  const length = Math.max(1, Math.floor(audio.sampleRate * duration));
+  const buffer = audio.createBuffer(1, length, audio.sampleRate);
+  const data = buffer.getChannelData(0);
+  let previous = 0;
+  for (let i = 0; i < length; i += 1) {
+    const white = Math.random() * 2 - 1;
+    previous = (previous * 0.94) + (white * 0.06);
+    data[i] = previous * 0.9;
+  }
+  return buffer;
+}
+
 function playSyntheticRoar(dinoName) {
   const Ctx = window.AudioContext || window.webkitAudioContext;
   if (!Ctx) return;
   const profile = getRoarProfile(dinoName);
   const audio = new Ctx();
-  const osc = audio.createOscillator();
-  const osc2 = audio.createOscillator();
-  const gain = audio.createGain();
-  const gain2 = audio.createGain();
+  const now = audio.currentTime;
+  const master = audio.createGain();
   const lowPass = audio.createBiquadFilter();
+  const bandPass = audio.createBiquadFilter();
+  const noiseFilter = audio.createBiquadFilter();
+  const rumble = audio.createOscillator();
+  const body = audio.createOscillator();
+  const grit = audio.createOscillator();
+  const rumbleGain = audio.createGain();
+  const bodyGain = audio.createGain();
+  const gritGain = audio.createGain();
+  const noiseGain = audio.createGain();
+  const noise = audio.createBufferSource();
+
   lowPass.type = "lowpass";
-  lowPass.frequency.setValueAtTime(900, audio.currentTime);
-  lowPass.frequency.exponentialRampToValueAtTime(280, audio.currentTime + profile.duration);
+  lowPass.frequency.setValueAtTime(520, now);
+  lowPass.frequency.exponentialRampToValueAtTime(180, now + profile.duration);
 
-  osc.type = "sawtooth";
-  osc2.type = "triangle";
-  osc.frequency.setValueAtTime(profile.start, audio.currentTime);
-  osc.frequency.exponentialRampToValueAtTime(profile.end, audio.currentTime + profile.duration);
-  osc2.frequency.setValueAtTime(profile.start * 1.6, audio.currentTime);
-  osc2.frequency.exponentialRampToValueAtTime(profile.end * 1.2, audio.currentTime + profile.duration);
+  bandPass.type = "bandpass";
+  bandPass.frequency.setValueAtTime(240, now);
+  bandPass.Q.value = 0.7;
 
-  gain.gain.setValueAtTime(0.0001, audio.currentTime);
-  gain.gain.exponentialRampToValueAtTime(profile.volume, audio.currentTime + 0.05);
-  gain.gain.exponentialRampToValueAtTime(0.0001, audio.currentTime + profile.duration);
+  noiseFilter.type = "lowpass";
+  noiseFilter.frequency.setValueAtTime(900, now);
+  noiseFilter.frequency.exponentialRampToValueAtTime(260, now + profile.duration);
 
-  gain2.gain.setValueAtTime(0.0001, audio.currentTime);
-  gain2.gain.exponentialRampToValueAtTime(profile.volume * 0.25, audio.currentTime + 0.04);
-  gain2.gain.exponentialRampToValueAtTime(0.0001, audio.currentTime + profile.duration);
+  master.gain.setValueAtTime(0.0001, now);
+  master.gain.exponentialRampToValueAtTime(Math.max(profile.volume * 1.6, 0.12), now + 0.06);
+  master.gain.exponentialRampToValueAtTime(0.0001, now + profile.duration);
 
-  osc.connect(gain).connect(lowPass).connect(audio.destination);
-  osc2.connect(gain2).connect(lowPass);
-  osc.start();
-  osc2.start();
-  osc.stop(audio.currentTime + profile.duration);
-  osc2.stop(audio.currentTime + profile.duration);
+  rumble.type = "sine";
+  body.type = "sawtooth";
+  grit.type = "triangle";
+
+  rumble.frequency.setValueAtTime(Math.max(profile.start * 0.45, 28), now);
+  rumble.frequency.exponentialRampToValueAtTime(Math.max(profile.end * 0.5, 18), now + profile.duration);
+
+  body.frequency.setValueAtTime(profile.start, now);
+  body.frequency.exponentialRampToValueAtTime(Math.max(profile.end, 24), now + profile.duration * 0.92);
+
+  grit.frequency.setValueAtTime(profile.start * 1.8, now);
+  grit.frequency.exponentialRampToValueAtTime(Math.max(profile.end * 1.1, 40), now + profile.duration * 0.72);
+
+  rumbleGain.gain.setValueAtTime(0.0001, now);
+  rumbleGain.gain.exponentialRampToValueAtTime(profile.volume * 1.15, now + 0.05);
+  rumbleGain.gain.exponentialRampToValueAtTime(0.0001, now + profile.duration);
+
+  bodyGain.gain.setValueAtTime(0.0001, now);
+  bodyGain.gain.exponentialRampToValueAtTime(profile.volume * 0.95, now + 0.04);
+  bodyGain.gain.exponentialRampToValueAtTime(0.0001, now + profile.duration * 0.95);
+
+  gritGain.gain.setValueAtTime(0.0001, now);
+  gritGain.gain.exponentialRampToValueAtTime(profile.volume * 0.22, now + 0.03);
+  gritGain.gain.exponentialRampToValueAtTime(0.0001, now + profile.duration * 0.6);
+
+  noise.buffer = createNoiseBuffer(audio, profile.duration + 0.12);
+  noiseGain.gain.setValueAtTime(0.0001, now);
+  noiseGain.gain.exponentialRampToValueAtTime(profile.volume * 0.42, now + 0.04);
+  noiseGain.gain.exponentialRampToValueAtTime(0.0001, now + profile.duration * 0.85);
+
+  rumble.connect(rumbleGain).connect(bandPass);
+  body.connect(bodyGain).connect(lowPass);
+  grit.connect(gritGain).connect(lowPass);
+  noise.connect(noiseGain).connect(noiseFilter).connect(lowPass);
+  bandPass.connect(master);
+  lowPass.connect(master);
+  master.connect(audio.destination);
+
+  rumble.start(now);
+  body.start(now);
+  grit.start(now);
+  noise.start(now);
+
+  rumble.stop(now + profile.duration + 0.02);
+  body.stop(now + profile.duration + 0.02);
+  grit.stop(now + profile.duration * 0.7);
+  noise.stop(now + profile.duration + 0.08);
+
+  setTimeout(() => {
+    audio.close().catch(() => {});
+  }, Math.ceil((profile.duration + 0.2) * 1000));
 }
 
 async function playRoar(dinoName) {
@@ -5331,24 +5784,9 @@ function buildLyonixLocalReply(query, local, external) {
 
 async function updateLyonixBackendStatus() {
   if (!lyonixBackendBadge) return;
-  if (typeof window !== "undefined" && window.location?.protocol === "file:") {
-    lyonixBackendBadge.textContent = "Gemini: modo local (sin servidor)";
-    lyonixBackendBadge.classList.remove("is-online");
-    return;
-  }
-  try {
-    const response = await fetch("/api/health", { cache: "no-store" });
-    if (!response.ok) throw new Error("health_not_ok");
-    const data = await response.json();
-    const ready = Boolean(data?.geminiReady);
-    lyonixBackendBadge.textContent = ready
-      ? `Gemini: conectado (${data?.model || "modelo"})`
-      : "Gemini: sin API key";
-    lyonixBackendBadge.classList.toggle("is-online", ready);
-  } catch (_err) {
-    lyonixBackendBadge.textContent = "Gemini: modo local activo";
-    lyonixBackendBadge.classList.remove("is-online");
-  }
+  lyonixBackendState = { ok: false, geminiReady: false, provider: "lyonix-native", model: "" };
+  lyonixBackendBadge.textContent = "LYONIX web: activo";
+  lyonixBackendBadge.classList.add("is-online");
 }
 
 function findLocalDino(query) {
@@ -5366,13 +5804,396 @@ function findLocalDino(query) {
   return bestScore > 0 ? { dino: best, score: bestScore } : null;
 }
 
+function getLyonixNativeContext() {
+  try {
+    return JSON.parse(safeGetStorage(LYONIX_NATIVE_CONTEXT_KEY) || "{}");
+  } catch (_err) {
+    return {};
+  }
+}
+
+function saveLyonixNativeContext(next) {
+  safeSetStorage(LYONIX_NATIVE_CONTEXT_KEY, JSON.stringify(next || {}));
+}
+
+function clearLyonixNativeState() {
+  safeSetStorage(LYONIX_NATIVE_CONTEXT_KEY, JSON.stringify({}));
+  safeSetStorage(LYONIX_HISTORY_KEY, JSON.stringify([]));
+}
+
+function renderLyonixNativeShell(lastQuery = "", parsed = null) {
+  if (lyonixCommandEcho) {
+    const cleanQuery = String(lastQuery || "").trim();
+    lyonixCommandEcho.textContent = cleanQuery
+      ? `Ultima pregunta: ${cleanQuery}`
+      : "Esperando pregunta para LYONIX";
+  }
+  if (lyonixKnowledgeStats) {
+    lyonixKnowledgeStats.innerHTML = [
+      { value: dinosaurs.length, label: "Especies" },
+      { value: fossilArtifacts.length, label: "Fosiles" },
+      { value: Object.keys(lyonixKnowledge.sections || {}).length, label: "Secciones" }
+    ].map((item) => `
+      <div class="lyonix-shell-stat">
+        <strong>${escapeHtml(String(item.value))}</strong>
+        <span>${escapeHtml(item.label)}</span>
+      </div>
+    `).join("");
+  }
+  if (lyonixMemoryState) {
+    const context = getLyonixNativeContext();
+    const parts = [];
+    if (parsed?.type) parts.push(`Ultima lectura: ${parsed.type}`);
+    if (context.lastDino) {
+      const dino = dinosaurs.find((item) => item.name === context.lastDino);
+      if (dino) parts.push(`Especie en memoria: ${dino.common}`);
+    }
+    if (context.lastFossil) parts.push(`Fosil en memoria: ${context.lastFossil}`);
+    if (context.lastQuery) parts.push(`Consulta previa: ${context.lastQuery}`);
+    lyonixMemoryState.textContent = parts.length
+      ? parts.join(" | ")
+      : "Sin contexto guardado todavia.";
+  }
+}
+
+function findMentionedDinos(query) {
+  const q = normalizeText(query);
+  if (!q) return [];
+  return dinosaurs.filter((d) => {
+    const full = normalizeText(d.name);
+    const common = normalizeText(d.common);
+    const genus = normalizeText(d.name.split(" ")[0]);
+    return q.includes(full) || q.includes(common) || q.includes(genus);
+  });
+}
+
+function findFossilByQuery(query) {
+  const q = normalizeText(query);
+  if (!q) return null;
+  let best = null;
+  let bestScore = 0;
+  fossilArtifacts.forEach((fossil) => {
+    const name = normalizeText(fossil.name);
+    let score = 0;
+    if (q.includes(name)) score = 100;
+    else {
+      const parts = name.split(" ");
+      score = parts.reduce((sum, part) => sum + (part.length > 3 && q.includes(part) ? 8 : 0), 0);
+    }
+    if (score > bestScore) {
+      bestScore = score;
+      best = fossil;
+    }
+  });
+  return bestScore > 10 ? best : null;
+}
+
+function findKnownValue(query, source) {
+  const q = normalizeText(query);
+  return Object.keys(source).find((key) => q.includes(normalizeText(key))) || null;
+}
+
+function getTopDinos(metric, filterFn = null, limit = 5) {
+  return dinosaurs
+    .filter((d) => (typeof filterFn === "function" ? filterFn(d) : true))
+    .slice()
+    .sort((a, b) => {
+      if (metric === "name") return a.common.localeCompare(b.common);
+      return b[metric] - a[metric];
+    })
+    .slice(0, limit);
+}
+
+function buildSpeciesReply(dino, mode = "nativo") {
+  if (!dino) return "No encontre esa especie en la base local de DinoVerse.";
+  const lines = [
+    `Archivo de especie: ${dino.common}`,
+    `Nombre cientifico: ${dino.name}`,
+    `Periodo: ${dino.period}`,
+    `Dieta: ${dino.diet}`,
+    `Habitat: ${dino.habitat}`,
+    `Continente: ${dino.continent}`,
+    `Tamano: ${dino.length} m`,
+    `Velocidad: ${dino.speed} km/h`,
+    `Fuerza: ${dino.power}/100`,
+    `Dato clave: ${dino.fact}`
+  ];
+  if (mode === "profesor") {
+    lines.push("Explicacion: esta especie ayuda a entender como su grupo se adapto a su ecosistema y a la presion de depredacion o defensa de su epoca.");
+  }
+  if (mode === "simple") {
+    lines.push("Resumen simple: fue un dinosaurio importante de su tiempo, con rasgos muy claros de alimentacion, defensa o caza.");
+  }
+  return lines.join("\n");
+}
+
+function buildComparisonReply(a, b) {
+  if (!a || !b) return "Necesito dos especies validas para comparar.";
+  const faster = a.speed === b.speed ? "Empate" : (a.speed > b.speed ? a.common : b.common);
+  const stronger = a.power === b.power ? "Empate" : (a.power > b.power ? a.common : b.common);
+  const larger = a.length === b.length ? "Empate" : (a.length > b.length ? a.common : b.common);
+  return [
+    `Comparacion LYN entre ${a.common} y ${b.common}:`,
+    `Periodo: ${a.period} vs ${b.period}`,
+    `Dieta: ${a.diet} vs ${b.diet}`,
+    `Tamano: ${a.length} m vs ${b.length} m`,
+    `Velocidad: ${a.speed} km/h vs ${b.speed} km/h`,
+    `Fuerza: ${a.power}/100 vs ${b.power}/100`,
+    `Habitat: ${a.habitat} vs ${b.habitat}`,
+    `Mas grande: ${larger}`,
+    `Mas rapido: ${faster}`,
+    `Mas fuerte: ${stronger}`
+  ].join("\n");
+}
+
+function buildFossilReply(fossil) {
+  if (!fossil) return "No encontre ese fosil en el archivo local.";
+  return [
+    `Archivo fosil: ${fossil.name}`,
+    `Era: ${fossil.era}`,
+    `Descripcion: ${fossil.text}`,
+    "Uso en el museo: sirve para conectar evidencia fisica con especies, anatomia y comportamiento."
+  ].join("\n");
+}
+
+function buildCategoryReply(kind, value, items = []) {
+  const intro = lyonixKnowledge[kind]?.[value] || `Resumen local de ${value}.`;
+  const picked = items.slice(0, 5).map((d) => `${d.common} (${d.period}, ${d.diet}, ${d.continent})`);
+  return [
+    `${value}:`,
+    intro,
+    picked.length ? `Ejemplos en DinoVerse: ${picked.join("; ")}.` : "No hay especies asociadas en la base actual."
+  ].join("\n");
+}
+
+function buildTopReply(metric, label, filterFn = null) {
+  const items = getTopDinos(metric, filterFn, 5);
+  if (!items.length) return `No encontre resultados para el top de ${label}.`;
+  return [
+    `Top ${label}:`,
+    ...items.map((d, index) => `${index + 1}. ${d.common} · ${metric === "length" ? `${d.length} m` : metric === "speed" ? `${d.speed} km/h` : `${d.power}/100`}`)
+  ].join("\n");
+}
+
+function parseLyonixNative(query) {
+  const raw = String(query || "").trim();
+  const q = normalizeText(raw);
+  const context = getLyonixNativeContext();
+  const clean = q.replace(/^(lyn|lyonix|lnx)\s*[:>\-]\s*/i, "").trim();
+  const source = clean || q;
+  const mentioned = findMentionedDinos(source);
+  const fossil = findFossilByQuery(source);
+  const period = findKnownValue(source, lyonixKnowledge.periods);
+  const diet = findKnownValue(source, lyonixKnowledge.diets);
+  const continent = findKnownValue(source, lyonixKnowledge.continents);
+  const section = findKnownValue(source, lyonixKnowledge.sections);
+
+  if (!source || /^(ayuda|help|comandos|lenguaje)$/.test(source)) return { type: "help" };
+  if (/^(hola|buenas|saludos)\b/.test(source)) return { type: "greeting" };
+  if (/hora/.test(source)) return { type: "time" };
+  if (/(fecha|dia)/.test(source)) return { type: "date" };
+  if (/(quien hizo|desarrollador|nosotros|creador)/.test(source)) return { type: "about-app" };
+  if (/(version|vercion|build)/.test(source)) return { type: "version" };
+  if (/(memoria|contexto|estado lyonix|estado interno)/.test(source)) return { type: "memory" };
+  if (/(cuantos dinosaurios|cantidad de dinosaurios|total de dinosaurios)/.test(source)) return { type: "count-dinos" };
+  if (/(cuantos fosiles|cantidad de fosiles|total de fosiles)/.test(source)) return { type: "count-fossils" };
+
+  if (/abrir|ir a|mostrar seccion/.test(source) && section) return { type: "section", section };
+  if ((/compar|vs\b|versus|contra/.test(source)) && mentioned.length >= 2) return { type: "compare", dinos: mentioned.slice(0, 2) };
+  if (/fosil/.test(source) && fossil) return { type: "fossil", fossil };
+  if (/periodo|era|epoca/.test(source) && period) return { type: "period", period };
+  if (/dieta/.test(source) && diet) return { type: "diet", diet };
+  if (/(continente|region|zona)/.test(source) && continent) return { type: "continent", continent };
+  if (/top|mejor|mas grande|mas rapido|mas fuerte/.test(source)) {
+    if (/rapido/.test(source)) return { type: "top", metric: "speed", label: "velocidad", continent };
+    if (/fuerte|fuerza|poder/.test(source)) return { type: "top", metric: "power", label: "fuerza", continent };
+    return { type: "top", metric: "length", label: "tamano", continent };
+  }
+  if (/lista|muestrame|dame/.test(source) && (diet || period || continent)) {
+    return { type: "list", diet, period, continent };
+  }
+  if (mentioned.length) return { type: "species", dino: mentioned[0] };
+  if ((/ese|esa|eso|amplia|detalle|expande/.test(source)) && context.lastDino) {
+    const remembered = dinosaurs.find((d) => d.name === context.lastDino);
+    if (remembered) return { type: "species", dino: remembered, remembered: true };
+  }
+  return { type: "unknown" };
+}
+
+function runLyonixNative(query, selectedMode = "nativo") {
+  const parsed = parseLyonixNative(query);
+  const context = getLyonixNativeContext();
+  const baseContext = { ...context, lastQuery: String(query || "").trim() };
+  const mode = selectedMode === "auto" ? "nativo" : selectedMode;
+  saveLyonixNativeContext(baseContext);
+
+  switch (parsed.type) {
+    case "help":
+      return {
+        text: [
+          "LYONIX local activo.",
+          "Puedes escribir preguntas naturales como estas:",
+          ...lyonixKnowledge.languageExamples.map((example) => `- ${example}`),
+          "Tambien entiendo consultas sobre fosiles, continentes, dietas, comparaciones y memoria de sesion."
+        ].join("\n"),
+        local: null,
+        meta: { provider: "lyonix-native", mode }
+      };
+    case "greeting":
+      return {
+        text: "Hola. Soy LYONIX intelligence.\nPuedo responder con la base local del museo sobre especies, fosiles, periodos, continentes, tops, comparaciones y secciones de DinoVerse.",
+        local: null,
+        meta: { provider: "lyonix-native", mode }
+      };
+    case "time":
+      return {
+        text: `Hora local: ${new Date().toLocaleTimeString("es-DO", { hour: "2-digit", minute: "2-digit", second: "2-digit" })}.`,
+        local: null,
+        meta: { provider: "lyonix-native", mode }
+      };
+    case "date":
+      return {
+        text: `Fecha local: ${new Date().toLocaleDateString("es-DO", { year: "numeric", month: "long", day: "numeric" })}.`,
+        local: null,
+        meta: { provider: "lyonix-native", mode }
+      };
+    case "about-app":
+      return {
+        text: [
+          "Equipo base de DinoVerse:",
+          "Dioslit Gomez: estructura HTML y construccion del museo digital.",
+          "Jose Manuel Vasquez: estilos CSS y JavaScript junto con trabajo compartido en experiencia y logica.",
+          "Resumen: LYONIX usa la base local de la pagina para responder sin depender de resultados incoherentes de la web."
+        ].join("\n"),
+        local: null,
+        meta: { provider: "lyonix-native", mode }
+      };
+    case "version":
+      return {
+        text: `Version actual de DinoVerse: ${getSemanticVersion()}.`,
+        local: null,
+        meta: { provider: "lyonix-native", mode }
+      };
+    case "memory":
+      return {
+        text: [
+          "Estado interno de LYONIX:",
+          `Consulta previa: ${baseContext.lastQuery || "sin registro"}.`,
+          `Especie en memoria: ${context.lastDino ? (dinosaurs.find((d) => d.name === context.lastDino)?.common || context.lastDino) : "ninguna"}.`,
+          `Fosil en memoria: ${context.lastFossil || "ninguno"}.`,
+          `Base disponible: ${dinosaurs.length} especies y ${fossilArtifacts.length} fosiles.`
+        ].join("\n"),
+        local: null,
+        meta: { provider: "lyonix-native", mode }
+      };
+    case "count-dinos":
+      return {
+        text: `Base local actual: ${dinosaurs.length} especies registradas en DinoVerse.`,
+        local: null,
+        meta: { provider: "lyonix-native", mode }
+      };
+    case "count-fossils":
+      return {
+        text: `Archivo local actual: ${fossilArtifacts.length} fosiles registrados en la galeria.`,
+        local: null,
+        meta: { provider: "lyonix-native", mode }
+      };
+    case "section": {
+      scrollToSection(parsed.section);
+      return {
+        text: `Navegacion ejecutada: ${parsed.section}.\n${lyonixKnowledge.sections[parsed.section] || "Seccion abierta."}`,
+        local: null,
+        meta: { provider: "lyonix-native", mode }
+      };
+    }
+    case "compare":
+      saveLyonixNativeContext({ ...baseContext, lastDino: parsed.dinos[0]?.name || "" });
+      return {
+        text: buildComparisonReply(parsed.dinos[0], parsed.dinos[1]),
+        local: { dino: parsed.dinos[0] },
+        meta: { provider: "lyonix-native", mode: "comparador" }
+      };
+    case "fossil":
+      saveLyonixNativeContext({ ...baseContext, lastFossil: parsed.fossil.name });
+      return {
+        text: buildFossilReply(parsed.fossil),
+        local: null,
+        fossil: parsed.fossil,
+        meta: { provider: "lyonix-native", mode }
+      };
+    case "period": {
+      const items = dinosaurs.filter((d) => d.period === parsed.period);
+      return {
+        text: buildCategoryReply("periods", parsed.period, items),
+        local: items.length ? { dino: items[0] } : null,
+        meta: { provider: "lyonix-native", mode }
+      };
+    }
+    case "diet": {
+      const items = dinosaurs.filter((d) => d.diet === parsed.diet);
+      return {
+        text: buildCategoryReply("diets", parsed.diet, items),
+        local: items.length ? { dino: items[0] } : null,
+        meta: { provider: "lyonix-native", mode }
+      };
+    }
+    case "continent": {
+      const items = dinosaurs.filter((d) => d.continent === parsed.continent);
+      return {
+        text: buildCategoryReply("continents", parsed.continent, items),
+        local: items.length ? { dino: items[0] } : null,
+        meta: { provider: "lyonix-native", mode }
+      };
+    }
+    case "top":
+      return {
+        text: buildTopReply(parsed.metric, parsed.label, parsed.continent ? (d) => d.continent === parsed.continent : null),
+        local: null,
+        meta: { provider: "lyonix-native", mode }
+      };
+    case "list": {
+      const items = dinosaurs.filter((d) => {
+        const byDiet = !parsed.diet || d.diet === parsed.diet;
+        const byPeriod = !parsed.period || d.period === parsed.period;
+        const byContinent = !parsed.continent || d.continent === parsed.continent;
+        return byDiet && byPeriod && byContinent;
+      }).slice(0, 8);
+      return {
+        text: [
+          "Lista filtrada por LYONIX:",
+          ...items.map((d, index) => `${index + 1}. ${d.common} · ${d.period} · ${d.diet} · ${d.continent}`)
+        ].join("\n"),
+        local: items.length ? { dino: items[0] } : null,
+        meta: { provider: "lyonix-native", mode }
+      };
+    }
+    case "species":
+      saveLyonixNativeContext({ ...baseContext, lastDino: parsed.dino.name });
+      return {
+        text: buildSpeciesReply(parsed.dino, mode),
+        local: { dino: parsed.dino },
+        meta: { provider: "lyonix-native", mode }
+      };
+    default:
+      return {
+        text: [
+          "No entendi bien esa consulta.",
+          "Prueba con una pregunta mas clara como una de estas:",
+          ...lyonixKnowledge.languageExamples.map((example) => `- ${example}`)
+        ].join("\n"),
+        local: null,
+        meta: { provider: "lyonix-native", mode }
+      };
+  }
+}
+
 function getLyonixLoaderMarkup(query) {
   return `
     <div class="lyonix-loader">
       <p class="lyonix-loader-text">LYONIX intelligence analizando "${query}"...</p>
       <div class="lyonix-loader-bar"></div>
       <div class="lyonix-loader-dots"><span></span><span></span><span></span></div>
-      <p class="result-meta">Procesando base local + conocimiento externo.</p>
+      <p class="result-meta">Procesando contexto local, memoria y base del museo.</p>
     </div>
   `;
 }
@@ -5381,24 +6202,24 @@ function getLyonixPromptSuggestions(query = "", local = null) {
   const dino = local?.dino;
   if (dino) {
     return [
-      `Explicame ${dino.common} como profesor`,
-      `Compara ${dino.common} vs T. rex`,
-      `Habitat y dieta de ${dino.common}`,
-      `Curiosidades de ${dino.common}`
+      `Explica ${dino.common} de forma simple`,
+      `Compara ${dino.common} con T. rex`,
+      `En que periodo vivio ${dino.common}?`,
+      `Que curiosidades tiene ${dino.common}?`
     ];
   }
   if (/compar|vs|versus/.test(normalizeText(query))) {
     return [
       "Compara Triceratops vs Ankylosaurus",
       "Compara Spinosaurus vs Giganotosaurus",
-      "Diferencias entre Velociraptor y Deinonychus"
+      "Compara Velociraptor vs Deinonychus"
     ];
   }
   return [
-    "Explicame el T. rex de forma simple",
-    "Habitat del Spinosaurus",
-    "Compara Triceratops vs T. rex",
-    "Cual fue el dinosaurio mas rapido"
+    "Que comia el T. rex?",
+    "Explica el Triceratops",
+    "Que fosiles de Spinosaurus hay?",
+    "Cual fue el dinosaurio mas rapido?"
   ];
 }
 
@@ -5421,7 +6242,7 @@ function renderLyonixHistory() {
   if (!lyonixHistory) return;
   const history = getLyonixHistoryItems();
   if (!history.length) {
-    lyonixHistory.innerHTML = '<span class="result-meta">Historial IA: vacio</span>';
+    lyonixHistory.innerHTML = '<span class="result-meta">Historial de preguntas: vacio</span>';
     return;
   }
   lyonixHistory.innerHTML = history
@@ -5516,10 +6337,15 @@ function initLyonixStudio() {
 
 function renderLyonixCard(targetEl, local, external, query, aiText = null, aiMeta = null) {
   if (!targetEl) return;
-  if (!local && !external && !aiText) {
+  if (!local && !aiText) {
     targetEl.innerHTML = `<p class="result-meta">LYONIX intelligence no encontro resultados para <strong>${escapeHtml(query)}</strong>.</p>`;
     return;
   }
+  const provider = String(aiMeta?.provider || "lyonix-native");
+  const providerTitle = provider === "external-web" ? "Fuente externa de dinosaurios" : "Motor lyonix-local";
+  const providerFooter = provider === "external-web"
+    ? `Respuesta ampliada con una fuente externa${aiMeta?.mode ? ` · modo ${escapeHtml(aiMeta.mode)}` : ""}.`
+    : `Respuesta generada con la base local de DinoVerse${aiMeta?.mode ? ` · modo ${escapeHtml(aiMeta.mode)}` : ""}.`;
 
   const localHtml = local ? `
     <article class="lyonix-block">
@@ -5539,24 +6365,22 @@ function renderLyonixCard(targetEl, local, external, query, aiText = null, aiMet
     </article>
   ` : "";
 
-  const externalHtml = external ? `
-    <article class="lyonix-block">
-      <h3>Fuente externa (${external.lang === "es" ? "Espanol" : "Ingles"})</h3>
-      ${external.image ? `<img class="lyonix-image" src="${external.image}" alt="${external.title}" loading="lazy" referrerpolicy="no-referrer">` : ""}
-      <p><strong>${external.title}</strong></p>
-      <p>${external.extract || "Sin resumen disponible."}</p>
-      ${external.page ? `<a class="btn btn-secondary" href="${external.page}" target="_blank" rel="noopener noreferrer">Ver articulo</a>` : ""}
-      ${external.lang !== "es" ? `<p class="result-meta">No se encontro entrada en espanol para esta consulta.</p>` : ""}
-    </article>
-  ` : `<article class="lyonix-block"><p class="result-meta">Sin fuente externa para esta consulta.</p></article>`;
-
   const aiHtml = aiText ? `
     <article class="lyonix-block">
-      <h3>LYONIX + ${escapeHtml(aiMeta?.provider || "Gemini")}</h3>
+      <h3>${providerTitle}</h3>
       ${formatLyonixAiHtml(aiText)}
-      <p class="result-meta">Respuesta generada por IA en tu servidor${aiMeta?.model ? ` · ${escapeHtml(aiMeta.model)}` : ""}${aiMeta?.mode ? ` · modo ${escapeHtml(aiMeta.mode)}` : ""}.</p>
+      <p class="result-meta">${providerFooter}</p>
     </article>
-  ` : `<article class="lyonix-block"><p class="result-meta">Gemini no disponible. Activa el backend para respuestas IA.</p></article>`;
+  ` : `<article class="lyonix-block"><p class="result-meta">Sin respuesta generada.</p></article>`;
+
+  const externalHtml = external?.extract ? `
+    <article class="lyonix-block">
+      <h3>${escapeHtml(external.title || "Referencia externa")}</h3>
+      ${external.image ? `<img class="lyonix-image" src="${escapeHtml(external.image)}" alt="${escapeHtml(external.title || "Referencia externa")}" loading="lazy" referrerpolicy="no-referrer">` : ""}
+      <p>${escapeHtml(external.extract)}</p>
+      ${external.page ? `<p class="result-meta"><a href="${escapeHtml(external.page)}" target="_blank" rel="noopener noreferrer">Abrir fuente externa</a></p>` : ""}
+    </article>
+  ` : "";
 
   targetEl.innerHTML = `
     <p class="result-meta">Resultado LYONIX para: <strong>${escapeHtml(query)}</strong></p>
@@ -5578,34 +6402,31 @@ async function runLyonixSearch(target = "panel") {
   panelEl?.classList.add("is-analyzing");
   resultEl.classList.add("is-analyzing");
   resultEl.innerHTML = getLyonixLoaderMarkup(query);
+  const selectedMode = lyonixModeSelect?.value || "auto";
+  const parsed = parseLyonixNative(query);
   const local = findLocalDino(query);
-  let aiText = null;
-  let aiMeta = null;
+  const nativeResponse = runLyonixNative(query, selectedMode);
+  let external = null;
   try {
-    const aiResponse = await fetchLyonixGemini(query);
-    aiText = aiResponse?.text || null;
-    aiMeta = aiResponse || null;
+    external = await fetchLyonixExternal(query);
   } catch (_err) {
-    aiText = null;
+    external = null;
   }
-  let external = lyonixCache.get(normalizeText(query)) || null;
-  if (!external) {
-    try {
-      external = await fetchLyonixExternal(query);
-      lyonixCache.set(normalizeText(query), external);
-    } catch (_err) {
-      external = null;
-    }
-  }
-  if (!aiText) {
-    aiText = buildLyonixLocalReply(query, local, external);
-  }
-  renderLyonixCard(resultEl, local, external, query, aiText, aiMeta);
+  const combinedText = buildLyonixLocalReply(query, local, external) || nativeResponse?.text || "";
+  renderLyonixCard(
+    resultEl,
+    local,
+    external,
+    query,
+    combinedText,
+    { provider: external?.extract ? "external-web" : "lyonix-native", mode: selectedMode }
+  );
   saveLyonixHistoryItem(query);
   renderLyonixHistory();
   renderLyonixPrompts(isGlobal ? lyonixGlobalPromptRow : lyonixPromptRow, query, local);
-  if (aiMeta?.model && lyonixBackendBadge) {
-    lyonixBackendBadge.textContent = `${aiMeta.provider || "gemini"}: conectado (${aiMeta.model})`;
+  renderLyonixNativeShell(query, parsed);
+  if (lyonixBackendBadge) {
+    lyonixBackendBadge.textContent = external?.extract ? "LYONIX web: fuente externa activa" : "LYONIX web: activo";
     lyonixBackendBadge.classList.add("is-online");
   }
   panelEl?.classList.remove("is-analyzing");
@@ -5624,6 +6445,11 @@ function initLyonixIntelligence() {
   renderLyonixHistory();
   renderLyonixPrompts(lyonixPromptRow, "", null);
   renderLyonixPrompts(lyonixGlobalPromptRow, "", null);
+  renderLyonixNativeShell();
+  lyonixModeSelect?.addEventListener("change", () => {
+    const query = lyonixInput?.value.trim() || "";
+    renderLyonixNativeShell(query, query ? parseLyonixNative(query) : null);
+  });
   lyonixSearchBtn.addEventListener("click", () => runLyonixSearch("panel"));
   lyonixInput.addEventListener("keydown", (event) => {
     if (event.key !== "Enter") return;
@@ -7501,6 +8327,31 @@ function updateCustomizationLabels(cfg) {
   if (glassValue) glassValue.textContent = `${Math.round(cfg.glass * 100)}%`;
 }
 
+function applyDesignMode(mode, { persist = true } = {}) {
+  const next = ["cinematic", "solid", "glass"].includes(mode) ? mode : "cinematic";
+  document.body.classList.toggle("design-cinematic", next === "cinematic");
+  document.body.classList.toggle("design-solid", next === "solid");
+  document.body.classList.toggle("design-glass", next === "glass");
+  if (designModeSelect) designModeSelect.value = next;
+  if (persist) {
+    const current = { ...defaultCustomization, ...JSON.parse(localStorage.getItem(CUSTOM_THEME_KEY) || "{}") };
+    current.designMode = next;
+    localStorage.setItem(CUSTOM_THEME_KEY, JSON.stringify(current));
+  }
+}
+
+function applyLayoutMode(mode, { persist = true } = {}) {
+  const next = ["airy", "balanced", "compact"].includes(mode) ? mode : "balanced";
+  document.body.classList.toggle("layout-airy", next === "airy");
+  document.body.classList.toggle("layout-compact", next === "compact");
+  if (layoutModeSelect) layoutModeSelect.value = next;
+  if (persist) {
+    const current = { ...defaultCustomization, ...JSON.parse(localStorage.getItem(CUSTOM_THEME_KEY) || "{}") };
+    current.layoutMode = next;
+    localStorage.setItem(CUSTOM_THEME_KEY, JSON.stringify(current));
+  }
+}
+
 function applyCustomization(cfg, { persist = true } = {}) {
   const bg1 = shiftHex(cfg.bg0, 14);
   const bg2 = shiftHex(cfg.bg0, 24);
@@ -7527,7 +8378,11 @@ function applyCustomization(cfg, { persist = true } = {}) {
   if (fontScaleInput) fontScaleInput.value = String(cfg.fontScale);
   if (radiusInput) radiusInput.value = String(Math.round(cfg.radius));
   if (glassInput) glassInput.value = String(cfg.glass);
+  if (designModeSelect) designModeSelect.value = cfg.designMode || defaultCustomization.designMode;
+  if (layoutModeSelect) layoutModeSelect.value = cfg.layoutMode || defaultCustomization.layoutMode;
   updateCustomizationLabels(cfg);
+  applyDesignMode(cfg.designMode || defaultCustomization.designMode, { persist: false });
+  applyLayoutMode(cfg.layoutMode || defaultCustomization.layoutMode, { persist: false });
 
   if (persist) localStorage.setItem(CUSTOM_THEME_KEY, JSON.stringify(cfg));
 }
@@ -7540,7 +8395,9 @@ function getCustomizationFromInputs() {
     ink: inkColorInput?.value || defaultCustomization.ink,
     fontScale: Number(fontScaleInput?.value || defaultCustomization.fontScale),
     radius: Number(radiusInput?.value || defaultCustomization.radius),
-    glass: Number(glassInput?.value || defaultCustomization.glass)
+    glass: Number(glassInput?.value || defaultCustomization.glass),
+    designMode: designModeSelect?.value || defaultCustomization.designMode,
+    layoutMode: layoutModeSelect?.value || defaultCustomization.layoutMode
   };
 }
 
@@ -7551,16 +8408,16 @@ function randomHexColor() {
 
 function applyPreset(name) {
   const presets = {
-    classic: { accent: "#f2b266", forest: "#1aa27c", bg0: "#0b141b", ink: "#e9f6ff", fontScale: 1, radius: 18, glass: 1 },
-    jungla: { accent: "#9fcf5d", forest: "#2f6d2a", bg0: "#102214", ink: "#e8f5d8", fontScale: 1, radius: 16, glass: 1.2 },
-    fosil: { accent: "#d48d3f", forest: "#7c5f3e", bg0: "#241a12", ink: "#fae8cf", fontScale: 1.03, radius: 20, glass: 1.05 },
-    oceano: { accent: "#4dbcd7", forest: "#2c7f8c", bg0: "#0f1e2b", ink: "#d7f0f7", fontScale: 1, radius: 18, glass: 1.15 },
-    nocturno: { accent: "#7e8cff", forest: "#4b5aa8", bg0: "#0d1020", ink: "#e5e9ff", fontScale: 1.02, radius: 22, glass: 1.25 },
-    aurora: { accent: "#72d6ff", forest: "#2e93a6", bg0: "#07131e", ink: "#e7f6ff", fontScale: 1.01, radius: 20, glass: 1.28 },
-    desierto: { accent: "#e7a85b", forest: "#8c5b2d", bg0: "#22160d", ink: "#f7e7d0", fontScale: 1, radius: 18, glass: 1.05 },
-    volcanico: { accent: "#ff7b42", forest: "#842b1f", bg0: "#170d0d", ink: "#ffe5d7", fontScale: 1.02, radius: 22, glass: 1.12 },
-    glaciar: { accent: "#9de8ff", forest: "#5b8ea3", bg0: "#0b1720", ink: "#eefcff", fontScale: 1.01, radius: 20, glass: 1.32 },
-    "selva-neon": { accent: "#5cff9a", forest: "#108a63", bg0: "#061712", ink: "#e9fff1", fontScale: 1, radius: 24, glass: 1.26 }
+    classic: { accent: "#f2b266", forest: "#1aa27c", bg0: "#0b141b", ink: "#e9f6ff", fontScale: 1, radius: 18, glass: 1, designMode: "cinematic", layoutMode: "balanced" },
+    jungla: { accent: "#9fcf5d", forest: "#2f6d2a", bg0: "#102214", ink: "#e8f5d8", fontScale: 1, radius: 16, glass: 1.2, designMode: "glass", layoutMode: "airy" },
+    fosil: { accent: "#d48d3f", forest: "#7c5f3e", bg0: "#241a12", ink: "#fae8cf", fontScale: 1.03, radius: 20, glass: 1.05, designMode: "solid", layoutMode: "balanced" },
+    oceano: { accent: "#4dbcd7", forest: "#2c7f8c", bg0: "#0f1e2b", ink: "#d7f0f7", fontScale: 1, radius: 18, glass: 1.15, designMode: "glass", layoutMode: "airy" },
+    nocturno: { accent: "#7e8cff", forest: "#4b5aa8", bg0: "#0d1020", ink: "#e5e9ff", fontScale: 1.02, radius: 22, glass: 1.25, designMode: "cinematic", layoutMode: "balanced" },
+    aurora: { accent: "#72d6ff", forest: "#2e93a6", bg0: "#07131e", ink: "#e7f6ff", fontScale: 1.01, radius: 20, glass: 1.28, designMode: "glass", layoutMode: "airy" },
+    desierto: { accent: "#e7a85b", forest: "#8c5b2d", bg0: "#22160d", ink: "#f7e7d0", fontScale: 1, radius: 18, glass: 1.05, designMode: "solid", layoutMode: "compact" },
+    volcanico: { accent: "#ff7b42", forest: "#842b1f", bg0: "#170d0d", ink: "#ffe5d7", fontScale: 1.02, radius: 22, glass: 1.12, designMode: "cinematic", layoutMode: "compact" },
+    glaciar: { accent: "#9de8ff", forest: "#5b8ea3", bg0: "#0b1720", ink: "#eefcff", fontScale: 1.01, radius: 20, glass: 1.32, designMode: "glass", layoutMode: "airy" },
+    "selva-neon": { accent: "#5cff9a", forest: "#108a63", bg0: "#061712", ink: "#e9fff1", fontScale: 1, radius: 24, glass: 1.26, designMode: "glass", layoutMode: "balanced" }
   };
   if (!presets[name]) return;
   applyCustomization(presets[name]);
@@ -7591,6 +8448,14 @@ function initCustomization() {
       });
     });
 
+  [designModeSelect, layoutModeSelect].forEach((el) => {
+    if (!el) return;
+    el.addEventListener("change", () => {
+      const cfg = getCustomizationFromInputs();
+      applyCustomization(cfg);
+    });
+  });
+
   document.querySelectorAll("[data-preset]").forEach((btn) => {
     btn.addEventListener("click", () => applyPreset(btn.dataset.preset));
   });
@@ -7604,7 +8469,9 @@ function initCustomization() {
         ink: randomHexColor(),
         fontScale: Number((0.95 + Math.random() * 0.2).toFixed(2)),
         radius: 12 + Math.round(Math.random() * 16),
-        glass: Number((0.8 + Math.random() * 0.6).toFixed(2))
+        glass: Number((0.8 + Math.random() * 0.6).toFixed(2)),
+        designMode: pick(["cinematic", "solid", "glass"]),
+        layoutMode: pick(["airy", "balanced", "compact"])
       };
       applyCustomization(cfg);
       showToast("Tema aleatorio aplicado");
@@ -7905,7 +8772,15 @@ function initV5Release() {
       }
     }
     safeSetStorage(LYONIX_SESSION_KEY, "");
-    if (lyonixResult) lyonixResult.innerHTML = '<p class="result-meta">Nueva conversacion iniciada para LYONIX.</p>';
+    clearLyonixNativeState();
+    renderLyonixHistory();
+    renderLyonixPrompts(lyonixPromptRow, "", null);
+    renderLyonixPrompts(lyonixGlobalPromptRow, "", null);
+    renderLyonixNativeShell();
+    if (lyonixInput) lyonixInput.value = "";
+    if (lyonixGlobalInput) lyonixGlobalInput.value = "";
+    if (lyonixResult) lyonixResult.innerHTML = '<p class="result-meta">Nueva conversacion iniciada para LYONIX. Prueba: <strong>Que comia el Triceratops?</strong></p>';
+    if (lyonixGlobalResult) lyonixGlobalResult.innerHTML = '<p class="result-meta">Sesión reiniciada. Escribe una pregunta para buscar informacion desde la web y la base local.</p>';
     showToast("Memoria de LYONIX reiniciada");
   });
 }
@@ -8395,11 +9270,37 @@ if (resetMemoryBtn) resetMemoryBtn.addEventListener("click", initMemoryGame);
 let lastScrollY = window.scrollY;
 let chromeHidden = false;
 let chromeScrollMomentum = 0;
+const OPTIONS_COLLAPSED_KEY = "dinoOptionsCollapsed";
 
 function setChromeHidden(hidden) {
+  if (document.body.classList.contains("options-collapsed")) {
+    chromeHidden = true;
+    return;
+  }
   mainHeader?.classList.toggle("is-hidden", hidden);
   screenSwitcher?.classList.toggle("is-hidden", hidden);
   chromeHidden = hidden;
+}
+
+function applyOptionsCollapsed(collapsed, { persist = true } = {}) {
+  document.body.classList.toggle("options-collapsed", !!collapsed);
+  if (optionsToggleBtn) {
+    optionsToggleBtn.textContent = collapsed ? "Mostrar menu" : "Ocultar menu";
+    optionsToggleBtn.setAttribute("aria-label", collapsed ? "Mostrar menu de opciones" : "Ocultar menu de opciones");
+  }
+  if (showOptionsBtn) {
+    showOptionsBtn.textContent = collapsed ? "Mostrar menu" : "Menu";
+    showOptionsBtn.setAttribute("aria-label", collapsed ? "Mostrar menu de opciones" : "Menu visible");
+  }
+  if (persist) localStorage.setItem(OPTIONS_COLLAPSED_KEY, collapsed ? "1" : "0");
+  if (!collapsed) {
+    mainHeader?.classList.remove("is-hidden");
+    screenSwitcher?.classList.remove("is-hidden");
+    chromeHidden = false;
+    chromeScrollMomentum = 0;
+  } else {
+    chromeHidden = true;
+  }
 }
 
 function shouldKeepChromeVisible(nextY) {
@@ -8454,6 +9355,20 @@ window.addEventListener("scroll", () => {
   });
 }, { passive: true });
 if (toTop) toTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+if (optionsToggleBtn) {
+  applyOptionsCollapsed(localStorage.getItem(OPTIONS_COLLAPSED_KEY) === "1", { persist: false });
+  optionsToggleBtn.addEventListener("click", () => {
+    const next = !document.body.classList.contains("options-collapsed");
+    applyOptionsCollapsed(next);
+    showToast(next ? "Menu de opciones oculto" : "Menu de opciones visible");
+  });
+}
+if (showOptionsBtn) {
+  showOptionsBtn.addEventListener("click", () => {
+    applyOptionsCollapsed(false);
+    showToast("Menu de opciones visible");
+  });
+}
 
 renderDinos();
 renderTimeline();
