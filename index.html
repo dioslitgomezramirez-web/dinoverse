@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="format-detection" content="telephone=no">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: blob: https:; font-src 'self' https://fonts.gstatic.com data:; connect-src 'self' https:; media-src 'self' https: data:; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>DinoVerse | Museo Interactivo Prehistorico</title>
 <meta name="description" content="Explora dinosaurios, periodos, mapa paleo, modo historia, LYONIX IA, arbol evolutivo, simulaciones educativas, rutas inteligentes y nuevas innovaciones en DinoVerse V5.1.">
   <meta name="theme-color" content="#0b141b">
@@ -322,6 +324,15 @@ body.options-collapsed .screen-switcher {
   opacity: 0 !important;
   pointer-events: none !important;
   transform: translateY(-130%) scale(0.96) !important;
+  max-height: 0 !important;
+  min-height: 0 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  border-width: 0 !important;
+  box-shadow: none !important;
+  overflow: hidden !important;
 }
 
 .screen-center {
@@ -3040,7 +3051,7 @@ body.view-lab {
   }
 
   body {
-    padding-bottom: calc(6.8rem + env(safe-area-inset-bottom, 0px));
+    padding-bottom: calc(5.2rem + env(safe-area-inset-bottom, 0px));
   }
 
   .main-header {
@@ -3091,8 +3102,8 @@ body.view-lab {
     align-items: stretch;
     top: calc(0.3rem + 60px);
     gap: 0.6rem;
-    padding: 0.7rem;
-    border-radius: 24px;
+    padding: 0.6rem;
+    border-radius: 20px;
   }
 
   #screenPrevBtn,
@@ -3189,26 +3200,28 @@ body.view-lab {
   }
 
   .hero {
-    gap: 1rem;
-    padding-top: 0.7rem;
+    gap: 0.55rem;
+    padding-top: 0.15rem;
+    margin-top: 0;
   }
 
   .hero-copy {
-    gap: 0.8rem;
+    gap: 0.45rem;
   }
 
   .hero-actions {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 0.65rem;
+    gap: 0.5rem;
+    margin-top: 0;
   }
 
   .hero-actions .btn {
     width: 100%;
-    min-height: 56px;
-    border-radius: 20px;
+    min-height: 52px;
+    border-radius: 18px;
     justify-content: center;
-    font-size: 1.02rem;
+    font-size: 0.98rem;
   }
 
   .memory-board {
@@ -3232,23 +3245,47 @@ body.view-lab {
     left: 0.75rem;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     max-width: none;
-    gap: 0.65rem;
-    padding: 0.65rem;
-    border: 1px solid color-mix(in srgb, var(--sand) 18%, transparent);
-    border-radius: 24px;
+    bottom: calc(0.7rem + env(safe-area-inset-bottom, 0px));
+    gap: 0.5rem;
+    padding: 0.45rem;
+    border: 1px solid color-mix(in srgb, var(--sand) 14%, transparent);
+    border-radius: 20px;
     background: linear-gradient(160deg, color-mix(in srgb, var(--bg-0) 82%, transparent), color-mix(in srgb, var(--bg-2) 78%, transparent));
-    backdrop-filter: blur(calc(14px * var(--glass-factor))) saturate(130%);
-    -webkit-backdrop-filter: blur(calc(14px * var(--glass-factor))) saturate(130%);
-    box-shadow: 0 18px 34px rgba(0, 0, 0, 0.24);
+    backdrop-filter: blur(calc(10px * var(--glass-factor))) saturate(122%);
+    -webkit-backdrop-filter: blur(calc(10px * var(--glass-factor))) saturate(122%);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
   }
 
   .quick-access-btn {
     min-width: 0;
     width: 100%;
-    min-height: 54px;
-    border-radius: 18px;
-    padding: 0.8rem 0.9rem;
-    font-size: 1rem;
+    min-height: 48px;
+    border-radius: 16px;
+    padding: 0.68rem 0.8rem;
+    font-size: 0.95rem;
+  }
+
+  body.options-collapsed .quick-access {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  body.options-collapsed #lyonixGlobalBtn,
+  body.options-collapsed #toTop {
+    display: none;
+  }
+
+  body.options-collapsed #showOptionsBtn {
+    top: calc(0.75rem + env(safe-area-inset-top, 0px));
+    right: 0.75rem;
+    left: auto;
+    width: auto;
+    min-width: 128px;
+    z-index: 40;
   }
 
 }
@@ -3268,8 +3305,13 @@ body.view-lab {
     left: 0.6rem;
     right: 0.6rem;
     bottom: calc(0.7rem + env(safe-area-inset-bottom, 0px));
-    padding: 0.55rem;
-    grid-template-columns: 1fr;
+    padding: 0.42rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .quick-access-btn {
+    min-height: 46px;
+    font-size: 0.92rem;
   }
 }
 
@@ -3317,7 +3359,7 @@ body.view-lab {
   .screen-switcher {
     width: min(98vw, 430px);
     margin-top: 0.38rem;
-    padding: 0.3rem 0.38rem;
+    padding: 0.45rem;
   }
 
   #screenPrevBtn,
@@ -3326,7 +3368,7 @@ body.view-lab {
   }
 
   .hero {
-    padding-top: 0.85rem;
+    padding-top: 0.2rem;
   }
 
   .panel {
@@ -3342,6 +3384,11 @@ body.view-lab {
 
   .tools-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .quick-access {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.45rem;
   }
 }
 
@@ -3555,12 +3602,12 @@ body.view-lab {
     <section id="novedades" class="panel reveal">
       <div class="section-title">
         <p class="eyebrow">Release</p>
-        <h2>Lanzamiento Version 5.0</h2>
+        <h2>Lanzamiento Version 5.1</h2>
       </div>
       <p class="result-meta">Version final de DinoVerse con mas contenido, nuevas especies, mejor album, mas fosiles, mejor personalizacion y una navegacion pulida para sesiones largas.</p>
       <div class="release-grid">
         <article class="release-card">
-          <h3>Centro 5.0</h3>
+          <h3>Centro 5.1</h3>
           <p>Centro de control de la version final con foco en estabilidad, calidad visual y seguimiento de toda la experiencia.</p>
         </article>
         <article class="release-card">
@@ -4204,7 +4251,7 @@ body.view-lab {
           </div>
           <p id="reduceEffectsStatus" class="result-meta">Normal</p>
           <div class="grid-footer">
-            <button id="saveThemeBtn" class="btn btn-secondary" type="button">Guardar tema 5.0</button>
+            <button id="saveThemeBtn" class="btn btn-secondary" type="button">Guardar tema 5.1</button>
             <button id="applySavedThemeBtn" class="btn btn-secondary" type="button">Aplicar guardado</button>
           </div>
         </article>
@@ -4388,7 +4435,7 @@ body.view-lab {
     <div class="season-grid">
       <article class="season-card">
         <h3>Version actual</h3>
-          <p id="appVersionLabel" class="fact">V5.0</p>
+          <p id="appVersionLabel" class="fact">V5.1</p>
         <p id="appVersionHint" class="result-meta">Se actualiza con cada release.</p>
       </article>
       <article class="season-card">
@@ -4816,13 +4863,13 @@ let currentMetric = "length";
 let currentRankingScope = "local";
 let currentGuessAnswer = "";
 let guessScore = Number(localStorage.getItem("dinoGuessScore") || "0");
-let favorites = JSON.parse(localStorage.getItem("dinoFavorites") || "[]");
+let favorites = safeParseJSON(localStorage.getItem("dinoFavorites"), []);
 const roarAudioCache = new Map();
 const missingRoars = new Set();
 let deferredInstallPrompt = null;
 let explorerXP = Number(localStorage.getItem("dinoExplorerXP") || "0");
 let completedMissions = Number(localStorage.getItem("dinoCompletedMissions") || "0");
-let unlockedAchievements = JSON.parse(localStorage.getItem("dinoAchievements") || "[]");
+let unlockedAchievements = safeParseJSON(localStorage.getItem("dinoAchievements"), []);
 let missionDoneToday = localStorage.getItem("dinoMissionDate") === new Date().toISOString().slice(0, 10);
 let memoryCards = [];
 let memoryFirstPick = null;
@@ -5011,9 +5058,9 @@ const storyChapters = [
 
 const releaseRoadmap = [
   { title: "Arquitectura V5", detail: "Base de LYONIX 2.0, arbol evolutivo y simulador inicial.", state: "Completada" },
-  { title: "Pulido visual", detail: "Analisis de simulacion, centro 5.0 ampliado y mejores rutas inteligentes.", state: "Completada" },
+  { title: "Pulido visual", detail: "Analisis de simulacion, centro 5.1 ampliado y mejores rutas inteligentes.", state: "Completada" },
   { title: "Revision final", detail: "Optimizacion global, accesibilidad, consistencia visual y limpieza antes del release.", state: "Completada" },
-  { title: "Version 5.0", detail: "Lanzamiento final con catalogo ampliado, scroll refinado del menu y personalizacion reforzada.", state: "En vivo" }
+  { title: "Version 5.1", detail: "Lanzamiento activo con catalogo ampliado, scroll refinado del menu, personalizacion reforzada y mas seguridad.", state: "En vivo" }
 ];
 
 const evolutionGroups = [
@@ -6582,6 +6629,15 @@ function safeGetStorage(key) {
   }
 }
 
+function safeParseJSON(raw, fallback) {
+  if (!raw) return fallback;
+  try {
+    return JSON.parse(raw);
+  } catch (_err) {
+    return fallback;
+  }
+}
+
 function saveAutoState() {
   const payload = {
     at: Date.now(),
@@ -6928,7 +6984,7 @@ function buildToolsActions() {
     { label: "32 Cambiar a tema Fosil", run: () => applyPreset("fosil") },
     { label: "33 Cambiar a tema Oceano", run: () => applyPreset("oceano") },
     { label: "34 Resetear tema", run: () => { localStorage.removeItem(CUSTOM_THEME_KEY); applyCustomization(defaultCustomization); setToolStatus("Tema restablecido."); } },
-    { label: "35 Ir a Novedades V5.0", run: () => scrollToSection("novedades") },
+    { label: "35 Ir a Novedades V5.1", run: () => scrollToSection("novedades") },
     { label: "36 Pantalla aleatoria", run: () => {
       if (!screenSections.length) return;
       const next = Math.floor(Math.random() * screenSections.length);
@@ -6968,7 +7024,7 @@ function buildToolsActions() {
     { label: "46 Iniciar Modo Historia", run: () => storyStartBtn?.click() },
     { label: "47 Vista Museo", run: () => applyViewMode("museo") },
     { label: "48 Vista Laboratorio", run: () => applyViewMode("lab") },
-    { label: "49 Guardar tema 5.0", run: saveThemeSnapshot },
+    { label: "49 Guardar tema 5.1", run: saveThemeSnapshot },
     { label: "50 Aplicar tema guardado", run: applySavedThemeSnapshot },
     { label: "51 Restaurar punto exacto", run: restoreExactPoint },
     { label: "52 Auto-optimizacion", run: autoOptimizeExperience }
@@ -7546,11 +7602,11 @@ function renderReleaseCenter() {
     `).join("");
   }
   if (releaseCountdownText) {
-    releaseCountdownText.textContent = "Version 5.0 desplegada con mejoras visuales, nuevas especies y estabilidad reforzada.";
+    releaseCountdownText.textContent = "Version 5.1 desplegada con mejoras visuales, nuevas especies, mas seguridad y estabilidad reforzada.";
   }
   if (releaseBuildChip) releaseBuildChip.textContent = `Build ${getSemanticVersion()}`;
   if (releaseQualityChip) releaseQualityChip.textContent = "Calidad: release final";
-  if (releaseSprintText) releaseSprintText.textContent = "Sprint 5.0: expansion de catalogo, personalizacion premium, velocidad de carga y scroll mas limpio del menu principal.";
+  if (releaseSprintText) releaseSprintText.textContent = "Sprint 5.1: expansion de catalogo, personalizacion premium, velocidad de carga, mas seguridad y scroll mas limpio del menu principal.";
 }
 
 function renderEvolutionTree() {
@@ -8334,7 +8390,7 @@ function applyDesignMode(mode, { persist = true } = {}) {
   document.body.classList.toggle("design-glass", next === "glass");
   if (designModeSelect) designModeSelect.value = next;
   if (persist) {
-    const current = { ...defaultCustomization, ...JSON.parse(localStorage.getItem(CUSTOM_THEME_KEY) || "{}") };
+    const current = { ...defaultCustomization, ...safeParseJSON(localStorage.getItem(CUSTOM_THEME_KEY), {}) };
     current.designMode = next;
     localStorage.setItem(CUSTOM_THEME_KEY, JSON.stringify(current));
   }
@@ -8346,7 +8402,7 @@ function applyLayoutMode(mode, { persist = true } = {}) {
   document.body.classList.toggle("layout-compact", next === "compact");
   if (layoutModeSelect) layoutModeSelect.value = next;
   if (persist) {
-    const current = { ...defaultCustomization, ...JSON.parse(localStorage.getItem(CUSTOM_THEME_KEY) || "{}") };
+    const current = { ...defaultCustomization, ...safeParseJSON(localStorage.getItem(CUSTOM_THEME_KEY), {}) };
     current.layoutMode = next;
     localStorage.setItem(CUSTOM_THEME_KEY, JSON.stringify(current));
   }
@@ -8742,7 +8798,7 @@ function initV5Release() {
 
   releaseFocusBtn?.addEventListener("click", () => {
     scrollToSection("release-center");
-      showToast("Centro 5.0 activo");
+      showToast("Centro 5.1 activo");
   });
   releaseResetTourBtn?.addEventListener("click", () => {
     storyChapterIndex = 0;
@@ -8797,9 +8853,9 @@ function getCommandItems() {
   const sectionItems = [
     { label: "Ir a Estado", type: "Seccion", action: () => openSettingsFromCommand("estado") },
     { label: "Ir a Version", type: "Seccion", action: () => openSettingsFromCommand("version") },
-    { label: "Ir a Novedades V5.0", type: "Seccion", action: () => scrollToSection("novedades") },
+    { label: "Ir a Novedades V5.1", type: "Seccion", action: () => scrollToSection("novedades") },
     { label: "Ir a Ultra rendimiento", type: "Seccion", action: () => scrollToSection("ultra") },
-    { label: "Ir a Centro 5.0", type: "Seccion", action: () => scrollToSection("release-center") },
+    { label: "Ir a Centro 5.1", type: "Seccion", action: () => scrollToSection("release-center") },
     { label: "Ir a Expediciones", type: "Seccion", action: () => scrollToSection("expediciones") },
     { label: "Ir a Modo Historia", type: "Seccion", action: () => scrollToSection("historia") },
     { label: "Ir a LYONIX intelligence", type: "Seccion", action: () => scrollToSection("enciclopedia") },
