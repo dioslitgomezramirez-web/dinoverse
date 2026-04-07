@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="DinoVerse">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="format-detection" content="telephone=no">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: blob: https:; font-src 'self' https://fonts.gstatic.com data:; connect-src 'self' https:; media-src 'self' https: data:; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
   <meta name="referrer" content="strict-origin-when-cross-origin">
@@ -21,7 +23,8 @@
   <meta name="twitter:title" content="DinoVerse | Museo Interactivo Prehistorico">
   <meta name="twitter:description" content="Museo interactivo de dinosaurios con enciclopedia, album, fosiles, mapa paleo y LYONIX intelligence.">
   <meta name="theme-color" content="#0b141b">
-  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -157,10 +160,10 @@ section[id] {
   top: 0;
   z-index: 20;
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto auto auto auto;
+  grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
-  gap: 1rem;
-  padding: 0.85rem clamp(1rem, 3vw, 2.5rem);
+  gap: 0.9rem;
+  padding: 0.8rem clamp(1rem, 3vw, 2.3rem);
   backdrop-filter: blur(calc(14px * var(--glass-factor))) saturate(140%);
   -webkit-backdrop-filter: blur(calc(14px * var(--glass-factor))) saturate(140%);
   background: linear-gradient(160deg, color-mix(in srgb, var(--bg-0) 52%, transparent), color-mix(in srgb, var(--bg-2) 68%, transparent));
@@ -214,10 +217,21 @@ section[id] {
 
 nav {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 0.3rem;
-  justify-content: center;
-  overflow: visible;
+  justify-content: flex-start;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.32rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--sand) 20%, transparent);
+  background: linear-gradient(140deg, color-mix(in srgb, var(--bg-0) 48%, transparent), color-mix(in srgb, var(--bg-2) 38%, transparent));
+  scrollbar-width: none;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
+}
+
+nav::-webkit-scrollbar {
+  display: none;
 }
 
 nav a {
@@ -507,12 +521,20 @@ main {
   align-items: center;
   gap: clamp(1rem, 2vw, 1.5rem);
   padding: 1rem 0 0.85rem;
+  position: relative;
 }
 
 .hero-copy {
   display: grid;
-  gap: 0.95rem;
+  gap: 1rem;
   align-content: start;
+  padding: clamp(1rem, 2vw, 1.35rem);
+  border-radius: 28px;
+  border: 1px solid color-mix(in srgb, var(--sand) 18%, transparent);
+  background:
+    linear-gradient(155deg, color-mix(in srgb, var(--bg-0) 46%, transparent), color-mix(in srgb, var(--bg-2) 44%, transparent)),
+    radial-gradient(circle at top left, rgba(255, 214, 149, 0.14), transparent 36%);
+  box-shadow: 0 24px 40px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255,255,255,0.08);
 }
 
 .hero-copy h1 {
@@ -522,6 +544,36 @@ main {
 
 .hero-copy .lead {
   margin: 0;
+}
+
+.hero-kicker-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.hero-status-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.42rem 0.8rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--forest-soft) 40%, transparent);
+  background: color-mix(in srgb, var(--forest) 18%, transparent);
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: color-mix(in srgb, var(--ink) 94%, white);
+}
+
+.hero-status-chip::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #8fffc8, #2fd59f);
+  box-shadow: 0 0 0 6px rgba(47, 213, 159, 0.12);
 }
 
 .hero-search-hints {
@@ -625,6 +677,241 @@ h3 {
   background: color-mix(in srgb, var(--forest) 28%, transparent);
   color: color-mix(in srgb, var(--ink) 92%, white);
   border-color: color-mix(in srgb, var(--sand) 38%, transparent);
+}
+
+.hero-art {
+  display: grid;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.hero-showcase {
+  position: relative;
+  min-height: 360px;
+  border-radius: 30px;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--sand) 24%, transparent);
+  background:
+    linear-gradient(180deg, rgba(8, 15, 20, 0.12), rgba(8, 15, 20, 0.56)),
+    linear-gradient(140deg, color-mix(in srgb, var(--bg-0) 36%, transparent), color-mix(in srgb, var(--bg-2) 64%, transparent));
+  box-shadow: 0 28px 42px rgba(0, 0, 0, 0.24);
+  isolation: isolate;
+  transition: transform var(--fx-speed-mid) var(--fx-ease), box-shadow var(--fx-speed-mid) ease, filter var(--fx-speed-fast) ease;
+}
+
+.hero-showcase.is-changing {
+  filter: saturate(0.88) brightness(0.96);
+}
+
+.hero-showcase:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 34px 48px rgba(0, 0, 0, 0.28);
+}
+
+.hero-showcase img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.hero-showcase::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(7, 11, 15, 0.08) 0%, rgba(7, 11, 15, 0.3) 38%, rgba(7, 11, 15, 0.85) 100%),
+    radial-gradient(circle at top right, rgba(255, 219, 160, 0.3), transparent 28%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero-showcase-copy {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  padding: 1.15rem;
+  display: grid;
+  gap: 0.32rem;
+}
+
+.hero-showcase-badge {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.38rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(10, 18, 24, 0.48);
+  border: 1px solid rgba(255, 228, 188, 0.2);
+  color: #fff2db;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+}
+
+.hero-showcase-badge::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #ffd089, #d58a35);
+  box-shadow: 0 0 0 6px rgba(213, 138, 53, 0.14);
+}
+
+.hero-showcase-copy h2 {
+  margin: 0.05rem 0 0;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  color: #fff5e7;
+}
+
+.hero-showcase-copy .result-meta {
+  margin: 0;
+  color: rgba(255, 242, 224, 0.86);
+  max-width: 42ch;
+}
+
+.hero-pulse-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.65rem;
+}
+
+.hero-pulse-card {
+  padding: 0.82rem 0.9rem;
+  border-radius: 22px;
+  border: 1px solid color-mix(in srgb, var(--sand) 18%, transparent);
+  background: linear-gradient(155deg, color-mix(in srgb, var(--bg-0) 56%, transparent), color-mix(in srgb, var(--bg-2) 42%, transparent));
+  box-shadow: 0 18px 30px rgba(0, 0, 0, 0.16);
+}
+
+.hero-pulse-card .eyebrow {
+  margin-bottom: 0.2rem;
+}
+
+.hero-pulse-card strong {
+  display: block;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 1.8rem;
+  line-height: 0.95;
+  letter-spacing: 0.03em;
+}
+
+.hero-pulse-card p {
+  margin: 0.22rem 0 0;
+  color: color-mix(in srgb, var(--ink) 84%, transparent);
+  font-size: 0.92rem;
+}
+
+.system-panel {
+  display: grid;
+  gap: 1rem;
+}
+
+.system-os-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  padding: 1rem;
+  border: 1px solid color-mix(in srgb, var(--sand) 18%, transparent);
+  background:
+    linear-gradient(155deg, color-mix(in srgb, var(--bg-0) 42%, transparent), color-mix(in srgb, var(--bg-2) 38%, transparent)),
+    linear-gradient(120deg, rgba(255,255,255,0.08), rgba(255,255,255,0) 45%);
+  backdrop-filter: blur(calc(14px * var(--glass-factor))) saturate(130%);
+  -webkit-backdrop-filter: blur(calc(14px * var(--glass-factor))) saturate(130%);
+  box-shadow: 0 22px 36px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255,255,255,0.12);
+}
+
+.system-os-card::before {
+  content: "";
+  position: absolute;
+  inset: -20% auto auto -10%;
+  width: 46%;
+  height: 90%;
+  background: radial-gradient(circle, rgba(255, 218, 163, 0.18) 0%, transparent 72%);
+  pointer-events: none;
+}
+
+.system-os-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.85rem;
+}
+
+.system-os-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.38rem 0.78rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--forest-soft) 34%, transparent);
+  background: color-mix(in srgb, var(--forest) 16%, transparent);
+  color: color-mix(in srgb, var(--ink) 96%, white);
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+.system-os-chip::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #8fffc8, #2fd59f);
+  box-shadow: 0 0 0 5px rgba(47, 213, 159, 0.14);
+}
+
+.system-os-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 0.9rem;
+}
+
+.system-os-metric {
+  border-radius: 18px;
+  padding: 0.8rem 0.9rem;
+  background: color-mix(in srgb, var(--bg-0) 42%, transparent);
+  border: 1px solid color-mix(in srgb, var(--sand) 14%, transparent);
+}
+
+.system-os-metric span {
+  display: block;
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: color-mix(in srgb, var(--ink) 70%, transparent);
+  margin-bottom: 0.2rem;
+}
+
+.system-os-metric strong {
+  display: block;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 1.6rem;
+  letter-spacing: 0.03em;
+}
+
+.system-os-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  align-items: center;
+}
+
+.system-os-actions .btn {
+  min-height: 48px;
+  border-radius: 18px;
+}
+
+.system-update-note {
+  margin: 0.1rem 0 0;
+  color: color-mix(in srgb, var(--ink) 76%, transparent);
 }
 
 .stats {
@@ -2801,6 +3088,10 @@ body.view-lab {
     grid-template-columns: minmax(0, 1.02fr) minmax(380px, 0.98fr);
     gap: 1.7rem;
   }
+
+  .hero-copy h1 {
+    max-width: 10.5ch;
+  }
 }
 
 @media (min-width: 741px) and (max-width: 980px) {
@@ -2968,6 +3259,7 @@ body.view-lab {
     border: 1px solid var(--line);
     border-radius: 14px;
     padding: 0 0.4rem;
+    box-shadow: 0 16px 26px rgba(0, 0, 0, 0.16);
   }
 
   .main-header.nav-open nav {
@@ -2989,8 +3281,8 @@ body.view-lab {
   .hero {
     min-height: auto;
     grid-template-columns: 1fr;
-    gap: 0.8rem;
-    padding-top: 1rem;
+    gap: 0.95rem;
+    padding-top: 0.85rem;
   }
 
   .screen-switcher {
@@ -3014,11 +3306,15 @@ body.view-lab {
   }
 
   .hero-art {
-    min-height: 230px;
+    min-height: auto;
   }
 
   .hero-showcase {
-    min-height: 190px;
+    min-height: 260px;
+  }
+
+  .hero-pulse-strip {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .stats {
@@ -3258,13 +3554,24 @@ body.view-lab {
   }
 
   .hero {
-    gap: 0.55rem;
+    gap: 0.75rem;
     padding-top: 0.15rem;
     margin-top: 0;
   }
 
   .hero-copy {
-    gap: 0.45rem;
+    gap: 0.55rem;
+    padding: 0.95rem;
+    border-radius: 22px;
+  }
+
+  .hero-kicker-row {
+    align-items: flex-start;
+  }
+
+  .hero-status-chip {
+    font-size: 0.74rem;
+    padding: 0.35rem 0.7rem;
   }
 
   .hero-actions {
@@ -3280,6 +3587,37 @@ body.view-lab {
     border-radius: 18px;
     justify-content: center;
     font-size: 0.98rem;
+  }
+
+  .hero-showcase {
+    min-height: 210px;
+    border-radius: 24px;
+  }
+
+  .hero-showcase-copy {
+    padding: 0.9rem;
+  }
+
+  .hero-showcase-badge {
+    font-size: 0.74rem;
+  }
+
+  .hero-showcase-copy h2 {
+    font-size: clamp(1.8rem, 10vw, 2.5rem);
+  }
+
+  .hero-pulse-strip {
+    grid-template-columns: 1fr;
+    gap: 0.55rem;
+  }
+
+  .system-os-grid,
+  .system-os-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .system-os-actions {
+    display: grid;
   }
 
   .memory-board {
@@ -3414,6 +3752,20 @@ body.view-lab {
     grid-template-columns: 1fr 1fr;
   }
 
+  .hero-copy h1 {
+    max-width: none;
+  }
+
+  .hero-search-hints {
+    gap: 0.42rem;
+  }
+
+  .hero-search-chip {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
   .screen-switcher {
     width: min(98vw, 430px);
     margin-top: 0.38rem;
@@ -3427,6 +3779,15 @@ body.view-lab {
 
   .hero {
     padding-top: 0.2rem;
+  }
+
+  .hero-showcase {
+    min-height: 188px;
+  }
+
+  .hero-pulse-card {
+    padding: 0.78rem 0.82rem;
+    border-radius: 18px;
   }
 
   .panel {
@@ -3558,9 +3919,9 @@ body.view-lab {
     <button id="menuToggle" class="menu-toggle" type="button" aria-expanded="false" aria-controls="mainNav" onclick="window.__dinoFallback && window.__dinoFallback.toggleMenu(event)">Menu</button>
     <nav id="mainNav">
       <a href="#estado">Estado</a>
-      <a href="#novedades">Novedades V5.1</a>
+      <a href="#novedades">Novedades V6.0</a>
       <a href="#ultra">Ultra rendimiento</a>
-      <a href="#release-center">Centro 5.1</a>
+      <a href="#release-center">Centro 6.0</a>
       <a href="#innovation-hub">Innovacion</a>
       <a href="#expediciones">Expediciones</a>
       <a href="#historia">Historia</a>
@@ -3605,7 +3966,10 @@ body.view-lab {
   <main>
     <section id="inicio" class="hero reveal">
       <div class="hero-copy">
-        <p class="eyebrow">Museo interactivo de dinosaurios</p>
+        <div class="hero-kicker-row">
+          <p class="eyebrow">Museo interactivo de dinosaurios</p>
+          <span class="hero-status-chip">Dia 2 de V6.0 activo</span>
+        </div>
         <h1>DinoVerse en espanol para explorar dinosaurios, fosiles y eras prehistoricas</h1>
         <p class="lead">Encuentra especies, compara dinosaurios, revisa fosiles, estudia el mapa paleo y navega una linea del tiempo educativa pensada para estudiantes, aficionados y curiosos.</p>
         <div class="hero-search-hints" aria-label="Busquedas rapidas">
@@ -3618,6 +3982,33 @@ body.view-lab {
           <a href="#enciclopedia" class="btn btn-primary" onclick="window.__dinoFallback && window.__dinoFallback.gotoSection(event,'enciclopedia')">Explorar especies</a>
           <a href="#timeline" class="btn btn-secondary" onclick="window.__dinoFallback && window.__dinoFallback.gotoSection(event,'timeline')">Ver timeline</a>
           <a href="#juego" class="btn btn-secondary" onclick="window.__dinoFallback && window.__dinoFallback.gotoSection(event,'juego')">Jugar quiz</a>
+        </div>
+      </div>
+      <div class="hero-art">
+        <article id="heroShowcase" class="hero-showcase" aria-live="polite">
+          <img id="heroShowcaseImage" src="https://commons.wikimedia.org/wiki/Special:FilePath/Tyrannosaurus_AMNH_5027.jpg?width=1400" alt="Escena destacada de dinosaurio" loading="eager" fetchpriority="high" decoding="async">
+          <div class="hero-showcase-copy">
+            <span class="hero-showcase-badge">Destacado V6</span>
+            <h2 id="heroShowcaseTitle">Tyrannosaurus rex</h2>
+            <p id="heroShowcaseCaption" class="result-meta">Explora una portada más viva, con especies destacadas rotando automáticamente para darle a DinoVerse una entrada más fuerte.</p>
+          </div>
+        </article>
+        <div class="hero-pulse-strip" aria-label="Panel rapido de portada">
+          <article class="hero-pulse-card">
+            <p class="eyebrow">Acceso directo</p>
+            <strong>20 pantallas</strong>
+            <p>Navegacion más clara y lista para la semana de trabajo V6.</p>
+          </article>
+          <article class="hero-pulse-card">
+            <p class="eyebrow">Modo estudio</p>
+            <strong>Fosiles + eras</strong>
+            <p>Salta rápido entre album, mapa paleo, timeline y laboratorio.</p>
+          </article>
+          <article class="hero-pulse-card">
+            <p class="eyebrow">Foco actual</p>
+            <strong>Portada + menu</strong>
+            <p>Estamos puliendo el acceso principal para laptop, tablet y telefono.</p>
+          </article>
         </div>
       </div>
     </section>
@@ -3669,40 +4060,40 @@ body.view-lab {
     <section id="novedades" class="panel reveal">
       <div class="section-title">
         <p class="eyebrow">Release</p>
-        <h2>Lanzamiento Version 5.1</h2>
+        <h2>Inicio de Version 6.0</h2>
       </div>
-      <p class="result-meta">Version final de DinoVerse con mas contenido, nuevas especies, mejor album, mas fosiles, mejor personalizacion y una navegacion pulida para sesiones largas.</p>
+      <p class="result-meta">Comenzamos una semana de trabajo dedicada a DinoVerse 6.0. Esta base prepara el rediseño visual, la reorganización de la experiencia y la expansión del contenido sin romper la estabilidad actual.</p>
       <div class="release-grid">
         <article class="release-card">
-          <h3>Centro 5.1</h3>
-          <p>Centro de control de la version final con foco en estabilidad, calidad visual y seguimiento de toda la experiencia.</p>
+          <h3>Centro 6.0</h3>
+          <p>Nueva etapa de trabajo con foco en orden, escalabilidad y control de la experiencia antes de los cambios grandes.</p>
         </article>
         <article class="release-card">
-          <h3>LYONIX 2.0</h3>
-          <p>Sesion mas consistente, mejor control de modo y experiencia preparada para responder mejor y mas rapido.</p>
+          <h3>Base visual</h3>
+          <p>Hoy dejamos lista la base de version, roadmap y estructura de lanzamiento para avanzar el resto de la semana con menos riesgo.</p>
         </article>
         <article class="release-card">
-          <h3>Arbol evolutivo</h3>
-          <p>Nuevo mapa conceptual de linajes para entender relaciones entre grupos prehistoricos.</p>
+          <h3>Semana V6</h3>
+          <p>Trabajaremos en portada, navegación, responsive, LYONIX, mapa, timeline, álbum, fósiles y pulido general.</p>
         </article>
         <article class="release-card">
-          <h3>Simulador+</h3>
-          <p>Ahora interpreta equilibrio, riesgo y recomendaciones del ecosistema configurado.</p>
+          <h3>Dia 1 listo</h3>
+          <p>Versión visible actualizada, mensajes alineados y centro de release preparado para seguir creciendo día por día.</p>
         </article>
         <article class="release-card">
-          <h3>Rutas inteligentes</h3>
-          <p>Experiencia guiada segun tu perfil: estudiante, fanatico o investigador.</p>
+          <h3>Estabilidad primero</h3>
+          <p>La meta es construir V6.0 por bloques pequeños para no dañar el trabajo ya hecho en la web.</p>
         </article>
         <article class="release-card">
-          <h3>Catalogo ampliado</h3>
-          <p>La enciclopedia, el album y la galeria de fosiles crecieron para reforzar el contenido de la version final.</p>
+          <h3>Proximo paso</h3>
+          <p>El Dia 2 se concentrará en el rediseño de portada y navegación para que el salto a V6.0 se note de inmediato.</p>
         </article>
       </div>
     </section>
 
     <section id="ultra" class="panel reveal">
       <div class="section-title">
-        <p class="eyebrow">V5.1</p>
+        <p class="eyebrow">V6.0</p>
         <h2>Centro de ultra rendimiento</h2>
       </div>
       <div class="season-grid">
@@ -3754,28 +4145,28 @@ body.view-lab {
 
     <section id="release-center" class="panel reveal">
       <div class="section-title">
-        <p class="eyebrow">Version 5.1</p>
-        <h2>Centro 5.1</h2>
+        <p class="eyebrow">Version 6.0</p>
+        <h2>Centro 6.0</h2>
       </div>
       <div class="story-layout">
         <article class="story-card">
-          <h3>Estado del lanzamiento 5.1</h3>
+          <h3>Estado del lanzamiento 6.0</h3>
           <p id="releaseCountdownText" class="fact">Cargando estado de lanzamiento...</p>
-          <p class="result-meta">Esta version concentra innovacion visual, mas inteligencia local, mejor adaptacion de pantallas y nuevas rutas de exploracion para que DinoVerse se sienta mas vivo.</p>
+          <p class="result-meta">Esta nueva etapa concentra orden de producto, mejoras visuales y una ejecución por fases para construir V6.0 durante una semana completa.</p>
           <div class="lyonix-chip-row">
-            <span id="releaseBuildChip" class="lyonix-chip">Build 5.1</span>
-            <span id="releaseQualityChip" class="lyonix-chip">Calidad final</span>
+            <span id="releaseBuildChip" class="lyonix-chip">Build 6.0</span>
+            <span id="releaseQualityChip" class="lyonix-chip">Semana activa</span>
           </div>
           <div class="grid-footer">
-            <button id="releaseFocusBtn" class="btn btn-primary" type="button">Ver foco 5.1</button>
-            <button id="releaseResetTourBtn" class="btn btn-secondary" type="button">Reiniciar ruta V5</button>
+            <button id="releaseFocusBtn" class="btn btn-primary" type="button">Ver foco 6.0</button>
+            <button id="releaseResetTourBtn" class="btn btn-secondary" type="button">Reiniciar ruta V6</button>
           </div>
         </article>
         <div>
           <div id="releaseRoadmapGrid" class="story-grid"></div>
           <article class="story-card" style="margin-top:1rem;">
             <h3>Sprint actual</h3>
-            <p id="releaseSprintText" class="result-meta">Aplicando mejoras de innovacion, nuevas especies, exploracion guiada y pulido visual general.</p>
+            <p id="releaseSprintText" class="result-meta">Dia 1: base de version, alineacion de textos y preparacion del roadmap semanal de V6.0.</p>
           </article>
         </div>
       </div>
@@ -3783,7 +4174,7 @@ body.view-lab {
 
     <section id="innovation-hub" class="panel reveal">
       <div class="section-title">
-        <p class="eyebrow">V5.1</p>
+        <p class="eyebrow">V6.0</p>
         <h2>Innovation Hub</h2>
       </div>
       <div class="innovation-grid">
@@ -4318,8 +4709,41 @@ body.view-lab {
           </div>
           <p id="reduceEffectsStatus" class="result-meta">Normal</p>
           <div class="grid-footer">
-            <button id="saveThemeBtn" class="btn btn-secondary" type="button">Guardar tema 5.1</button>
+            <button id="saveThemeBtn" class="btn btn-secondary" type="button">Guardar tema 6.0</button>
             <button id="applySavedThemeBtn" class="btn btn-secondary" type="button">Aplicar guardado</button>
+          </div>
+        </article>
+
+        <article class="custom-card system-panel">
+          <h3>Informacion del Sistema</h3>
+          <div class="system-os-card">
+            <div class="system-os-head">
+              <div>
+                <p class="eyebrow">Sistema DinoVerse OS</p>
+                <p class="result-meta">Panel de actualizacion manual para la PWA instalada en navegadores modernos.</p>
+              </div>
+              <span id="systemUpdateChip" class="system-os-chip">Sistema listo</span>
+            </div>
+            <div class="system-os-grid">
+              <article class="system-os-metric">
+                <span>Version</span>
+                <strong id="systemVersionValue">V6.0</strong>
+              </article>
+              <article class="system-os-metric">
+                <span>Instalacion</span>
+                <strong id="systemInstallState">Web activa</strong>
+              </article>
+              <article class="system-os-metric">
+                <span>Actualizacion</span>
+                <strong id="systemUpdateState">Sin revisar</strong>
+              </article>
+            </div>
+            <div class="system-os-actions">
+              <button id="systemInstallBtn" class="btn btn-secondary" type="button">Instalar app</button>
+              <button id="checkUpdatesBtn" class="btn btn-primary" type="button">Buscar actualizaciones</button>
+              <button id="applyUpdateBtn" class="btn btn-secondary" type="button" hidden>Instalar ahora</button>
+            </div>
+            <p id="systemUpdateMessage" class="system-update-note">La app revisara manualmente si existe una nueva version del sistema.</p>
           </div>
         </article>
       </div>
@@ -4502,7 +4926,7 @@ body.view-lab {
     <div class="season-grid">
       <article class="season-card">
         <h3>Version actual</h3>
-          <p id="appVersionLabel" class="fact">V5.1</p>
+          <p id="appVersionLabel" class="fact">V6.0</p>
         <p id="appVersionHint" class="result-meta">Se actualiza con cada release.</p>
       </article>
       <article class="season-card">
@@ -4904,6 +5328,14 @@ const reduceEffectsToggle = $("reduceEffectsToggle");
 const reduceEffectsStatus = $("reduceEffectsStatus");
 const saveThemeBtn = $("saveThemeBtn");
 const applySavedThemeBtn = $("applySavedThemeBtn");
+const systemInstallBtn = $("systemInstallBtn");
+const checkUpdatesBtn = $("checkUpdatesBtn");
+const applyUpdateBtn = $("applyUpdateBtn");
+const systemVersionValue = $("systemVersionValue");
+const systemInstallState = $("systemInstallState");
+const systemUpdateState = $("systemUpdateState");
+const systemUpdateMessage = $("systemUpdateMessage");
+const systemUpdateChip = $("systemUpdateChip");
 const quizAdaptiveStatus = $("quizAdaptiveStatus");
 const fossilHunterClue = $("fossilHunterClue");
 const fossilHunterOptions = $("fossilHunterOptions");
@@ -4931,6 +5363,9 @@ let currentRankingScope = "local";
 let currentGuessAnswer = "";
 let guessScore = Number(localStorage.getItem("dinoGuessScore") || "0");
 let favorites = safeParseJSON(localStorage.getItem("dinoFavorites"), []);
+let pwaRegistration = null;
+let waitingServiceWorker = null;
+let hasPendingSystemUpdate = false;
 const roarAudioCache = new Map();
 const missingRoars = new Set();
 let deferredInstallPrompt = null;
@@ -5124,10 +5559,10 @@ const storyChapters = [
 ];
 
 const releaseRoadmap = [
-  { title: "Arquitectura V5", detail: "Base de LYONIX 2.0, arbol evolutivo y simulador inicial.", state: "Completada" },
-  { title: "Pulido visual", detail: "Analisis de simulacion, centro 5.1 ampliado y mejores rutas inteligentes.", state: "Completada" },
-  { title: "Revision final", detail: "Optimizacion global, accesibilidad, consistencia visual y limpieza antes del release.", state: "Completada" },
-  { title: "Version 5.1", detail: "Lanzamiento activo con catalogo ampliado, scroll refinado del menu, personalizacion reforzada y mas seguridad.", state: "En vivo" }
+  { title: "Dia 1 · Base V6", detail: "Version visible actualizada, textos alineados y centro de release preparado para la semana de trabajo.", state: "Completada" },
+  { title: "Dia 2 · Portada y menu", detail: "Rediseño de portada, navegacion mas clara y mejor comportamiento del menu principal.", state: "Pendiente" },
+  { title: "Dia 3 · Responsive", detail: "Pulido real para telefono, tablet y laptop con mejor uso del espacio y controles mas limpios.", state: "Pendiente" },
+  { title: "Dia 4 a 7 · Expansion V6", detail: "LYONIX, mapa, timeline, album, fosiles, rendimiento y pulido final de la experiencia.", state: "En preparacion" }
 ];
 
 const evolutionGroups = [
@@ -5205,8 +5640,8 @@ const lyonixKnowledge = {
 
 const SEASON_RELEASE_DATE = "2026-03-20";
 const SEASON_DURATION_DAYS = 60;
-const APP_MAJOR_VERSION = 5;
-const APP_MINOR_VERSION = 1;
+const APP_MAJOR_VERSION = 6;
+const APP_MINOR_VERSION = 0;
 const APP_CHANNEL = "";
 const DEFAULT_DINO_IMAGE = "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Tyrannosaurus_AMNH_5027.jpg/1280px-Tyrannosaurus_AMNH_5027.jpg";
 const DEFAULT_FOSSIL_IMAGE = createFossilImage("Archivo fosil", "#ba7d38");
@@ -5456,37 +5891,37 @@ const heroSlides = [
   {
     title: "Tyrannosaurus en caceria",
     caption: "Depredador dominante del Cretacico tardio.",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Tyrannosaurus_AMNH_5027.jpg/1280px-Tyrannosaurus_AMNH_5027.jpg",
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/Tyrannosaurus_AMNH_5027.jpg",
     fallback: createHeroImage("Tyrannosaurus en caceria", "#c98840")
   },
   {
     title: "Galeria de sauropodos",
     caption: "Gigantes herbivoros de cuello largo.",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Diplodocus_skeletal.jpg/800px-Diplodocus_skeletal.jpg",
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/Diplodocus_skeletal.jpg",
     fallback: createHeroImage("Galeria de sauropodos", "#88a965")
   },
   {
     title: "Stegosaurus jurasico",
     caption: "Placas dorsales iconicas en ecosistemas humedos.",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Stegosaurus_ungulatus.jpg/800px-Stegosaurus_ungulatus.jpg",
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/Stegosaurus_ungulatus.jpg",
     fallback: createHeroImage("Stegosaurus jurasico", "#77a162")
   },
   {
     title: "Triceratops en las llanuras",
     caption: "Herbivoro con gran escudo y tres cuernos.",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Triceratops_mount.jpg/1024px-Triceratops_mount.jpg",
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/Triceratops_mount.jpg",
     fallback: createHeroImage("Triceratops en las llanuras", "#d89142")
   },
   {
     title: "Spinosaurus riberenio",
     caption: "Teropodo adaptado a ambientes acuaticos.",
-    image: "https://upload.wikimedia.org/wikipedia/commons/8/86/Spinosaurus_aegyptiacus_restoration.jpg",
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/Spinosaurus_life_restoration_with_Onchopristis.jpg",
     fallback: createHeroImage("Spinosaurus riberenio", "#53aab0")
   },
   {
     title: "Velociraptor agil",
     caption: "Cazador pequeno y veloz del Cretacico.",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Velociraptor_Restoration.png/960px-Velociraptor_Restoration.png",
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/Velociraptor_Restoration.png",
     fallback: createHeroImage("Velociraptor agil", "#89b16c")
   }
 ];
@@ -7051,7 +7486,7 @@ function buildToolsActions() {
     { label: "32 Cambiar a tema Fosil", run: () => applyPreset("fosil") },
     { label: "33 Cambiar a tema Oceano", run: () => applyPreset("oceano") },
     { label: "34 Resetear tema", run: () => { localStorage.removeItem(CUSTOM_THEME_KEY); applyCustomization(defaultCustomization); setToolStatus("Tema restablecido."); } },
-    { label: "35 Ir a Novedades V5.1", run: () => scrollToSection("novedades") },
+    { label: "35 Ir a Novedades V6.0", run: () => scrollToSection("novedades") },
     { label: "36 Pantalla aleatoria", run: () => {
       if (!screenSections.length) return;
       const next = Math.floor(Math.random() * screenSections.length);
@@ -7091,7 +7526,7 @@ function buildToolsActions() {
     { label: "46 Iniciar Modo Historia", run: () => storyStartBtn?.click() },
     { label: "47 Vista Museo", run: () => applyViewMode("museo") },
     { label: "48 Vista Laboratorio", run: () => applyViewMode("lab") },
-    { label: "49 Guardar tema 5.1", run: saveThemeSnapshot },
+    { label: "49 Guardar tema 6.0", run: saveThemeSnapshot },
     { label: "50 Aplicar tema guardado", run: applySavedThemeSnapshot },
     { label: "51 Restaurar punto exacto", run: restoreExactPoint },
     { label: "52 Auto-optimizacion", run: autoOptimizeExperience }
@@ -7669,11 +8104,11 @@ function renderReleaseCenter() {
     `).join("");
   }
   if (releaseCountdownText) {
-    releaseCountdownText.textContent = "Version 5.1 desplegada con mejoras visuales, nuevas especies, mas seguridad y estabilidad reforzada.";
+    releaseCountdownText.textContent = "Version 6.0 en desarrollo activo: semana 1 iniciada con una base estable para seguir mejorando la web por fases.";
   }
   if (releaseBuildChip) releaseBuildChip.textContent = `Build ${getSemanticVersion()}`;
-  if (releaseQualityChip) releaseQualityChip.textContent = "Calidad: release final";
-  if (releaseSprintText) releaseSprintText.textContent = "Sprint 5.1: expansion de catalogo, personalizacion premium, velocidad de carga, mas seguridad y scroll mas limpio del menu principal.";
+  if (releaseQualityChip) releaseQualityChip.textContent = "Calidad: semana de trabajo";
+  if (releaseSprintText) releaseSprintText.textContent = "Sprint V6.0 · Dia 1: preparar la version, alinear la narrativa de release y dejar una base segura para los cambios de los proximos dias.";
 }
 
 function renderEvolutionTree() {
@@ -8865,13 +9300,13 @@ function initV5Release() {
 
   releaseFocusBtn?.addEventListener("click", () => {
     scrollToSection("release-center");
-      showToast("Centro 5.1 activo");
+      showToast("Centro 6.0 activo");
   });
   releaseResetTourBtn?.addEventListener("click", () => {
     storyChapterIndex = 0;
     renderStoryMode();
     setActiveScreen(0);
-    showToast("Ruta V5 reiniciada");
+    showToast("Ruta V6 reiniciada");
   });
   runSimulationBtn?.addEventListener("click", () => {
     runEcosystemSimulation();
@@ -8920,9 +9355,9 @@ function getCommandItems() {
   const sectionItems = [
     { label: "Ir a Estado", type: "Seccion", action: () => openSettingsFromCommand("estado") },
     { label: "Ir a Version", type: "Seccion", action: () => openSettingsFromCommand("version") },
-    { label: "Ir a Novedades V5.1", type: "Seccion", action: () => scrollToSection("novedades") },
+    { label: "Ir a Novedades V6.0", type: "Seccion", action: () => scrollToSection("novedades") },
     { label: "Ir a Ultra rendimiento", type: "Seccion", action: () => scrollToSection("ultra") },
-    { label: "Ir a Centro 5.1", type: "Seccion", action: () => scrollToSection("release-center") },
+    { label: "Ir a Centro 6.0", type: "Seccion", action: () => scrollToSection("release-center") },
     { label: "Ir a Expediciones", type: "Seccion", action: () => scrollToSection("expediciones") },
     { label: "Ir a Modo Historia", type: "Seccion", action: () => scrollToSection("historia") },
     { label: "Ir a LYONIX intelligence", type: "Seccion", action: () => scrollToSection("enciclopedia") },
@@ -9173,31 +9608,158 @@ function initSettingsDrawer() {
   setView("personalizacion");
 }
 function initPWA() {
+  const isiOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+  const applySystemStatus = (type, detail) => {
+    if (systemVersionValue) systemVersionValue.textContent = getSemanticVersion();
+    if (systemInstallState) {
+      systemInstallState.textContent = window.matchMedia("(display-mode: standalone)").matches
+        ? "PWA instalada"
+        : (isiOS ? "Lista para pantalla de inicio" : "Web activa");
+    }
+    if (systemUpdateState) systemUpdateState.textContent = type;
+    if (systemUpdateMessage) systemUpdateMessage.textContent = detail;
+    if (systemUpdateChip) systemUpdateChip.textContent = hasPendingSystemUpdate ? "Nueva version lista" : type;
+    if (applyUpdateBtn) applyUpdateBtn.hidden = !hasPendingSystemUpdate;
+  };
+
+  const requestActivation = () => {
+    if (!waitingServiceWorker) {
+      applySystemStatus("Sin version pendiente", "No hay una nueva version lista para instalar en este momento.");
+      return;
+    }
+    const accepted = window.confirm("Hay una nueva version de DinoVerse disponible. Quieres instalarla ahora?");
+    if (!accepted) {
+      applySystemStatus("Actualizacion pendiente", "La nueva version quedo lista para cuando quieras instalarla.");
+      return;
+    }
+    waitingServiceWorker.postMessage({ type: "SKIP_WAITING" });
+    applySystemStatus("Instalando actualizacion", "Aplicando la nueva version del sistema. La pagina se recargara automaticamente.");
+  };
+
+  const bindWaitingWorker = (worker) => {
+    if (!worker) return;
+    waitingServiceWorker = worker;
+    hasPendingSystemUpdate = true;
+    applySystemStatus("Actualizacion disponible", "Se detecto una nueva version de DinoVerse lista para instalar.");
+    requestActivation();
+  };
+
+  applySystemStatus("Sistema listo", "La app revisara manualmente si existe una nueva version del sistema.");
+
+  if (location.protocol === "file:") {
+    applySystemStatus("Modo archivo", "Para instalar la PWA y recibir actualizaciones reales, abre DinoVerse desde un servidor local o en hosting HTTPS.");
+  }
+
   if ("serviceWorker" in navigator) {
     window.addEventListener("load", () => {
-      navigator.serviceWorker.register("sw.js").catch(() => {});
+      navigator.serviceWorker.register("service_worker.js").then((registration) => {
+        pwaRegistration = registration;
+        if (registration.waiting) bindWaitingWorker(registration.waiting);
+
+        registration.addEventListener("updatefound", () => {
+          const installingWorker = registration.installing;
+          if (!installingWorker) return;
+          applySystemStatus("Buscando actualizacion", "Se encontro una compilacion nueva. Esperando a que termine de descargarse.");
+          installingWorker.addEventListener("statechange", () => {
+            if (installingWorker.state === "installed" && navigator.serviceWorker.controller) {
+              bindWaitingWorker(installingWorker);
+            }
+          });
+        });
+      }).catch(() => {
+        applySystemStatus("PWA no disponible", "No se pudo registrar el sistema offline en este navegador.");
+      });
     });
+
+    let reloadingAfterUpdate = false;
+    navigator.serviceWorker.addEventListener("controllerchange", () => {
+      if (reloadingAfterUpdate) return;
+      reloadingAfterUpdate = true;
+      window.location.reload();
+    });
+  } else {
+    applySystemStatus("Sin soporte", "Este navegador no soporta Service Worker ni instalacion PWA.");
   }
 
   window.addEventListener("beforeinstallprompt", (e) => {
     e.preventDefault();
     deferredInstallPrompt = e;
     if (installAppBtn) installAppBtn.hidden = false;
+    if (systemInstallBtn) systemInstallBtn.hidden = false;
+    applySystemStatus("Instalable", "La aplicacion puede instalarse en este dispositivo.");
   });
+
+  const runInstallPrompt = async () => {
+    if (location.protocol === "file:") {
+      applySystemStatus("Instalacion bloqueada", "Abre DinoVerse desde un servidor local o HTTPS para poder instalarla como app.");
+      showToast("Abre la web desde un servidor para instalarla");
+      return;
+    }
+    if (!deferredInstallPrompt) {
+      if (isiOS) {
+        applySystemStatus("Instalacion manual iPhone", "En iPhone o iPad pulsa Compartir y luego Agregar a pantalla de inicio para instalar DinoVerse como app.");
+        showToast("Usa Compartir > Agregar a pantalla de inicio");
+      } else {
+        applySystemStatus("Instalacion no disponible", "Este navegador no mostro el evento de instalacion todavia. Intenta abrir la web en HTTPS y vuelve a probar.");
+        showToast("La instalacion aun no esta disponible");
+      }
+      return;
+    }
+    deferredInstallPrompt.prompt();
+    await deferredInstallPrompt.userChoice;
+    deferredInstallPrompt = null;
+    if (installAppBtn) installAppBtn.hidden = true;
+    if (systemInstallBtn) systemInstallBtn.hidden = true;
+    applySystemStatus("Instalacion enviada", "Confirma la instalacion desde el navegador para fijar DinoVerse como app.");
+  };
 
   if (installAppBtn) {
     installAppBtn.addEventListener("click", async () => {
-      if (!deferredInstallPrompt) return;
-      deferredInstallPrompt.prompt();
-      await deferredInstallPrompt.userChoice;
-      deferredInstallPrompt = null;
-      installAppBtn.hidden = true;
+      await runInstallPrompt();
     });
+  }
+
+  if (systemInstallBtn) {
+    systemInstallBtn.addEventListener("click", async () => {
+      await runInstallPrompt();
+    });
+    if (window.matchMedia("(display-mode: standalone)").matches) {
+      systemInstallBtn.hidden = true;
+    }
   }
 
   window.addEventListener("appinstalled", () => {
     deferredInstallPrompt = null;
     if (installAppBtn) installAppBtn.hidden = true;
+    if (systemInstallBtn) systemInstallBtn.hidden = true;
+    applySystemStatus("PWA instalada", "DinoVerse ya esta instalada como aplicacion en tu dispositivo.");
+  });
+
+  checkUpdatesBtn?.addEventListener("click", async () => {
+    if (!pwaRegistration) {
+      applySystemStatus("PWA no inicializada", "Todavia no hay un registro activo del service worker para revisar actualizaciones.");
+      showToast("La PWA aun no esta lista");
+      return;
+    }
+    hasPendingSystemUpdate = false;
+    waitingServiceWorker = null;
+    applySystemStatus("Revisando actualizaciones", "Buscando una nueva version del sistema en el servidor.");
+    try {
+      await pwaRegistration.update();
+      window.setTimeout(() => {
+        if (!hasPendingSystemUpdate) {
+          applySystemStatus("Sistema actualizado", "No se encontraron nuevas versiones. Ya tienes la compilacion mas reciente.");
+          showToast("No hay actualizaciones nuevas");
+        }
+      }, 1100);
+    } catch (_error) {
+      applySystemStatus("Revision fallida", "No se pudo comprobar si hay una nueva version. Revisa tu conexion e intenta otra vez.");
+      showToast("No se pudo revisar actualizaciones");
+    }
+  });
+
+  applyUpdateBtn?.addEventListener("click", () => {
+    requestActivation();
   });
 }
 
