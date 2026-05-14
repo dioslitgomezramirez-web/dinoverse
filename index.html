@@ -10,7 +10,7 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: blob: https:; font-src 'self' https://fonts.gstatic.com data:; connect-src 'self' https:; media-src 'self' https: data:; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>DinoVerse | Museo Interactivo Prehistorico</title>
-  <meta name="description" content="DinoVerse es una web educativa de dinosaurios con enciclopedia, album, fosiles, mapa paleo, timeline, comparador, LYONIX IA y juegos interactivos en español.">
+  <meta name="description" content="DinoVerse es una web educativa de dinosaurios con enciclopedia, album, fosiles, mapa paleo, timeline, comparador, LYONIX IA y juegos interactivos en espanol.">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
   <meta name="author" content="Dioslit Gomez y Jose Manuel Vasquez">
   <meta name="keywords" content="dinosaurios, museo interactivo, dinosaurios en espanol, fosiles, tiranosaurio rex, triceratops, mapa paleo, linea del tiempo prehistorica, enciclopedia de dinosaurios">
@@ -22,9 +22,12 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="DinoVerse | Museo Interactivo Prehistorico">
   <meta name="twitter:description" content="Museo interactivo de dinosaurios con enciclopedia, album, fosiles, mapa paleo y LYONIX intelligence.">
+  <link rel="canonical" href="https://dinoverse.app/">
   <meta name="theme-color" content="#0b141b">
   <link rel="manifest" href="manifest.json">
-  <link rel="apple-touch-icon" href="icons/apple-touch-icon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="icons/favicon-64.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -1423,7 +1426,7 @@ body.layout-compact .panel {
   -webkit-overflow-scrolling: touch;
 }
 
-input, select {
+input, select, textarea {
   width: 100%;
   border: 1px solid color-mix(in srgb, var(--sand) 26%, transparent);
   border-radius: 12px;
@@ -1431,6 +1434,11 @@ input, select {
   background: color-mix(in srgb, var(--bg-0) 62%, transparent);
   color: var(--ink);
   font: inherit;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 120px;
 }
 
 select option {
@@ -1820,6 +1828,100 @@ select option {
   border-radius: 14px;
   padding: 0.9rem;
   background: color-mix(in srgb, var(--bg-0) 54%, transparent);
+}
+
+.review-list {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.review-item {
+  border: 1px solid color-mix(in srgb, var(--sand) 16%, transparent);
+  border-radius: 18px;
+  padding: 0.85rem;
+  background: linear-gradient(160deg, color-mix(in srgb, var(--bg-0) 54%, transparent), color-mix(in srgb, var(--bg-2) 48%, transparent));
+}
+
+.review-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.8rem;
+}
+
+.review-stars {
+  color: var(--fossil);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.review-note {
+  margin-top: 0.5rem;
+}
+
+.dev-lock,
+.dev-panel {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.dev-panel[hidden],
+.dev-lock[hidden] {
+  display: none !important;
+}
+
+.dev-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  width: fit-content;
+  padding: 0.45rem 0.8rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--sand) 20%, transparent);
+  background: color-mix(in srgb, var(--forest) 24%, transparent);
+  font-weight: 800;
+}
+
+.dev-badge::before {
+  content: "";
+  width: 0.62rem;
+  height: 0.62rem;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--sand) 88%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--forest) 26%, transparent);
+}
+
+.dev-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem;
+}
+
+.owner-metrics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem;
+}
+
+.owner-metric {
+  border: 1px solid color-mix(in srgb, var(--sand) 16%, transparent);
+  border-radius: 18px;
+  padding: 0.8rem;
+  background: color-mix(in srgb, var(--bg-0) 50%, transparent);
+}
+
+.owner-metric span {
+  display: block;
+  font-size: 0.78rem;
+  color: color-mix(in srgb, var(--ink) 72%, transparent);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.owner-metric strong {
+  display: block;
+  margin-top: 0.28rem;
+  font-size: 1.15rem;
 }
 
 .metric-switches {
@@ -3401,6 +3503,7 @@ body.view-lab {
     justify-content: space-between;
     align-items: center;
     gap: 0.5rem;
+    overflow: visible;
   }
 
   .logo {
@@ -3425,8 +3528,11 @@ body.view-lab {
   }
 
   .main-header nav {
+    position: absolute;
+    top: calc(100% + 0.45rem);
+    left: 0.75rem;
+    right: 0.75rem;
     grid-column: 1 / -1;
-    width: 100%;
     max-height: 0;
     overflow: hidden;
     opacity: 0;
@@ -3444,12 +3550,16 @@ body.view-lab {
   }
 
   .main-header.nav-open nav {
-    max-height: min(68vh, 420px);
+    max-height: min(48vh, 320px);
     overflow-y: auto;
     opacity: 1;
     pointer-events: auto;
     transform: translateY(0);
     padding: 0.4rem;
+  }
+
+  .smartbar {
+    display: none;
   }
 
   .main-header nav a {
@@ -3728,6 +3838,14 @@ body.view-lab {
   .timeline-jumps {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .dev-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .owner-metrics {
+    grid-template-columns: 1fr;
   }
 
   .lyonix-controls {
@@ -4167,6 +4285,1088 @@ body.view-lab {
   box-shadow: 0 0 0 2px color-mix(in srgb, var(--forest) 24%, transparent);
 }
 
+.lyonix-result,
+.lyonix-global-result,
+.map-info,
+.fossil-meta,
+.album-meta,
+.story-card,
+.experience-card {
+  overflow-wrap: anywhere;
+}
+
+@media (min-width: 641px) and (max-width: 1100px) {
+  .main-header {
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 0.85rem;
+  }
+
+  .header-actions {
+    grid-column: 1 / -1;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .hero {
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 0.9rem;
+  }
+
+  .hero-copy {
+    padding: 1.1rem;
+  }
+
+  .quick-access {
+    right: 1rem;
+    bottom: 1rem;
+  }
+}
+
+@media (max-width: 640px) {
+  body {
+    padding-bottom: calc(4.8rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  .main-header {
+    margin-top: env(safe-area-inset-top, 0px);
+    padding: 0.72rem 0.72rem 0.78rem;
+    border-radius: 0 0 22px 22px;
+    grid-template-columns: minmax(0, 1fr) auto;
+    row-gap: 0.55rem;
+  }
+
+  .main-header nav {
+    border-radius: 22px;
+    padding: 0.5rem;
+    left: 0.6rem;
+    right: 0.6rem;
+  }
+
+  .header-actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+
+  .screen-switcher {
+    top: calc(0.35rem + 64px);
+    padding: 0.55rem;
+    gap: 0.55rem;
+    border-radius: 22px;
+  }
+
+  .main-header.nav-open nav {
+    max-height: min(42vh, 280px);
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 0.7rem;
+    padding-top: 0.2rem;
+  }
+
+  .hero-art {
+    order: -1;
+  }
+
+  .hero-copy {
+    padding: 0.9rem;
+    border-radius: 24px;
+  }
+
+  .hero-copy h1 {
+    font-size: clamp(2rem, 9vw, 3rem);
+    line-height: 0.96;
+  }
+
+  .hero-copy .lead {
+    font-size: 1rem;
+    line-height: 1.45;
+  }
+
+  .hero-search-hints {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.45rem;
+  }
+
+  .hero-search-chip {
+    min-height: 44px;
+    padding: 0.62rem 0.7rem;
+    font-size: 0.88rem;
+  }
+
+  .hero-actions {
+    gap: 0.5rem;
+  }
+
+  .hero-actions .btn {
+    min-height: 50px;
+    border-radius: 18px;
+  }
+
+  .hero-showcase {
+    min-height: 240px;
+    border-radius: 24px;
+  }
+
+  .hero-showcase img {
+    min-height: 240px;
+  }
+
+  .hero-showcase-copy {
+    padding: 0.9rem;
+  }
+
+  .stats,
+  .season-grid,
+  .release-grid,
+  .experience-grid,
+  .mission-grid,
+  .period-grid,
+  .story-layout,
+  .custom-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .quick-access {
+    left: 0.7rem;
+    right: 0.7rem;
+    bottom: calc(0.55rem + env(safe-area-inset-bottom, 0px));
+    padding: 0.28rem;
+    gap: 0.35rem;
+    border-radius: 18px;
+  }
+
+  .quick-access-btn {
+    min-height: 40px;
+    padding: 0.56rem 0.7rem;
+    font-size: 0.84rem;
+    border-radius: 14px;
+  }
+
+  body.options-collapsed #showOptionsBtn {
+    top: calc(0.72rem + env(safe-area-inset-top, 0px));
+    right: 0.72rem;
+    min-width: 118px;
+  }
+}
+
+
+.v61-badge-glow {
+  position: relative;
+  isolation: isolate;
+}
+
+.v61-badge-glow::after {
+  content: "";
+  position: absolute;
+  inset: -18%;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(circle, color-mix(in srgb, var(--forest) 46%, transparent), transparent 72%);
+  opacity: 0.52;
+  filter: blur(18px);
+}
+
+.hero {
+  overflow: hidden;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 18% 16%, color-mix(in srgb, var(--forest) 24%, transparent), transparent 26%),
+    radial-gradient(circle at 78% 18%, color-mix(in srgb, var(--fossil) 26%, transparent), transparent 28%),
+    linear-gradient(145deg, transparent, color-mix(in srgb, var(--bg-1) 28%, transparent));
+  opacity: 0.95;
+}
+
+.hero-copy,
+.hero-art {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-search-hints {
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+.hero-showcase {
+  border-radius: calc(var(--radius) + 10px);
+  overflow: hidden;
+  min-height: 100%;
+  box-shadow: 0 20px 48px rgba(0,0,0,.28);
+}
+
+.hero-showcase-copy {
+  background: linear-gradient(180deg, transparent, rgba(8, 14, 19, 0.8));
+}
+
+.hero-showcase-badge,
+.hero-status-chip,
+.dev-badge,
+.system-os-chip {
+  border-radius: 999px;
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--sand) 12%, transparent), 0 10px 24px rgba(0,0,0,.14);
+}
+
+.quick-access {
+  border-radius: 26px;
+  padding: 0.52rem;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.quick-access-btn {
+  min-height: 54px;
+  border-radius: 22px;
+  font-weight: 900;
+  letter-spacing: 0.01em;
+}
+
+.lyonix-panel,
+.system-os-card,
+.custom-card,
+.story-card,
+.release-card,
+.experience-card,
+.lab-card,
+.mission-card,
+.compare-result,
+.map-info,
+.fossil-card,
+.album-card,
+.dino-card,
+.ecosystem-card,
+.innovation-card,
+.season-card {
+  border-radius: calc(var(--radius) + 8px);
+}
+
+.lyonix-panel {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--glass-hi) 82%, transparent), color-mix(in srgb, var(--bg-1) 88%, transparent));
+  border: 1px solid color-mix(in srgb, var(--sand) 18%, transparent);
+  box-shadow: 0 18px 42px rgba(0,0,0,.22);
+}
+
+.lyonix-result .lyonix-grid {
+  gap: 0.9rem;
+}
+
+.lyonix-block {
+  border-radius: calc(var(--radius) + 2px);
+  overflow: hidden;
+}
+
+.lyonix-history {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.lyonix-history-btn,
+.lyonix-prompt {
+  border-radius: 999px;
+}
+
+.universal-search-results,
+#mapSummary,
+#fossilDetail {
+  border-radius: calc(var(--radius) + 4px);
+}
+
+.review-list,
+.owner-metrics {
+  gap: 0.7rem;
+}
+
+.system-os-grid {
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+}
+
+@media (max-width: 980px) {
+  .hero {
+    padding: 1rem;
+    gap: 0.9rem;
+  }
+
+  .hero-copy {
+    gap: 0.7rem;
+  }
+
+  .hero-showcase {
+    min-height: 280px;
+  }
+
+  .quick-access {
+    width: min(100% - 1rem, 560px);
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    bottom: calc(0.72rem + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+@media (max-width: 640px) {
+  .main-header {
+    padding: 0.9rem 0.88rem;
+    border-radius: 0 0 calc(var(--radius) + 10px) calc(var(--radius) + 10px);
+  }
+
+  .header-actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hero {
+    min-height: auto;
+    padding: 0.95rem;
+    border-radius: calc(var(--radius) + 8px);
+  }
+
+  .hero-kicker-row {
+    gap: 0.55rem;
+    align-items: flex-start;
+  }
+
+  .hero-status-chip {
+    font-size: 0.8rem;
+    padding: 0.5rem 0.72rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.1rem, 10vw, 3rem);
+    line-height: 0.95;
+  }
+
+  .lead {
+    font-size: 1rem;
+  }
+
+  .hero-search-hints {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+
+  .hero-search-chip,
+  .hero-actions .btn,
+  .header-actions .theme-toggle,
+  .screen-switcher .theme-toggle,
+  .screen-select {
+    min-height: 52px;
+    border-radius: 20px;
+  }
+
+  .smartbar {
+    display: none;
+  }
+
+  .screen-switcher {
+    margin-bottom: 0.8rem;
+    padding: 0.8rem;
+    border-radius: calc(var(--radius) + 8px);
+  }
+
+  .quick-access {
+    gap: 0.5rem;
+    padding: 0.44rem;
+    border-radius: 22px;
+    width: min(100% - 1rem, 520px);
+  }
+
+  .quick-access-btn {
+    min-height: 48px;
+    font-size: 1.02rem;
+    border-radius: 18px;
+  }
+
+  body {
+    padding-bottom: calc(6.6rem + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+
+.album-controls,
+.fossil-controls {
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+.album-card,
+.fossil-card,
+.dino-card,
+.review-item,
+.owner-metric,
+.ranking-item,
+.time-card {
+  animation: riseIn .42s var(--fx-ease);
+}
+
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(10px) scale(.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.album-card .lyonix-chip-row,
+.dino-card .lyonix-chip-row,
+.fossil-meta .lyonix-chip-row {
+  margin-top: .35rem;
+}
+
+.result-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: .6rem;
+  margin-top: .8rem;
+}
+
+.result-stat {
+  padding: .7rem .8rem;
+  border-radius: calc(var(--radius) + 2px);
+  border: 1px solid color-mix(in srgb, var(--sand) 18%, transparent);
+  background: color-mix(in srgb, var(--bg-0) 60%, transparent);
+}
+
+.result-stat strong {
+  display: block;
+  font-size: 1.15rem;
+}
+
+.review-item {
+  border-radius: calc(var(--radius) + 6px);
+}
+
+@media (max-width: 640px) {
+  .album-controls,
+  .fossil-controls {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .album-controls input,
+  .fossil-controls input {
+    grid-column: 1 / -1;
+  }
+}
+
+/* V6.1 cleanup pass: stable mobile header, menu and dock */
+@media (max-width: 640px) {
+  body {
+    padding-bottom: calc(5.4rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  .main-header {
+    padding: 0.72rem 0.76rem;
+    row-gap: 0.45rem;
+    border-radius: 0 0 20px 20px;
+  }
+
+  .menu-toggle {
+    min-height: 42px;
+    padding: 0.46rem 0.78rem;
+    border-radius: 16px;
+  }
+
+  .header-actions {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 0.45rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 0.08rem;
+    scrollbar-width: none;
+  }
+
+  .header-actions::-webkit-scrollbar {
+    display: none;
+  }
+
+  .header-actions .theme-toggle {
+    flex: 0 0 auto;
+    width: auto;
+    min-width: max-content;
+    min-height: 42px;
+    padding: 0.5rem 0.82rem;
+    border-radius: 16px;
+    font-size: 0.88rem;
+  }
+
+  .main-header nav {
+    top: calc(100% + 0.36rem);
+    left: 0.55rem;
+    right: 0.55rem;
+    border-radius: 20px;
+    padding: 0 0.32rem;
+    box-shadow: 0 18px 34px rgba(0, 0, 0, 0.2);
+  }
+
+  .main-header.nav-open nav {
+    max-height: min(34vh, 250px);
+    padding: 0.42rem;
+  }
+
+  .main-header nav a {
+    padding: 0.62rem 0.75rem;
+    border-radius: 14px;
+    font-size: 0.92rem;
+  }
+
+  .screen-switcher {
+    width: min(97vw, 430px);
+    padding: 0.5rem;
+    gap: 0.45rem;
+    border-radius: 18px;
+  }
+
+  .screen-switcher .theme-toggle,
+  .screen-select {
+    min-height: 46px;
+    border-radius: 16px;
+  }
+
+  .screen-dots {
+    gap: 0.28rem;
+  }
+
+  .screen-dot {
+    width: 8px;
+    height: 8px;
+  }
+
+  .hero {
+    gap: 0.55rem;
+    padding-top: 0;
+  }
+
+  .hero-copy {
+    padding: 0.9rem;
+  }
+
+  .hero-copy h1 {
+    font-size: clamp(1.92rem, 9vw, 2.8rem);
+    line-height: 0.98;
+  }
+
+  .hero-copy .lead {
+    font-size: 0.98rem;
+    line-height: 1.42;
+  }
+
+  .hero-search-hints {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.42rem;
+  }
+
+  .hero-search-chip,
+  .hero-actions .btn {
+    min-height: 46px;
+    border-radius: 16px;
+  }
+
+  .quick-access {
+    left: 0.6rem;
+    right: 0.6rem;
+    width: auto;
+    max-width: none;
+    bottom: calc(0.56rem + env(safe-area-inset-bottom, 0px));
+    gap: 0.35rem;
+    padding: 0.32rem;
+    border-radius: 18px;
+    z-index: 55;
+  }
+
+  .quick-access-btn {
+    min-height: 44px;
+    padding: 0.58rem 0.74rem;
+    border-radius: 16px;
+    font-size: 0.9rem;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.18);
+  }
+
+  body.options-collapsed .quick-access {
+    left: auto;
+    right: auto;
+    width: auto;
+    max-width: none;
+    padding: 0;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  body.options-collapsed #lyonixGlobalBtn,
+  body.options-collapsed #toTop {
+    display: none !important;
+  }
+
+  body.options-collapsed #showOptionsBtn {
+    position: fixed !important;
+    top: calc(0.78rem + env(safe-area-inset-top, 0px));
+    right: 0.75rem;
+    left: auto;
+    bottom: auto;
+    min-width: 142px;
+    z-index: 90;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.22);
+  }
+}
+
+/* V6.2 redesign + performance cleanup */
+:root {
+  --bg-0: #071016;
+  --bg-1: #0c1b24;
+  --bg-2: #122733;
+  --forest: #14856f;
+  --forest-soft: #3fc6a5;
+  --fossil: #efb264;
+  --sand: #f6e7d0;
+  --ink: #edf5f7;
+  --line: rgba(201, 225, 232, 0.16);
+  --card: rgba(13, 22, 28, 0.92);
+  --radius: 28px;
+  --radius-sm: 20px;
+  --radius-xs: 16px;
+  --shadow: 0 14px 34px rgba(0, 0, 0, 0.2);
+  --shadow-soft: 0 8px 18px rgba(0, 0, 0, 0.12);
+  --glass-factor: 0.28;
+  --panel-pad: clamp(0.88rem, 1.4vw, 1.05rem);
+}
+
+body {
+  background:
+    radial-gradient(circle at top right, rgba(71, 162, 150, 0.18), transparent 24%),
+    radial-gradient(circle at top left, rgba(239, 178, 100, 0.08), transparent 26%),
+    linear-gradient(180deg, #10202a 0%, #122731 46%, #152f3a 100%);
+  color: var(--ink);
+}
+
+body.light {
+  background:
+    radial-gradient(circle at top right, rgba(202, 152, 92, 0.18), transparent 24%),
+    radial-gradient(circle at top left, rgba(103, 162, 131, 0.1), transparent 28%),
+    linear-gradient(180deg, #f6f1e8 0%, #efe8dc 48%, #e8dfd2 100%);
+  color: #201913;
+}
+
+.bg-layers,
+.mist,
+.grain,
+.main-header::after,
+.panel::before,
+.panel::after,
+.hero::before {
+  display: none !important;
+}
+
+.main-header,
+.screen-switcher,
+.panel,
+.hero-copy,
+.hero-showcase,
+.system-os-card,
+.lyonix-panel,
+.quick-access {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.main-header,
+.screen-switcher {
+  background: rgba(9, 18, 24, 0.96);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.16);
+}
+
+.main-header {
+  border-radius: 0 0 22px 22px;
+}
+
+nav,
+.theme-toggle,
+.screen-select,
+input[type="search"],
+input[type="text"],
+input[type="color"],
+select,
+.btn,
+.region-btn,
+.metric-btn,
+.quiz-option,
+.tool-btn {
+  border-radius: 18px;
+}
+
+nav {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.07);
+}
+
+nav a,
+.theme-toggle {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+nav a {
+  color: rgba(237, 245, 247, 0.88);
+}
+
+.theme-toggle {
+  color: rgba(237, 245, 247, 0.92);
+}
+
+nav a:hover,
+.theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.06);
+  transform: none;
+}
+
+.hero {
+  align-items: stretch;
+  gap: 0.9rem;
+}
+
+.hero-copy,
+.hero-showcase,
+.panel,
+.system-os-card,
+.lyonix-panel,
+.experience-card,
+.mission-card,
+.compare-result,
+.map-info,
+.release-card,
+.custom-card,
+.season-card,
+.lab-card,
+.about-card,
+.fossil-card,
+.album-card,
+.dino-card {
+  background: linear-gradient(180deg, rgba(14, 24, 30, 0.96), rgba(18, 29, 36, 0.94));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: var(--shadow);
+}
+
+.panel {
+  margin: 1.4rem 0;
+  padding: clamp(0.9rem, 1.8vw, 1.2rem);
+}
+
+.panel:hover,
+.hero-showcase:hover,
+.experience-card:hover,
+.mission-card:hover,
+.release-card:hover {
+  transform: none;
+  box-shadow: var(--shadow);
+}
+
+.hero-copy {
+  gap: 0.8rem;
+  border-radius: 28px;
+}
+
+.hero-copy h1 {
+  max-width: 11ch;
+  letter-spacing: 0.01em;
+  color: #f7efe4;
+}
+
+.hero-copy .lead {
+  max-width: 52ch;
+  color: rgba(237, 245, 247, 0.82);
+}
+
+.hero-status-chip,
+.hero-showcase-badge,
+.system-os-chip,
+.lyonix-chip {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.08);
+  color: var(--sand);
+  box-shadow: none;
+}
+
+.hero-status-chip::before,
+.hero-showcase-badge::before,
+.system-os-chip::before {
+  box-shadow: none;
+}
+
+.hero-search-hints {
+  gap: 0.42rem;
+}
+
+.hero-search-chip {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.hero-search-chip:hover {
+  transform: none;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.hero-showcase {
+  min-height: 320px;
+  border-radius: 28px;
+}
+
+.hero-showcase::after {
+  background: linear-gradient(180deg, rgba(5, 9, 12, 0.08) 0%, rgba(5, 9, 12, 0.26) 38%, rgba(5, 9, 12, 0.84) 100%);
+}
+
+.hero-showcase-copy h2 {
+  color: #fff4e5;
+}
+
+.hero-showcase-copy .result-meta,
+.screen-switcher .result-meta,
+.screen-label,
+.result-meta,
+.eyebrow {
+  color: rgba(237, 245, 247, 0.72);
+}
+
+.hero-pulse-strip,
+.smartbar {
+  display: none !important;
+}
+
+.stats {
+  gap: 0.75rem;
+  margin-bottom: 1.8rem;
+}
+
+.stats article {
+  padding: 0.8rem;
+}
+
+.section-title {
+  margin-bottom: 0.85rem;
+}
+
+.section-title h2::before {
+  display: none !important;
+}
+
+.release-grid,
+.experience-grid,
+.custom-grid,
+.tools-grid,
+.season-grid,
+.mission-grid,
+.album-grid,
+.fossil-gallery,
+.dino-grid {
+  gap: 0.8rem;
+}
+
+.universal-search-results,
+#fossilDetail,
+#mapSummary,
+.compare-result,
+.map-summary {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.quick-access {
+  background: rgba(7, 14, 19, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.16);
+}
+
+.quick-access-btn {
+  color: #f9f1e8;
+  box-shadow: none;
+}
+
+.quick-access-lyonix {
+  background: linear-gradient(135deg, #176ee7, #23c6b0);
+}
+
+.quick-access-top {
+  background: linear-gradient(135deg, #d38b3f, #efba69);
+}
+
+.quick-access-menu {
+  background: linear-gradient(135deg, #314a5a, #47697d);
+}
+
+.lyonix-panel {
+  padding: 1rem;
+}
+
+.lyonix-result .lyonix-grid {
+  gap: 0.7rem;
+}
+
+.lyonix-block {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+@media (max-width: 1100px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-art {
+    order: -1;
+  }
+
+  .stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  body {
+    padding-bottom: calc(5rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  .main-header {
+    border-radius: 0 0 18px 18px;
+  }
+
+  .hero-copy,
+  .panel,
+  .hero-showcase,
+  .system-os-card,
+  .lyonix-panel {
+    border-radius: 22px;
+  }
+
+  .hero-copy {
+    padding: 0.88rem;
+  }
+
+  .hero-copy h1 {
+    max-width: none;
+    font-size: clamp(2rem, 9vw, 2.9rem);
+  }
+
+  .hero-search-hints {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+  }
+
+  .hero-actions .btn,
+  .hero-search-chip {
+    width: 100%;
+  }
+
+  .stats {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .quick-access {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    transform: none;
+  }
+
+  .quick-access-btn {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+body.light .main-header,
+body.light .screen-switcher {
+  background: rgba(247, 241, 231, 0.96);
+  border-color: rgba(98, 72, 33, 0.12);
+  box-shadow: 0 10px 20px rgba(91, 67, 39, 0.12);
+}
+
+body.light nav {
+  background: rgba(113, 83, 42, 0.05);
+  border-color: rgba(98, 72, 33, 0.1);
+}
+
+body.light nav a,
+body.light .theme-toggle,
+body.light .screen-label,
+body.light .screen-switcher .result-meta,
+body.light .result-meta,
+body.light .eyebrow {
+  color: #3e2e1e;
+}
+
+body.light nav a,
+body.light .theme-toggle,
+body.light .hero-search-chip,
+body.light .screen-select,
+body.light input[type="search"],
+body.light input[type="text"],
+body.light input[type="color"],
+body.light select {
+  background: rgba(255, 250, 243, 0.92);
+  border-color: rgba(109, 82, 43, 0.12);
+}
+
+body.light .hero-copy,
+body.light .hero-showcase,
+body.light .panel,
+body.light .system-os-card,
+body.light .lyonix-panel,
+body.light .experience-card,
+body.light .mission-card,
+body.light .compare-result,
+body.light .map-info,
+body.light .release-card,
+body.light .custom-card,
+body.light .season-card,
+body.light .lab-card,
+body.light .about-card,
+body.light .fossil-card,
+body.light .album-card,
+body.light .dino-card {
+  background: linear-gradient(180deg, rgba(255, 251, 245, 0.98), rgba(245, 238, 228, 0.96));
+  border-color: rgba(109, 82, 43, 0.12);
+  box-shadow: 0 12px 24px rgba(91, 67, 39, 0.1);
+}
+
+body.light .hero-copy h1,
+body.light .hero-showcase-copy h2,
+body.light .section-title h2,
+body.light .logo {
+  color: #5b3717;
+}
+
+body.light .hero-copy .lead {
+  color: rgba(50, 38, 26, 0.78);
+}
+
+body.light .hero-status-chip,
+body.light .hero-showcase-badge,
+body.light .system-os-chip,
+body.light .lyonix-chip {
+  background: rgba(91, 55, 23, 0.06);
+  border-color: rgba(91, 55, 23, 0.1);
+  color: #7a4a20;
+}
+
+body.light .quick-access {
+  background: rgba(247, 241, 231, 0.96);
+  border-color: rgba(98, 72, 33, 0.12);
+  box-shadow: 0 10px 20px rgba(91, 67, 39, 0.12);
+}
+
+body.light .quick-access-btn {
+  color: #fff8ef;
+}
+
+body.light .quick-access-top {
+  color: #2d1c0b;
+}
+
 </style>
 </head>
 <body>
@@ -4183,9 +5383,9 @@ body.view-lab {
     <button id="menuToggle" class="menu-toggle" type="button" aria-expanded="false" aria-controls="mainNav" onclick="window.__dinoFallback && window.__dinoFallback.toggleMenu(event)">Menu</button>
     <nav id="mainNav">
       <a href="#estado">Estado</a>
-      <a href="#novedades">Novedades V6.0</a>
+      <a href="#novedades">Novedades V6.2</a>
       <a href="#ultra">Ultra rendimiento</a>
-      <a href="#release-center">Centro 6.0</a>
+      <a href="#release-center">Centro 6.2</a>
       <a href="#innovation-hub">Innovacion</a>
       <a href="#expediciones">Expediciones</a>
       <a href="#historia">Historia</a>
@@ -4214,12 +5414,13 @@ body.view-lab {
     </div>
   </header>
 
-  <div class="smartbar" id="smartbar" aria-label="Accesos compactos V6">
-    <span class="smartbar-label">Explorar por</span>
+  <div class="smartbar" id="smartbar" aria-label="Accesos compactos V6.2">
+    <span class="smartbar-label">Atajos V6.2</span>
     <button class="smartbar-btn active" data-smart-group="explorar" type="button">Explorar</button>
     <button class="smartbar-btn" data-smart-group="estudiar" type="button">Estudiar</button>
     <button class="smartbar-btn" data-smart-group="descubrir" type="button">Descubrir</button>
     <button class="smartbar-btn" data-smart-group="jugar" type="button">Jugar</button>
+    <button class="smartbar-btn" data-smart-group="sistema" type="button">Sistema</button>
   </div>
 
   <div class="screen-switcher" id="screenSwitcher" aria-label="Navegacion por pantallas">
@@ -4240,15 +5441,17 @@ body.view-lab {
       <div class="hero-copy">
         <div class="hero-kicker-row">
           <p class="eyebrow">Museo interactivo de dinosaurios</p>
-          <span class="hero-status-chip">Actualizado V6.0</span>
+          <span class="hero-status-chip">Actualizado V6.2</span>
         </div>
-        <h1>DinoVerse en espanol para explorar dinosaurios, fosiles y eras prehistoricas</h1>
-        <p class="lead">Encuentra especies, compara dinosaurios, revisa fosiles, estudia el mapa paleo y navega una linea del tiempo educativa pensada para estudiantes, aficionados y curiosos.</p>
+        <h1>DinoVerse en espanol para explorar dinosaurios, fosiles, eras y descubrimientos prehistoricos</h1>
+        <p class="lead">Explora especies, compara dinosaurios, revisa fosiles, estudia el mapa paleo, juega, descubre ecosistemas y usa LYONIX para encontrar respuestas claras en una experiencia mas elegante y mejor organizada.</p>
         <div class="hero-search-hints" aria-label="Busquedas rapidas">
           <button class="hero-search-chip" data-quick-find="T. rex" type="button">Buscar T. rex</button>
           <button class="hero-search-chip" data-quick-find="Triceratops" type="button">Buscar Triceratops</button>
+          <button class="hero-search-chip" data-quick-find="Spinosaurus" type="button">Buscar Spinosaurus</button>
           <button class="hero-search-chip" data-quick-find="Cretacico" type="button">Ver Cretacico</button>
           <button class="hero-search-chip" data-quick-find="Fosiles" type="button">Ir a fosiles</button>
+          <button class="hero-search-chip" data-quick-find="Mapa" type="button">Abrir mapa</button>
         </div>
         <div class="hero-actions">
           <a href="#enciclopedia" class="btn btn-primary" onclick="window.__dinoFallback && window.__dinoFallback.gotoSection(event,'enciclopedia')">Explorar especies</a>
@@ -4260,9 +5463,9 @@ body.view-lab {
         <article id="heroShowcase" class="hero-showcase" aria-live="polite">
           <img id="heroShowcaseImage" src="https://commons.wikimedia.org/wiki/Special:FilePath/Tyrannosaurus_AMNH_5027.jpg?width=1400" alt="Escena destacada de dinosaurio" loading="eager" fetchpriority="high" decoding="async">
           <div class="hero-showcase-copy">
-            <span class="hero-showcase-badge">Destacado V6</span>
+            <span class="hero-showcase-badge">Destacado V6.2</span>
             <h2 id="heroShowcaseTitle">Tyrannosaurus rex</h2>
-            <p id="heroShowcaseCaption" class="result-meta">Explora una portada más viva, con especies destacadas rotando automáticamente para darle a DinoVerse una entrada más fuerte.</p>
+            <p id="heroShowcaseCaption" class="result-meta">Explora una portada mas viva, con especies destacadas rotando automaticamente para darle a DinoVerse una entrada mas fuerte.</p>
           </div>
         </article>
       </div>
@@ -4315,40 +5518,40 @@ body.view-lab {
     <section id="novedades" class="panel reveal">
       <div class="section-title">
         <p class="eyebrow">Release</p>
-        <h2>Inicio de Version 6.0</h2>
+        <h2>Inicio de Version 6.2</h2>
       </div>
-      <p class="result-meta">DinoVerse 6.0 organiza mejoras visuales, rendimiento, contenido y herramientas educativas en una sola experiencia más clara y más sólida.</p>
+      <p class="result-meta">DinoVerse 6.2 reorganiza diseno, rendimiento, contenido y herramientas educativas en una experiencia mucho mas limpia, compacta y clara.</p>
       <div class="release-grid">
         <article class="release-card">
-          <h3>Centro 6.0</h3>
-          <p>Panel central para seguir el estado de la versión, los módulos activos y las mejoras principales del sistema.</p>
+          <h3>Centro 6.2</h3>
+          <p>Panel central para seguir el estado de la version, los modulos activos y las mejoras principales del sistema.</p>
         </article>
         <article class="release-card">
-          <h3>Diseño renovado</h3>
-          <p>La portada, los paneles y la navegación evolucionan hacia una interfaz más limpia y mejor organizada.</p>
+          <h3>Diseno cinematografico</h3>
+          <p>La portada, los paneles y la navegacion evolucionan hacia una interfaz mas limpia, visual y profesional.</p>
         </article>
         <article class="release-card">
           <h3>Experiencia total</h3>
-          <p>La versión 6.0 une portada, LYONIX, mapa, timeline, fósiles y álbum con una navegación más consistente.</p>
+          <p>V6.2 conecta portada, LYONIX, mapa, timeline, fosiles, album y personalizacion con una navegacion mas consistente.</p>
         </article>
         <article class="release-card">
-          <h3>Responsive real</h3>
-          <p>Teléfono, tablet y laptop reciben ajustes específicos para usar mejor el espacio y reducir ruido visual.</p>
+          <h3>Responsive premium</h3>
+          <p>Telefono, tablet y laptop reciben ajustes especificos para usar mejor el espacio y reducir ruido visual.</p>
         </article>
         <article class="release-card">
           <h3>Estabilidad primero</h3>
-          <p>Seguimos mejorando la web por bloques seguros para no romper contenido, imágenes ni navegación existente.</p>
+          <p>V6.2 prioriza bloques seguros para mejorar la web sin romper contenido, imagenes ni navegacion existente.</p>
         </article>
         <article class="release-card">
           <h3>Objetivo actual</h3>
-          <p>Subir la calidad general: búsqueda más útil, menú más inteligente, mejor adaptación y pulido del contenido.</p>
+          <p>Subir la calidad general: busqueda mas util, menu mas inteligente, mejor adaptacion y pulido del contenido.</p>
         </article>
       </div>
     </section>
 
     <section id="ultra" class="panel reveal">
       <div class="section-title">
-        <p class="eyebrow">V6.0</p>
+        <p class="eyebrow">V6.2</p>
         <h2>Centro de ultra rendimiento</h2>
       </div>
       <div class="season-grid">
@@ -4400,28 +5603,28 @@ body.view-lab {
 
     <section id="release-center" class="panel reveal">
       <div class="section-title">
-        <p class="eyebrow">Version 6.0</p>
-        <h2>Centro 6.0</h2>
+        <p class="eyebrow">Version 6.2</p>
+        <h2>Centro 6.2</h2>
       </div>
       <div class="story-layout">
         <article class="story-card">
-          <h3>Estado del lanzamiento 6.0</h3>
+          <h3>Estado del lanzamiento 6.2</h3>
           <p id="releaseCountdownText" class="fact">Cargando estado de lanzamiento...</p>
-          <p class="result-meta">Esta nueva etapa concentra orden de producto, mejoras visuales y una ejecución por fases para construir V6.0 durante una semana completa.</p>
+          <p class="result-meta">Esta version se centra en ordenar el producto, limpiar el diseno, mejorar el rendimiento y dejar una experiencia mucho mas solida en movil y escritorio.</p>
           <div class="lyonix-chip-row">
-            <span id="releaseBuildChip" class="lyonix-chip">Build 6.0</span>
+            <span id="releaseBuildChip" class="lyonix-chip">Build 6.2</span>
             <span id="releaseQualityChip" class="lyonix-chip">Calidad estable</span>
           </div>
           <div class="grid-footer">
-            <button id="releaseFocusBtn" class="btn btn-primary" type="button">Ver foco 6.0</button>
-            <button id="releaseResetTourBtn" class="btn btn-secondary" type="button">Reiniciar ruta V6</button>
+            <button id="releaseFocusBtn" class="btn btn-primary" type="button">Ver foco 6.2</button>
+            <button id="releaseResetTourBtn" class="btn btn-secondary" type="button">Reiniciar ruta V6.2</button>
           </div>
         </article>
         <div>
           <div id="releaseRoadmapGrid" class="story-grid"></div>
           <article class="story-card" style="margin-top:1rem;">
             <h3>Sprint actual</h3>
-            <p id="releaseSprintText" class="result-meta">Foco activo: mejorar navegación, organización visual y experiencia en teléfono, tablet y laptop.</p>
+            <p id="releaseSprintText" class="result-meta">Foco activo: navegacion compacta, mejor responsive, LYONIX mas claro y una interfaz mas ordenada.</p>
           </article>
         </div>
       </div>
@@ -4429,7 +5632,7 @@ body.view-lab {
 
     <section id="innovation-hub" class="panel reveal">
       <div class="section-title">
-        <p class="eyebrow">V6.0</p>
+        <p class="eyebrow">V6.2</p>
         <h2>Innovation Hub</h2>
       </div>
       <div class="innovation-grid">
@@ -4440,7 +5643,7 @@ body.view-lab {
           <p class="result-meta">Resume velocidad, fuerza, rareza y foco actual del museo en una sola lectura.</p>
         </article>
         <article class="mission-card innovation-card">
-          <h3>Ruta adaptativa V6</h3>
+          <h3>Ruta adaptativa V6.2</h3>
           <p id="innovationRouteText" class="fact">Preparando recorrido...</p>
           <div class="grid-footer">
             <button id="innovationRouteBtn" class="btn btn-primary" type="button">Generar ruta</button>
@@ -4458,7 +5661,7 @@ body.view-lab {
 
     <section id="expediciones" class="panel reveal">
       <div class="section-title">
-        <p class="eyebrow">Exploracion V6</p>
+        <p class="eyebrow">Exploracion guiada</p>
         <h2>Expediciones prehistoricas</h2>
       </div>
       <p class="result-meta">Rutas guiadas con biomas, periodos y especies destacadas para explorar por region.</p>
@@ -4490,7 +5693,7 @@ body.view-lab {
           </div>
         </article>
         <article class="experience-card">
-          <h3>Ruta inteligente V6</h3>
+          <h3>Ruta inteligente V6.2</h3>
           <div class="custom-row">
             <label for="visitorRouteSelect">Perfil</label>
             <select id="visitorRouteSelect">
@@ -4510,7 +5713,7 @@ body.view-lab {
               <button id="universalSearchBtn" class="btn btn-secondary" type="button">Buscar</button>
             </div>
             <div id="universalSearchResults" class="universal-search-results">
-              <p class="result-meta">Prueba: T. rex, Fosiles, Cretacico, Asia o Timeline.</p>
+              <p class="result-meta">Prueba: T. rex, Spinosaurus, Fosiles, Cretacico, Asia, Timeline o Mapa.</p>
             </div>
           </div>
         </article>
@@ -4566,7 +5769,7 @@ body.view-lab {
     <section id="enciclopedia" class="panel reveal">
       <div class="section-title">
         <p class="eyebrow">Enciclopedia</p>
-        <h2>Catalogo de dinosaurios</h2>
+        <h2>Catalogo de dinosaurios V2</h2>
       </div>
       <article id="lyonixPanel" class="lyonix-panel" aria-live="polite">
         <div class="lyonix-head">
@@ -4580,7 +5783,7 @@ body.view-lab {
         </div>
         <div class="grid-footer">
           <select id="lyonixModeSelect" class="screen-select" aria-label="Modo de LYONIX">
-            <option value="auto">Modo inteligente web</option>
+            <option value="auto">Modo inteligente web+</option>
             <option value="simple">Modo simple</option>
             <option value="profesor">Modo profesor</option>
             <option value="comparador">Modo comparador</option>
@@ -4594,11 +5797,12 @@ body.view-lab {
           <article class="lyonix-shell-card">
             <p class="eyebrow">Estado de sesion</p>
             <h3 id="lyonixCommandEcho">Esperando pregunta para LYONIX</h3>
-            <p class="result-meta">Escribe preguntas normales. LYONIX interpreta la consulta, busca coincidencias en la base local y amplia la respuesta con una fuente externa de dinosaurios.</p>
+            <p class="result-meta">Escribe preguntas normales. LYONIX V6.2 interpreta la consulta, ordena resultados locales, amplia con una fuente externa y devuelve una respuesta mas clara, util y mejor presentada.</p>
             <div class="lyonix-chip-row">
               <span class="lyonix-chip">Analisis local</span>
               <span class="lyonix-chip">Fuente externa</span>
               <span class="lyonix-chip">Memoria de sesion</span>
+              <span class="lyonix-chip">Prompts inteligentes</span>
               <span class="lyonix-chip">Base DinoVerse</span>
             </div>
           </article>
@@ -4609,11 +5813,11 @@ body.view-lab {
           </article>
         </section>
         <article id="lyonixResult" class="lyonix-result">
-          <p class="result-meta">Prueba: <strong>Que comia el Triceratops?</strong></p>
+          <p class="result-meta">Prueba: <strong>Que comia el Triceratops?</strong> o <strong>Que fosiles del Spinosaurus hay?</strong></p>
         </article>
         <article class="lyonix-studio">
           <h3>LYONIX Studio</h3>
-          <p class="result-meta">Crea imagenes de dinosaurios y mezcla especies hipoteticas.</p>
+          <p class="result-meta">Crea imagenes de dinosaurios, mezcla especies hipoteticas y usa un panel visual mas limpio.</p>
           <div class="lyonix-studio-grid">
             <div class="lyonix-tool-card">
               <h3>Imagen generada</h3>
@@ -4692,9 +5896,9 @@ body.view-lab {
         <p class="eyebrow">Imagenes</p>
         <h2>Album de Dinosaurios</h2>
       </div>
-      <p class="result-meta">Galeria de todas las especies de esta web. Puedes buscar por nombre comun o cientifico.</p>
+      <p class="result-meta">Galeria V3 con mas especies, mejor orden visual y filtros rapidos por nombre, periodo y dieta.</p>
       <div class="album-controls">
-        <input id="albumSearchInput" type="search" placeholder="Buscar en album...">
+        <input id="albumSearchInput" type="search" placeholder="Buscar especie en album...">
         <select id="albumPeriodFilter">
           <option value="all">Periodo: Todos</option>
           <option value="Triasico">Triasico</option>
@@ -4707,7 +5911,18 @@ body.view-lab {
           <option value="Herbivoro">Herbivoro</option>
           <option value="Omnivoro">Omnivoro</option>
         </select>
+        <select id="albumContinentFilter">
+          <option value="all">Region: Todas</option>
+          <option value="Norteamerica">Norteamerica</option>
+          <option value="Sudamerica">Sudamerica</option>
+          <option value="Europa">Europa</option>
+          <option value="Asia">Asia</option>
+          <option value="Africa">Africa</option>
+          <option value="Antartida">Antartida</option>
+          <option value="Australia">Australia</option>
+        </select>
       </div>
+      <div id="albumSummary" class="map-summary"></div>
       <div id="dinoAlbumGrid" class="album-grid"></div>
       <div class="grid-footer">
         <p id="albumStatus" class="result-meta"></p>
@@ -4717,7 +5932,7 @@ body.view-lab {
     <section id="timeline" class="panel reveal">
       <div class="section-title">
         <p class="eyebrow">Cronologia</p>
-        <h2>Linea del tiempo prehistorica</h2>
+        <h2>Linea del tiempo prehistorica V3</h2>
       </div>
       <div class="timeline-tools">
         <label class="timeline-zoom">
@@ -4733,13 +5948,13 @@ body.view-lab {
         <button class="region-btn active" data-timeline-period="eventos" type="button">Todos</button>
       </div>
       <p class="hint">Arrastra horizontalmente para navegar eventos.</p>
-      <div id="timelineTrack" class="timeline-track" role="region" aria-label="Linea del tiempo prehistorica"></div>
+      <div id="timelineTrack" class="timeline-track" role="region" aria-label="Linea del tiempo prehistorica V3"></div>
     </section>
 
     <section id="mapa" class="panel reveal">
       <div class="section-title">
         <p class="eyebrow">Mundo prehistorico</p>
-        <h2>Mapa de hallazgos por region</h2>
+        <h2>Mapa paleo interactivo V3</h2>
       </div>
       <div class="map-layout">
         <div class="map-legend">
@@ -4777,7 +5992,7 @@ body.view-lab {
 
     <section id="arbol" class="panel reveal">
       <div class="section-title">
-        <p class="eyebrow">Conocimiento V6</p>
+        <p class="eyebrow">Conocimiento V6.2</p>
         <h2>Arbol evolutivo interactivo</h2>
       </div>
       <p class="result-meta">Vista ampliada de relaciones entre grandes grupos para estudiar origen, especializacion y adaptaciones.</p>
@@ -4787,7 +6002,7 @@ body.view-lab {
     <section id="ecosistemas" class="panel reveal">
       <div class="section-title">
         <p class="eyebrow">Ambientes</p>
-        <h2>Ecosistemas y periodos</h2>
+        <h2>Ecosistemas y periodos V2</h2>
       </div>
       <div id="ecosystemLiveGrid" class="ecosystem-live-grid"></div>
       <div class="period-grid">
@@ -4828,6 +6043,7 @@ body.view-lab {
       </div>
       <p id="rankingStatus" class="result-meta">Top local basado en tu base actual.</p>
       <div id="rankingList" class="ranking-list"></div>
+      <div id="missionSummary" class="map-summary"></div>
     </section>
 
     <section id="misiones" class="panel reveal">
@@ -4859,16 +6075,28 @@ body.view-lab {
     <section id="fosiles" class="panel reveal">
       <div class="section-title">
         <p class="eyebrow">Archivo visual</p>
-        <h2>Galeria de fosiles</h2>
+        <h2>Galeria de fosiles Pro</h2>
       </div>
       <div class="fossil-controls">
-        <input id="fossilSearchInput" type="search" placeholder="Buscar fosil...">
+        <input id="fossilSearchInput" type="search" placeholder="Buscar fosil o pieza...">
         <select id="fossilEraFilter">
           <option value="all">Era: Todas</option>
+          <option value="Triasico">Triasico</option>
           <option value="Jurasico">Jurasico</option>
           <option value="Cretacico">Cretacico</option>
         </select>
+        <select id="fossilTypeFilter">
+          <option value="all">Tipo: Todos</option>
+          <option value="craneo">Craneos</option>
+          <option value="garra">Garras</option>
+          <option value="vertebra">Vertebras</option>
+          <option value="huevo">Huevos y nidos</option>
+          <option value="placa">Placas y armaduras</option>
+          <option value="diente">Dientes</option>
+          <option value="otros">Otros</option>
+        </select>
       </div>
+      <div id="fossilSummary" class="map-summary"></div>
       <div id="fossilGallery" class="fossil-gallery"></div>
       <article id="fossilDetail" class="map-info"></article>
     </section>
@@ -4876,7 +6104,7 @@ body.view-lab {
     <section id="funciones" class="panel reveal">
       <div class="section-title">
         <p class="eyebrow">Utilidades Pro</p>
-        <h2>52 funciones rapidas</h2>
+        <h2>53 funciones rapidas</h2>
       </div>
       <p class="result-meta">Acciones listas para explorar, estudiar y personalizar tu experiencia.</p>
       <div id="toolsGrid" class="tools-grid"></div>
@@ -4888,7 +6116,7 @@ body.view-lab {
     <section id="personalizacion" class="panel reveal">
       <div class="section-title">
         <p class="eyebrow">A tu gusto</p>
-        <h2>Personalizacion avanzada</h2>
+        <h2>Personalizacion avanzada V3</h2>
       </div>
       <div class="custom-grid">
         <article class="custom-card">
@@ -4964,6 +6192,8 @@ body.view-lab {
             <button class="metric-btn" data-preset="volcanico" type="button">Volcanico</button>
             <button class="metric-btn" data-preset="glaciar" type="button">Glaciar</button>
             <button class="metric-btn" data-preset="selva-neon" type="button">Selva neon</button>
+            <button class="metric-btn" data-preset="obsidiana" type="button">Obsidiana</button>
+            <button class="metric-btn" data-preset="aurora-premium" type="button">Aurora premium</button>
           </div>
           <div class="grid-footer">
             <button id="randomThemeBtn" class="btn btn-secondary" type="button">Tema aleatorio</button>
@@ -5003,25 +6233,25 @@ body.view-lab {
           </div>
           <p id="reduceEffectsStatus" class="result-meta">Normal</p>
           <div class="grid-footer">
-            <button id="saveThemeBtn" class="btn btn-secondary" type="button">Guardar tema 6.0</button>
+            <button id="saveThemeBtn" class="btn btn-secondary" type="button">Guardar tema 6.2</button>
             <button id="applySavedThemeBtn" class="btn btn-secondary" type="button">Aplicar guardado</button>
           </div>
         </article>
 
         <article class="custom-card system-panel">
-          <h3>Informacion del Sistema</h3>
+          <h3>Centro del sistema</h3>
           <div class="system-os-card">
             <div class="system-os-head">
               <div>
                 <p class="eyebrow">Sistema DinoVerse OS</p>
-                <p class="result-meta">Panel de actualizacion manual para la PWA instalada en navegadores modernos.</p>
+                <p class="result-meta">Panel del sistema para instalacion, actualizacion manual y estado general de la experiencia PWA en navegadores modernos.</p>
               </div>
-              <span id="systemUpdateChip" class="system-os-chip">Sistema listo</span>
+              <span id="systemUpdateChip" class="system-os-chip">Sistema V6.2 listo</span>
             </div>
             <div class="system-os-grid">
               <article class="system-os-metric">
                 <span>Version</span>
-                <strong id="systemVersionValue">V6.0</strong>
+                <strong id="systemVersionValue">V6.2</strong>
               </article>
               <article class="system-os-metric">
                 <span>Instalacion</span>
@@ -5037,8 +6267,133 @@ body.view-lab {
               <button id="checkUpdatesBtn" class="btn btn-primary" type="button">Buscar actualizaciones</button>
               <button id="applyUpdateBtn" class="btn btn-secondary" type="button" hidden>Instalar ahora</button>
             </div>
-            <p id="systemUpdateMessage" class="system-update-note">La app revisara manualmente si existe una nueva version del sistema.</p>
+            <p id="systemUpdateMessage" class="system-update-note">La app revisara manualmente si existe una nueva version del sistema y te explicara mejor el proceso de instalacion y actualizacion.</p>
           </div>
+        </article>
+
+        <article class="custom-card">
+          <h3>Temas premium</h3>
+          <div class="custom-row">
+            <label for="ownerAccentPreset">Tema del dueno</label>
+            <select id="ownerAccentPreset">
+              <option value="cinematic">Museo premium</option>
+              <option value="glass">Cristal avanzado</option>
+              <option value="solid">Solido editorial</option>
+            </select>
+          </div>
+          <div class="custom-row">
+            <label for="welcomeMessageInput">Mensaje de portada</label>
+            <input id="welcomeMessageInput" type="text" placeholder="Ejemplo: Bienvenido a DinoVerse 6.2">
+          </div>
+          <div class="grid-footer">
+            <button id="applyOwnerStyleBtn" class="btn btn-secondary" type="button">Aplicar estilo</button>
+            <button id="resetWelcomeBtn" class="btn btn-secondary" type="button">Restaurar portada</button>
+          </div>
+          <p class="result-meta">Te permite cambiar rapido la vibra general y el mensaje principal del inicio.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="feedback" class="panel reveal">
+      <div class="section-title">
+        <p class="eyebrow">Comunidad</p>
+        <h2>Resenas y mejoras</h2>
+      </div>
+      <div class="custom-grid">
+        <article class="custom-card">
+          <h3>Enviar resena</h3>
+          <div class="custom-row">
+            <label for="reviewNameInput">Nombre</label>
+            <input id="reviewNameInput" type="text" placeholder="Tu nombre o apodo">
+          </div>
+          <div class="custom-row">
+            <label for="reviewTypeSelect">Tipo</label>
+            <select id="reviewTypeSelect">
+              <option value="opinion">Opinion general</option>
+              <option value="bug">Reporte de bug</option>
+              <option value="idea">Nueva idea</option>
+              <option value="diseno">Mejora de diseno</option>
+            </select>
+          </div>
+          <div class="custom-row">
+            <label for="reviewRatingSelect">Calificacion</label>
+            <select id="reviewRatingSelect">
+              <option value="5">5 estrellas</option>
+              <option value="4">4 estrellas</option>
+              <option value="3">3 estrellas</option>
+              <option value="2">2 estrellas</option>
+              <option value="1">1 estrella</option>
+            </select>
+          </div>
+          <div class="custom-row">
+            <label for="reviewMessageInput">Que te gusto?</label>
+            <textarea id="reviewMessageInput" rows="4" placeholder="CuÃ¯Â¿Â½ntanos que te gusto de la pagina..."></textarea>
+          </div>
+          <div class="custom-row">
+            <label for="reviewImproveInput">Que debemos mejorar?</label>
+            <textarea id="reviewImproveInput" rows="4" placeholder="Errores, ideas o mejoras importantes..."></textarea>
+          </div>
+          <div class="grid-footer">
+            <button id="sendReviewBtn" class="btn btn-primary" type="button">Guardar y enviar</button>
+            <button id="saveReviewDraftBtn" class="btn btn-secondary" type="button">Guardar borrador</button>
+          </div>
+          <p id="reviewStatus" class="result-meta">Las resenas se guardan localmente y se pueden enviar al correo del dueno.</p>
+        </article>
+        <article class="custom-card">
+          <h3>Ultimas resenas</h3>
+          <div id="reviewSummary" class="map-summary"></div>
+          <div id="reviewList" class="review-list">
+            <p class="result-meta">Todavia no hay resenas guardadas.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="devmode" class="panel reveal">
+      <div class="section-title">
+        <p class="eyebrow">Propietario</p>
+        <h2>Centro del dueno V2</h2>
+      </div>
+      <div class="custom-grid">
+        <article class="custom-card">
+          <div class="dev-lock" id="devLockPanel">
+            <h3>Acceso privado</h3>
+            <p class="result-meta">Este espacio es solo para el dueno de DinoVerse.</p>
+            <div class="custom-row">
+              <label for="devPasswordInput">Clave</label>
+              <input id="devPasswordInput" type="password" placeholder="Introduce tu clave privada">
+            </div>
+            <div class="grid-footer">
+              <button id="devUnlockBtn" class="btn btn-primary" type="button">Entrar</button>
+            </div>
+            <p id="devModeStatus" class="result-meta">Bloqueado.</p>
+          </div>
+          <div id="devPanel" class="dev-panel" hidden>
+            <span class="dev-badge">Centro del dueno V2 activo</span>
+            <p class="result-meta">Centro privado del dueno con diagnostico, respaldos, control de resenas y acceso directo a los modulos clave. Esta protecciÃ¯Â¿Â½n sigue siendo local del navegador.</p>
+            <div id="ownerMetrics" class="owner-metrics"></div>
+            <div class="dev-grid">
+              <button id="devCopyDiagnosticsBtn" class="btn btn-secondary" type="button">Copiar diagnostico</button>
+              <button id="devCopyOwnerReportBtn" class="btn btn-secondary" type="button">Copiar reporte dueno</button>
+              <button id="devExportBackupBtn" class="btn btn-secondary" type="button">Exportar respaldo</button>
+              <button id="devExportReviewsBtn" class="btn btn-secondary" type="button">Exportar resenas</button>
+              <button id="devSendReviewsBtn" class="btn btn-secondary" type="button">Enviar resenas</button>
+              <button id="devClearReviewsBtn" class="btn btn-secondary" type="button">Borrar resenas</button>
+              <button id="devResetProgressBtn" class="btn btn-secondary" type="button">Reiniciar progreso</button>
+              <button id="devOpenSettingsBtn" class="btn btn-secondary" type="button">Abrir configuracion</button>
+              <button id="devOpenFeedbackBtn" class="btn btn-secondary" type="button">Abrir rese?as</button>
+              <button id="devLogoutBtn" class="btn btn-secondary" type="button">Cerrar modo dev</button>
+            </div>
+          </div>
+        </article>
+        <article class="custom-card">
+          <h3>Canal del dueno</h3>
+          <p class="result-meta">La direccion del dueno ya no se muestra en la interfaz. Cuando toque enviar resenas o reportes, DinoVerse prepara el mensaje internamente y abre el cliente de correo del dispositivo.</p>
+          <div class="custom-row">
+            <label for="ownerNoteInput">Nota privada del dueno</label>
+            <textarea id="ownerNoteInput" rows="4" placeholder="Ideas, pendientes y decisiones del proyecto..."></textarea>
+          </div>
+          <p id="ownerPrivateStatus" class="result-meta">Espacio privado local de este navegador.</p>
         </article>
       </div>
     </section>
@@ -5046,7 +6401,7 @@ body.view-lab {
     <section id="laboratorio" class="panel reveal">
       <div class="section-title">
         <p class="eyebrow">Laboratorio</p>
-        <h2>Explorador de especies</h2>
+        <h2>Laboratorio de descubrimiento V2</h2>
       </div>
       <div class="lab-grid">
         <article class="lab-card">
@@ -5063,7 +6418,7 @@ body.view-lab {
     <section id="comparador" class="panel reveal">
       <div class="section-title">
         <p class="eyebrow">Herramienta</p>
-        <h2>Comparador de dinosaurios</h2>
+        <h2>Comparador de dinosaurios V3</h2>
       </div>
       <div class="compare-controls">
         <select id="compareA"></select>
@@ -5071,11 +6426,12 @@ body.view-lab {
         <select id="compareC"></select>
       </div>
       <div id="compareResult" class="compare-result"></div>
+      <div id="compareInsights" class="map-summary"></div>
     </section>
 
     <section id="simulador" class="panel reveal">
       <div class="section-title">
-        <p class="eyebrow">Simulacion V6</p>
+        <p class="eyebrow">Simulacion V6.2</p>
         <h2>Simulador de ecosistemas</h2>
       </div>
       <div class="custom-grid">
@@ -5206,6 +6562,8 @@ body.view-lab {
       <div class="settings-tabs">
         <button class="metric-btn active" data-settings-view="personalizacion" type="button">Personalizar</button>
         <button class="metric-btn" data-settings-view="funciones" type="button">Funciones</button>
+        <button class="metric-btn" data-settings-view="feedback" type="button">Feedback</button>
+        <button class="metric-btn" data-settings-view="devmode" type="button">Dev</button>
         <button class="metric-btn" data-settings-view="estado" type="button">Estado</button>
         <button class="metric-btn" data-settings-view="version" type="button">Version</button>
       </div>
@@ -5221,7 +6579,7 @@ body.view-lab {
     <div class="season-grid">
       <article class="season-card">
         <h3>Version actual</h3>
-          <p id="appVersionLabel" class="fact">V6.0</p>
+          <p id="appVersionLabel" class="fact">V6.2</p>
         <p id="appVersionHint" class="result-meta">Se actualiza con cada release.</p>
       </article>
       <article class="season-card">
@@ -5385,7 +6743,12 @@ const dinosaurs = [
   { name: "Concavenator corcovatus", common: "Concavenator", period: "Cretacico", diet: "Carnivoro", size: "Mediano", continent: "Europa", length: 6, speed: 33, power: 67, habitat: "Llanuras costeras", fact: "Su lomo mostraba una joroba o elevacion muy distintiva." },
   { name: "Pachyrhinosaurus lakustai", common: "Pachyrhinosaurus", period: "Cretacico", diet: "Herbivoro", size: "Gigante", continent: "Norteamerica", length: 6.6, speed: 18, power: 69, habitat: "Llanuras frias", fact: "En lugar de grandes cuernos nasales tenia una gran masa osea sobre el hocico." },
   { name: "Rugops primus", common: "Rugops", period: "Cretacico", diet: "Carnivoro", size: "Mediano", continent: "Africa", length: 6, speed: 27, power: 61, habitat: "Planicies secas", fact: "Fue un abelisaurido ligero con craneo ornamentado." },
-  { name: "Leaellynasaura amicagraphica", common: "Leaellynasaura", period: "Cretacico", diet: "Herbivoro", size: "Pequenio", continent: "Australia", length: 2.4, speed: 21, power: 24, habitat: "Bosques polares", fact: "Vivio en latitudes muy altas con largos periodos de oscuridad." }
+  { name: "Leaellynasaura amicagraphica", common: "Leaellynasaura", period: "Cretacico", diet: "Herbivoro", size: "Pequenio", continent: "Australia", length: 2.4, speed: 21, power: 24, habitat: "Bosques polares", fact: "Vivio en latitudes muy altas con largos periodos de oscuridad." },
+  { name: "Mosasaurus hoffmannii", common: "Mosasaurus", period: "Cretacico", diet: "Carnivoro", size: "Gigante", continent: "Europa", length: 14, speed: 26, power: 89, habitat: "Mares costeros", fact: "No era un dinosaurio terrestre, pero ayuda a comprender los ecosistemas del Cretacico." },
+  { name: "Quetzalcoatlus northropi", common: "Quetzalcoatlus", period: "Cretacico", diet: "Carnivoro", size: "Gigante", continent: "Norteamerica", length: 10, speed: 34, power: 58, habitat: "Llanuras costeras", fact: "Uno de los mayores animales voladores conocidos del registro fosil." },
+  { name: "Aucasaurus garridoi", common: "Aucasaurus", period: "Cretacico", diet: "Carnivoro", size: "Mediano", continent: "Sudamerica", length: 5.8, speed: 31, power: 64, habitat: "Llanuras secas", fact: "Abelisaurido patagonico con brazos muy reducidos." },
+  { name: "Wuerhosaurus homheni", common: "Wuerhosaurus", period: "Cretacico", diet: "Herbivoro", size: "Mediano", continent: "Asia", length: 7, speed: 12, power: 55, habitat: "Llanuras semi aridas", fact: "Stegosaurio tardio que sobrevivio mas alla del auge de su grupo." },
+  { name: "Nigersaurus taqueti", common: "Nigersaurus", period: "Cretacico", diet: "Herbivoro", size: "Mediano", continent: "Africa", length: 9, speed: 15, power: 52, habitat: "Llanuras fluviales", fact: "Tenia una bateria dental especializada para pastar cerca del suelo." }
 ];
 
 const events = [
@@ -5463,6 +6826,8 @@ const lyonixMixCaption = $("lyonixMixCaption");
 const lyonixBackendBadge = $("lyonixBackendBadge");
 const smartbar = $("smartbar");
 const albumSearchInput = $("albumSearchInput");
+const albumContinentFilter = $("albumContinentFilter");
+const albumSummary = $("albumSummary");
 const albumPeriodFilter = $("albumPeriodFilter");
 const albumDietFilter = $("albumDietFilter");
 const dinoAlbumGrid = $("dinoAlbumGrid");
@@ -5521,6 +6886,8 @@ const fossilGallery = $("fossilGallery");
 const fossilDetail = $("fossilDetail");
 const fossilSearchInput = $("fossilSearchInput");
 const fossilEraFilter = $("fossilEraFilter");
+const fossilTypeFilter = $("fossilTypeFilter");
+const fossilSummary = $("fossilSummary");
 const memoryBoard = $("memoryBoard");
 const memoryStats = $("memoryStats");
 const resetMemoryBtn = $("resetMemoryBtn");
@@ -5563,6 +6930,38 @@ const settingsToggleBtn = $("settingsToggleBtn");
 const settingsDrawer = $("settingsDrawer");
 const closeSettingsBtn = $("closeSettingsBtn");
 const settingsContent = $("settingsContent");
+const ownerAccentPreset = $("ownerAccentPreset");
+const welcomeMessageInput = $("welcomeMessageInput");
+const applyOwnerStyleBtn = $("applyOwnerStyleBtn");
+const resetWelcomeBtn = $("resetWelcomeBtn");
+const reviewNameInput = $("reviewNameInput");
+const reviewTypeSelect = $("reviewTypeSelect");
+const reviewRatingSelect = $("reviewRatingSelect");
+const reviewMessageInput = $("reviewMessageInput");
+const reviewImproveInput = $("reviewImproveInput");
+const sendReviewBtn = $("sendReviewBtn");
+const saveReviewDraftBtn = $("saveReviewDraftBtn");
+const reviewStatus = $("reviewStatus");
+const reviewList = $("reviewList");
+const reviewSummary = $("reviewSummary");
+const devPasswordInput = $("devPasswordInput");
+const devUnlockBtn = $("devUnlockBtn");
+const devLogoutBtn = $("devLogoutBtn");
+const devModeStatus = $("devModeStatus");
+const devLockPanel = $("devLockPanel");
+const devPanel = $("devPanel");
+const devCopyDiagnosticsBtn = $("devCopyDiagnosticsBtn");
+const devExportReviewsBtn = $("devExportReviewsBtn");
+const devClearReviewsBtn = $("devClearReviewsBtn");
+const devResetProgressBtn = $("devResetProgressBtn");
+const devOpenFeedbackBtn = $("devOpenFeedbackBtn");
+const devCopyOwnerReportBtn = $("devCopyOwnerReportBtn");
+const devExportBackupBtn = $("devExportBackupBtn");
+const devSendReviewsBtn = $("devSendReviewsBtn");
+const devOpenSettingsBtn = $("devOpenSettingsBtn");
+const ownerMetrics = $("ownerMetrics");
+const ownerNoteInput = $("ownerNoteInput");
+const ownerPrivateStatus = $("ownerPrivateStatus");
 const seasonWindowText = $("seasonWindowText");
 const seasonRemainingText = $("seasonRemainingText");
 const dailyDinoName = $("dailyDinoName");
@@ -5627,6 +7026,7 @@ const ecosystemLiveGrid = $("ecosystemLiveGrid");
 const rankingScopeLocal = $("rankingScopeLocal");
 const rankingScopeWeekly = $("rankingScopeWeekly");
 const rankingStatus = $("rankingStatus");
+const missionSummary = $("missionSummary");
 const readingModeToggle = $("readingModeToggle");
 const readingModeStatus = $("readingModeStatus");
 const reduceEffectsToggle = $("reduceEffectsToggle");
@@ -5654,6 +7054,7 @@ const runSimulationBtn = $("runSimulationBtn");
 const simulationResult = $("simulationResult");
 const simulationRiskText = $("simulationRiskText");
 const simulationAdviceText = $("simulationAdviceText");
+const compareInsights = $("compareInsights");
 
 let qIndex = 0;
 let score = 0;
@@ -5857,17 +7258,17 @@ const weeklyChallenges = [
 ];
 
 const storyChapters = [
-  { title: "Capitulo 1 · Triasico inicial", text: "El museo abre con la aparicion de los primeros dinosaurios y la recuperacion de ecosistemas tras grandes extinciones.", target: "timeline" },
-  { title: "Capitulo 2 · Auge del Jurasico", text: "Gigantes herbivoros y depredadores dominan biomas humedos con nuevos nichos ecologicos.", target: "ecosistemas" },
-  { title: "Capitulo 3 · Expansion del Cretacico", text: "La diversidad explota: ceratopsidos, tiranosaurios y titanios ocupan regiones separadas por mares.", target: "mapa" },
-  { title: "Capitulo 4 · Ciencia y legado", text: "Fosiles, comparaciones y laboratorio muestran como reconstruimos el pasado con evidencia real.", target: "fosiles" }
+  { title: "Capitulo 1 - Triasico inicial", text: "El museo abre con la aparicion de los primeros dinosaurios y la recuperacion de ecosistemas tras grandes extinciones.", target: "timeline" },
+  { title: "Capitulo 2 - Auge del Jurasico", text: "Gigantes herbivoros y depredadores dominan biomas humedos con nuevos nichos ecologicos.", target: "ecosistemas" },
+  { title: "Capitulo 3 - Expansion del Cretacico", text: "La diversidad explota: ceratopsidos, tiranosaurios y titanios ocupan regiones separadas por mares.", target: "mapa" },
+  { title: "Capitulo 4 - Ciencia y legado", text: "Fosiles, comparaciones y laboratorio muestran como reconstruimos el pasado con evidencia real.", target: "fosiles" }
 ];
 
 const releaseRoadmap = [
-  { title: "Base del sistema", detail: "Version, paneles y estructura principal alineados para sostener la evolucion de DinoVerse 6.0.", state: "Activa" },
-  { title: "Portada y menu", detail: "Acceso principal más limpio, navegación más compacta y mejor lectura de la primera pantalla.", state: "En progreso" },
-  { title: "Responsive total", detail: "Pulido real para teléfono, tablet y laptop con mejor uso del espacio y controles más cómodos.", state: "Pendiente" },
-  { title: "Expansion V6", detail: "LYONIX, mapa, timeline, álbum, fósiles, rendimiento y pulido general de la experiencia.", state: "En preparacion" }
+  { title: "Base del sistema", detail: "Version, paneles y estructura principal alineados para sostener la evolucion de DinoVerse 6.2.", state: "Activa" },
+  { title: "Portada y menu", detail: "Acceso principal mas limpio, navegaciÃ¯Â¿Â½n mas compacta y mejor lectura de la primera pantalla.", state: "En progreso" },
+  { title: "Responsive total", detail: "Pulido real para telefono, tablet y laptop con mejor uso del espacio y controles mas cÃ¯Â¿Â½modos.", state: "Pendiente" },
+  { title: "Expansion 6.2", detail: "LYONIX, mapa, timeline, album, fosiles, rendimiento y pulido general de la experiencia.", state: "En preparacion" }
 ];
 
 const evolutionGroups = [
@@ -5907,9 +7308,9 @@ const lyonixKnowledge = {
     Cretacico: "El Cretacico fue una era de maxima diversidad. Aparecieron ceratopsidos, hadrosaurios y grandes tiranosauridos, junto con ecosistemas mas complejos y plantas con flor."
   },
   diets: {
-    Carnivoro: "Los carnivoros se especializaron en caza, carroñeo o emboscada. En DinoVerse se distinguen por velocidad, fuerza y adaptaciones craneales o de garras.",
+    Carnivoro: "Los carnivoros se especializaron en caza, carroÃ¯Â¿Â½eo o emboscada. En DinoVerse se distinguen por velocidad, fuerza y adaptaciones craneales o de garras.",
     Herbivoro: "Los herbivoros dominaron enormes porciones del registro fosil. Presentaban cuellos largos, picos, baterias dentales o armaduras para resistir a depredadores.",
-    Omnivoro: "Los omnivoros aprovecharon dietas mixtas, lo que les dio flexibilidad para cambiar entre vegetacion, pequenos animales, huevos o carroña."
+    Omnivoro: "Los omnivoros aprovecharon dietas mixtas, lo que les dio flexibilidad para cambiar entre vegetacion, pequenos animales, huevos o carrona."
   },
   continents: {
     Norteamerica: "Norteamerica concentro tiranosauridos, hadrosaurios y ceratopsidos famosos. Fue una region clave del Cretacico tardio.",
@@ -5946,10 +7347,17 @@ const lyonixKnowledge = {
 const SEASON_RELEASE_DATE = "2026-03-20";
 const SEASON_DURATION_DAYS = 60;
 const APP_MAJOR_VERSION = 6;
-const APP_MINOR_VERSION = 0;
+const APP_MINOR_VERSION = 2;
 const APP_CHANNEL = "";
 const DEFAULT_DINO_IMAGE = "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Tyrannosaurus_AMNH_5027.jpg/1280px-Tyrannosaurus_AMNH_5027.jpg";
 const DEFAULT_FOSSIL_IMAGE = createFossilImage("Archivo fosil", "#ba7d38");
+const OWNER_MODE_KEY = "dinoOwnerMode";
+const OWNER_REVIEWS_KEY = "dinoOwnerReviews";
+const OWNER_REVIEW_DRAFT_KEY = "dinoOwnerReviewDraft";
+const OWNER_WELCOME_KEY = "dinoOwnerWelcome";
+const OWNER_NOTE_KEY = "dinoOwnerNote";
+const OWNER_PASSWORD = ["d", "123", "g"].join("");
+const OWNER_EMAIL = ["dioslitgomezramirez", "@", "gmail", ".", "com"].join("");
 
 function getSemanticVersion() {
   return APP_CHANNEL
@@ -6189,6 +7597,20 @@ const fossilArtifacts = [
     text: "Armadura dorsal y caudal adaptada a defensa pesada.",
     image: "https://commons.wikimedia.org/wiki/Special:FilePath/WDC_-_Ankylosaurus_tail_club.jpg",
     fallback: createFossilImage("Placa caudal de Ankylosaurus", "#aa7a41")
+  },
+  {
+    name: "Garra de Therizinosaurus",
+    era: "Cretacico",
+    text: "Una de las garras mas largas y extra?as entre los teropodos.",
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/Therizinosaurus_claws.jpg",
+    fallback: createFossilImage("Garra de Therizinosaurus", "#7bb08b")
+  },
+  {
+    name: "Diente de Mosasaurus",
+    era: "Cretacico",
+    text: "Pieza marina asociada a grandes depredadores del final del Cretacico.",
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/Mosasaur_tooth.jpg",
+    fallback: createFossilImage("Diente de Mosasaurus", "#53aab0")
   }
 ];
 
@@ -6514,7 +7936,7 @@ async function fetchLyonixGemini(query) {
     ? "comparador"
     : /(explica|ensen|profesor)/.test(q)
       ? "profesor"
-      : /(facil|simple|nino|niño)/.test(q)
+      : /(facil|simple|nino|nino)/.test(q)
         ? "simple"
         : "experto";
   const mode = selectedMode === "auto" ? autoMode : selectedMode;
@@ -6639,7 +8061,7 @@ function buildLyonixLocalReply(query, local, external) {
 async function updateLyonixBackendStatus() {
   if (!lyonixBackendBadge) return;
   lyonixBackendState = { ok: false, geminiReady: false, provider: "lyonix-native", model: "" };
-  lyonixBackendBadge.textContent = "LYONIX web: activo";
+  lyonixBackendBadge.textContent = "LYONIX 3.1 web: activo";
   lyonixBackendBadge.classList.add("is-online");
 }
 
@@ -6808,7 +8230,7 @@ function buildComparisonReply(a, b) {
     `Mas grande: ${larger}`,
     `Mas rapido: ${faster}`,
     `Mas fuerte: ${stronger}`,
-    `Sugerencia: revisa el comparador visual para ver barras y añade una tercera especie como referencia.`
+    `Sugerencia: revisa el comparador visual para ver barras y anade una tercera especie como referencia.`
   ].join("\n");
 }
 
@@ -6839,7 +8261,7 @@ function buildTopReply(metric, label, filterFn = null) {
   if (!items.length) return `No encontre resultados para el top de ${label}.`;
   return [
     `Resumen: top ${label}.`,
-    ...items.map((d, index) => `${index + 1}. ${d.common} · ${metric === "length" ? `${d.length} m` : metric === "speed" ? `${d.speed} km/h` : `${d.power}/100`}`),
+    ...items.map((d, index) => `${index + 1}. ${d.common} Ã‚Â· ${metric === "length" ? `${d.length} m` : metric === "speed" ? `${d.speed} km/h` : `${d.power}/100`}`),
     "Sugerencia: abre Ranking para ver el panel visual completo."
   ].join("\n");
 }
@@ -7030,7 +8452,7 @@ function runLyonixNative(query, selectedMode = "nativo") {
       return {
         text: [
           "Lista filtrada por LYONIX:",
-          ...items.map((d, index) => `${index + 1}. ${d.common} · ${d.period} · ${d.diet} · ${d.continent}`)
+          ...items.map((d, index) => `${index + 1}. ${d.common} Ã‚Â· ${d.period} Ã‚Â· ${d.diet} Ã‚Â· ${d.continent}`)
         ].join("\n"),
         local: items.length ? { dino: items[0] } : null,
         meta: { provider: "lyonix-native", mode }
@@ -7064,7 +8486,7 @@ function getLyonixLoaderMarkup(query) {
       <p class="lyonix-loader-text">LYONIX intelligence analizando "${query}"...</p>
       <div class="lyonix-loader-bar"></div>
       <div class="lyonix-loader-dots"><span></span><span></span><span></span></div>
-      <p class="result-meta">Procesando contexto local, memoria y base del museo.</p>
+      <p class="result-meta">Procesando contexto local, memoria, base del museo y coincidencias web confiables.</p>
     </div>
   `;
 }
@@ -7090,7 +8512,9 @@ function getLyonixPromptSuggestions(query = "", local = null) {
     "Que comia el T. rex?",
     "Explica el Triceratops",
     "Que fosiles de Spinosaurus hay?",
-    "Cual fue el dinosaurio mas rapido?"
+    "Cual fue el dinosaurio mas rapido?",
+    "Que especies vivieron en Asia?",
+    "Compara Ankylosaurus vs Triceratops"
   ];
 }
 
@@ -7106,14 +8530,14 @@ function saveLyonixHistoryItem(query) {
   if (!query) return;
   const current = getLyonixHistoryItems().filter((item) => normalizeText(item) !== normalizeText(query));
   current.unshift(query);
-  safeSetStorage(LYONIX_HISTORY_KEY, JSON.stringify(current.slice(0, 6)));
+  safeSetStorage(LYONIX_HISTORY_KEY, JSON.stringify(current.slice(0, 10)));
 }
 
 function renderLyonixHistory() {
   if (!lyonixHistory) return;
   const history = getLyonixHistoryItems();
   if (!history.length) {
-    lyonixHistory.innerHTML = '<span class="result-meta">Historial de preguntas: vacio</span>';
+    lyonixHistory.innerHTML = '<span class="result-meta">Historial reciente: vacio</span>';
     return;
   }
   lyonixHistory.innerHTML = history
@@ -7213,14 +8637,14 @@ function initLyonixStudio() {
 function renderLyonixCard(targetEl, local, external, query, aiText = null, aiMeta = null) {
   if (!targetEl) return;
   if (!local && !aiText) {
-    targetEl.innerHTML = `<p class="result-meta">LYONIX intelligence no encontro resultados para <strong>${escapeHtml(query)}</strong>.</p>`;
+    targetEl.innerHTML = `<p class="result-meta">LYONIX 3.1 no encontro resultados para <strong>${escapeHtml(query)}</strong>.</p>`;
     return;
   }
   const provider = String(aiMeta?.provider || "lyonix-native");
   const providerTitle = provider === "external-web" ? "Fuente externa de dinosaurios" : "Motor lyonix-local";
   const providerFooter = provider === "external-web"
-    ? `Respuesta ampliada con una fuente externa${aiMeta?.mode ? ` · modo ${escapeHtml(aiMeta.mode)}` : ""}.`
-    : `Respuesta generada con la base local de DinoVerse${aiMeta?.mode ? ` · modo ${escapeHtml(aiMeta.mode)}` : ""}.`;
+    ? `Respuesta ampliada con una fuente externa${aiMeta?.mode ? ` Ã‚Â· modo ${escapeHtml(aiMeta.mode)}` : ""}.`
+    : `Respuesta generada con la base local de DinoVerse${aiMeta?.mode ? ` Ã‚Â· modo ${escapeHtml(aiMeta.mode)}` : ""}.`;
 
   const localHtml = local ? `
     <article class="lyonix-block">
@@ -7258,7 +8682,7 @@ function renderLyonixCard(targetEl, local, external, query, aiText = null, aiMet
   ` : "";
 
   targetEl.innerHTML = `
-    <p class="result-meta">Resultado LYONIX para: <strong>${escapeHtml(query)}</strong></p>
+    <p class="result-meta">Resultado LYONIX 3.1 para: <strong>${escapeHtml(query)}</strong></p>
     <div class="lyonix-grid">${localHtml}${aiHtml}${externalHtml}</div>
   `;
 }
@@ -7301,7 +8725,7 @@ async function runLyonixSearch(target = "panel") {
   renderLyonixPrompts(isGlobal ? lyonixGlobalPromptRow : lyonixPromptRow, query, local);
   renderLyonixNativeShell(query, parsed);
   if (lyonixBackendBadge) {
-    lyonixBackendBadge.textContent = external?.extract ? "LYONIX web: fuente externa activa" : "LYONIX web: activo";
+    lyonixBackendBadge.textContent = external?.extract ? "LYONIX 3.1 web: fuente externa activa" : "LYONIX 3.1 web: activo";
     lyonixBackendBadge.classList.add("is-online");
   }
   panelEl?.classList.remove("is-analyzing");
@@ -7812,8 +9236,9 @@ function buildToolsActions() {
     { label: "32 Cambiar a tema Fosil", run: () => applyPreset("fosil") },
     { label: "33 Cambiar a tema Oceano", run: () => applyPreset("oceano") },
     { label: "34 Resetear tema", run: () => { localStorage.removeItem(CUSTOM_THEME_KEY); applyCustomization(defaultCustomization); setToolStatus("Tema restablecido."); } },
-    { label: "35 Ir a Novedades V6.0", run: () => scrollToSection("novedades") },
-    { label: "36 Pantalla aleatoria", run: () => {
+    { label: "35 Ir a Novedades V6.2", run: () => scrollToSection("novedades") },
+    { label: "36 Buscar Spinosaurus", run: () => { if (universalSearchInput) universalSearchInput.value = "Spinosaurus"; renderUniversalSearchResults(); setToolStatus("Busqueda universal preparada."); } },
+    { label: "37 Pantalla aleatoria", run: () => {
       if (!screenSections.length) return;
       const next = Math.floor(Math.random() * screenSections.length);
       setActiveScreen(next);
@@ -7821,17 +9246,17 @@ function buildToolsActions() {
       if (id) history.replaceState(null, "", `#${id}`);
       setToolStatus("Pantalla aleatoria activada.");
     } },
-    { label: "37 Copiar resumen de sesion", run: () => {
+    { label: "38 Copiar resumen de sesion", run: () => {
       const text = `DinoVerse ${getSemanticVersion()} | XP:${explorerXP} | Misiones:${completedMissions} | Favoritos:${favorites.length} | Quiz:${score}/${quizData.length}`;
       safeCopy(text);
       setToolStatus("Resumen copiado.");
     } },
-    { label: "38 Exportar favoritos", run: () => {
+    { label: "39 Exportar favoritos", run: () => {
       const data = favorites.length ? favorites.join(", ") : "Sin favoritos";
       safeCopy(data);
       setToolStatus("Favoritos copiados.");
     } },
-    { label: "39 Importar favoritos", run: () => {
+    { label: "40 Importar favoritos", run: () => {
       const raw = prompt("Pega favoritos separados por coma:");
       if (!raw) return;
       const imported = raw.split(",").map((n) => n.trim()).filter(Boolean);
@@ -7843,19 +9268,19 @@ function buildToolsActions() {
       renderDinos();
       setToolStatus("Favoritos importados.");
     } },
-    { label: "40 Abrir Configuracion", run: () => settingsToggleBtn?.click() },
-    { label: "41 Ir a Expediciones", run: () => scrollToSection("expediciones") },
-    { label: "42 Activar ambiente", run: () => applyAmbientMode(true) },
-    { label: "43 Desactivar ambiente", run: () => applyAmbientMode(false) },
-    { label: "44 Contraste alto", run: () => applyContrastMode(true) },
-    { label: "45 Contraste normal", run: () => applyContrastMode(false) },
-    { label: "46 Iniciar Modo Historia", run: () => storyStartBtn?.click() },
-    { label: "47 Vista Museo", run: () => applyViewMode("museo") },
-    { label: "48 Vista Laboratorio", run: () => applyViewMode("lab") },
-    { label: "49 Guardar tema 6.0", run: saveThemeSnapshot },
-    { label: "50 Aplicar tema guardado", run: applySavedThemeSnapshot },
-    { label: "51 Restaurar punto exacto", run: restoreExactPoint },
-    { label: "52 Auto-optimizacion", run: autoOptimizeExperience }
+    { label: "41 Abrir Configuracion", run: () => settingsToggleBtn?.click() },
+    { label: "42 Ir a Expediciones", run: () => scrollToSection("expediciones") },
+    { label: "43 Activar ambiente", run: () => applyAmbientMode(true) },
+    { label: "44 Desactivar ambiente", run: () => applyAmbientMode(false) },
+    { label: "45 Contraste alto", run: () => applyContrastMode(true) },
+    { label: "46 Contraste normal", run: () => applyContrastMode(false) },
+    { label: "47 Iniciar Modo Historia", run: () => storyStartBtn?.click() },
+    { label: "48 Vista Museo", run: () => applyViewMode("museo") },
+    { label: "49 Vista Laboratorio", run: () => applyViewMode("lab") },
+    { label: "50 Guardar tema 6.2", run: saveThemeSnapshot },
+    { label: "51 Aplicar tema guardado", run: applySavedThemeSnapshot },
+    { label: "52 Restaurar punto exacto", run: restoreExactPoint },
+    { label: "53 Auto-optimizacion", run: autoOptimizeExperience }
   ];
 }
 
@@ -7977,6 +9402,13 @@ function renderDailyMission() {
   dailyMissionText.textContent = missionDoneToday ? `Mision completada hoy: ${mission}` : mission;
   completeMissionBtn.disabled = missionDoneToday;
   completeMissionBtn.textContent = missionDoneToday ? "Ya completada" : "Completar mision";
+  if (missionSummary) {
+    missionSummary.innerHTML = `
+      <article class="lyonix-shell-stat"><strong>${completedMissions}</strong><span>Misiones hechas</span></article>
+      <article class="lyonix-shell-stat"><strong>${unlockedAchievements.length}</strong><span>Logros</span></article>
+      <article class="lyonix-shell-stat"><strong>${Math.floor(explorerXP / 100) + 1}</strong><span>Nivel actual</span></article>
+    `;
+  }
 }
 
 function completeDailyMission() {
@@ -8038,23 +9470,67 @@ async function initVersionPanel() {
   if (appVersionHint) appVersionHint.textContent = "No se pudo leer sw.js en este momento.";
 }
 
+
+function getFossilCategory(fossil) {
+  const source = normalizeText(fossil?.name || "");
+  if (source.includes("craneo")) return "craneo";
+  if (source.includes("garra")) return "garra";
+  if (source.includes("vertebra")) return "vertebra";
+  if (source.includes("huevo") || source.includes("nido")) return "huevo";
+  if (source.includes("placa") || source.includes("armadura")) return "placa";
+  if (source.includes("diente")) return "diente";
+  return "otros";
+}
+
+function getAlbumContinentSummary(items) {
+  const counts = items.reduce((acc, item) => {
+    acc[item.continent] = (acc[item.continent] || 0) + 1;
+    return acc;
+  }, {});
+  return Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 3);
+}
+
+function getReviewTypeSummary(items) {
+  const counts = items.reduce((acc, item) => {
+    const key = item.type || "opinion";
+    acc[key] = (acc[key] || 0) + 1;
+    return acc;
+  }, {});
+  return Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 3);
+}
+
 function renderFossils() {
   if (!fossilGallery || !fossilDetail) return;
   const query = normalizeText(fossilSearchInput?.value || "");
   const era = fossilEraFilter?.value || "all";
+  const type = fossilTypeFilter?.value || "all";
   const filteredFossils = fossilArtifacts
-    .map((f, idx) => ({ ...f, originalIndex: idx }))
+    .map((f, idx) => ({ ...f, originalIndex: idx, category: getFossilCategory(f) }))
     .filter((f) => {
       const matchQuery = !query || normalizeText(`${f.name} ${f.text}`).includes(query);
       const matchEra = era === "all" || f.era === era;
-      return matchQuery && matchEra;
+      const matchType = type === "all" || f.category === type;
+      return matchQuery && matchEra && matchType;
     });
+  if (fossilSummary) {
+    const topTypes = filteredFossils.reduce((acc, item) => {
+      acc[item.category] = (acc[item.category] || 0) + 1;
+      return acc;
+    }, {});
+    const leadType = Object.entries(topTypes).sort((a, b) => b[1] - a[1])[0]?.[0] || "mixto";
+    fossilSummary.innerHTML = `
+      <article class="lyonix-shell-stat"><strong>${filteredFossils.length}</strong><span>Piezas visibles</span></article>
+      <article class="lyonix-shell-stat"><strong>${era === "all" ? "Todas" : era}</strong><span>Era activa</span></article>
+      <article class="lyonix-shell-stat"><strong>${leadType}</strong><span>Tipo dominante</span></article>
+    `;
+  }
   fossilGallery.innerHTML = filteredFossils.map((f) => `
     <article class="fossil-card" data-fossil-index="${f.originalIndex}">
       <img class="fossil-image" src="${normalizeImageUrl(f.image, 1100) || f.fallback}" data-fallback="${f.fallback}" alt="${f.name}" loading="lazy" referrerpolicy="no-referrer">
       <div class="fossil-meta">
         <h3>${f.name}</h3>
-        <p class="result-meta">${f.era}</p>
+        <div class="lyonix-chip-row"><span class="lyonix-chip">${f.era}</span><span class="lyonix-chip">${f.category}</span></div>
+        <p class="result-meta">${f.text}</p>
       </div>
     </article>
   `).join("");
@@ -8133,11 +9609,13 @@ function getAlbumFilteredDinos() {
   const q = (albumSearchInput?.value || "").toLowerCase().trim();
   const period = albumPeriodFilter?.value || "all";
   const diet = albumDietFilter?.value || "all";
+  const continent = albumContinentFilter?.value || "all";
   return dinosaurs.filter((d) => {
     const matchQuery = !q || d.common.toLowerCase().includes(q) || d.name.toLowerCase().includes(q);
     const matchPeriod = period === "all" || d.period === period;
     const matchDiet = diet === "all" || d.diet === diet;
-    return matchQuery && matchPeriod && matchDiet;
+    const matchContinent = continent === "all" || d.continent === continent;
+    return matchQuery && matchPeriod && matchDiet && matchContinent;
   });
 }
 
@@ -8145,6 +9623,14 @@ function renderAlbum() {
   if (!dinoAlbumGrid) return;
   const list = getAlbumFilteredDinos();
   albumRenderToken += 1;
+  if (albumSummary) {
+    const topRegions = getAlbumContinentSummary(list);
+    albumSummary.innerHTML = `
+      <article class="lyonix-shell-stat"><strong>${list.length}</strong><span>Especies visibles</span></article>
+      <article class="lyonix-shell-stat"><strong>${[...new Set(list.map((item) => item.period))].length}</strong><span>Periodos activos</span></article>
+      <article class="lyonix-shell-stat"><strong>${topRegions[0]?.[0] || "Mixto"}</strong><span>Region dominante</span></article>
+    `;
+  }
 
   if (!list.length) {
     dinoAlbumGrid.innerHTML = '<p class="empty">No hay especies para ese filtro.</p>';
@@ -8317,11 +9803,16 @@ function renderDinos() {
         <h3>${d.common}</h3>
       </div>
       <p class="latin">${d.name}</p>
-      <p><strong>Dieta:</strong> ${d.diet}</p>
-      <p><strong>Tamano:</strong> ${d.size} (${d.length} m)</p>
-      <p><strong>Velocidad:</strong> ${d.speed} km/h</p>
-      <p><strong>Fuerza:</strong> ${d.power}/100</p>
-      <p><strong>Region:</strong> ${d.continent}</p>
+      <div class="lyonix-chip-row">
+        <span class="lyonix-chip">${d.diet}</span>
+        <span class="lyonix-chip">${d.size}</span>
+        <span class="lyonix-chip">${d.continent}</span>
+      </div>
+      <div class="result-stat-grid">
+        <div class="result-stat"><span>Longitud</span><strong>${d.length} m</strong></div>
+        <div class="result-stat"><span>Velocidad</span><strong>${d.speed} km/h</strong></div>
+        <div class="result-stat"><span>Fuerza</span><strong>${d.power}/100</strong></div>
+      </div>
       <p><strong>Habitat:</strong> ${d.habitat}</p>
       <p class="fact">${d.fact}</p>
       <div class="grid-footer">
@@ -8331,7 +9822,7 @@ function renderDinos() {
     </article>
   `).join("");
 
-  if (resultMeta) resultMeta.textContent = `Mostrando ${visible.length} de ${sorted.length} especies`;
+  if (resultMeta) resultMeta.textContent = `Mostrando ${visible.length} de ${sorted.length} especies ? filtros activos listos.`;
   if (loadMoreBtn) loadMoreBtn.style.display = visible.length < sorted.length ? "inline-block" : "none";
 }
 
@@ -8351,16 +9842,18 @@ function renderTimeline() {
       <p class="time-age">${e.age}</p>
       <h3>${e.title}</h3>
       <p>${e.detail}</p>
+      <div class="lyonix-chip-row"><span class="lyonix-chip">${activePeriod === "eventos" ? "Global" : activePeriod}</span><span class="lyonix-chip">${e.age.includes("Ma") ? "Microevento" : "Evento clave"}</span></div>
       <small>${e.age.includes("Ma") ? "Microevento geologico" : "Evento clave"}</small>
     </article>
   `).join("");
+  if (timelineZoomLabel) timelineZoomLabel.textContent = `Zoom ${Math.round((Number(document.documentElement.style.getPropertyValue("--timeline-zoom") || 1) || 1) * 100)}% ? ${filtered.length} eventos visibles`;
 }
 
 function renderExpeditions() {
   if (!expeditionGrid) return;
   expeditionGrid.innerHTML = expeditions.map((exp) => `
     <article class="expedition-card">
-      <span class="expedition-tag">${exp.period} · ${exp.region}</span>
+      <span class="expedition-tag">${exp.period} Ã‚Â· ${exp.region}</span>
       <h3>${exp.title}</h3>
       <p class="expedition-meta">${exp.biome}. ${exp.focus}</p>
       <div class="expedition-stats">
@@ -8428,7 +9921,7 @@ function renderEcosystems() {
   ecosystemLiveGrid.innerHTML = ecosystemProfiles.map((item) => `
     <article class="ecosystem-card">
       <h3>${item.name}</h3>
-      <p class="result-meta">${item.fauna}</p>
+      <p class="result-meta">${item.fauna}</p><div class="lyonix-chip-row"><span class="lyonix-chip">Bioma activo</span><span class="lyonix-chip">${item.climate}% clima</span></div>
       <div class="ecosystem-bar">
         <span><strong>Clima</strong><strong>${item.climate}%</strong></span>
         <div class="ecosystem-bar-track"><div class="ecosystem-bar-fill" style="width:${item.climate}%"></div></div>
@@ -8456,11 +9949,11 @@ function renderReleaseCenter() {
     `).join("");
   }
   if (releaseCountdownText) {
-    releaseCountdownText.textContent = "Version 6.0 en evolucion activa con mejoras visuales, organizacion mas clara y una experiencia mas estable.";
+    releaseCountdownText.textContent = "Version 6.2 activa con mejoras visuales, navegacion mas clara, mejor organizacion y una experiencia mas refinada en todos los dispositivos.";
   }
   if (releaseBuildChip) releaseBuildChip.textContent = `Build ${getSemanticVersion()}`;
-  if (releaseQualityChip) releaseQualityChip.textContent = "Calidad: estable";
-  if (releaseSprintText) releaseSprintText.textContent = "Foco V6.0: mejorar navegación, responsive, búsqueda y organización visual sin romper la base actual.";
+  if (releaseQualityChip) releaseQualityChip.textContent = "Calidad: premium estable";
+  if (releaseSprintText) releaseSprintText.textContent = "Foco V6.2: mejorar navegaciÃ¯Â¿Â½n, responsive, busqueda y organizacion visual sin romper la base actual.";
 }
 
 function renderEvolutionTree() {
@@ -8537,19 +10030,19 @@ function applyReduceEffects(enabled, { persist = true } = {}) {
 function saveThemeSnapshot() {
   const cfg = getCustomizationFromInputs();
   safeSetStorage(SAVED_THEME_SLOT_KEY, JSON.stringify(cfg));
-  showToast("Tema V4 guardado.");
+  showToast("Tema V6.2 guardado.");
 }
 
 function applySavedThemeSnapshot() {
   const raw = safeGetStorage(SAVED_THEME_SLOT_KEY);
   if (!raw) {
-    showToast("No hay un tema V4 guardado.");
+    showToast("No hay un tema V6.2 guardado.");
     return;
   }
   try {
     const cfg = JSON.parse(raw);
     applyCustomization({ ...defaultCustomization, ...cfg });
-    showToast("Tema V4 restaurado.");
+    showToast("Tema V6.2 restaurado.");
   } catch (_err) {
     showToast("No se pudo restaurar el tema guardado.");
   }
@@ -8568,8 +10061,13 @@ function renderFossilHunterRound() {
 
 function initFpsMonitor() {
   if (!fpsText) return;
+  if (window.matchMedia("(max-width: 640px)").matches) {
+    fpsText.textContent = "Modo movil optimizado";
+    return;
+  }
   const samples = [];
   let previous = performance.now();
+  let frames = 0;
   const tick = (now) => {
     const delta = now - previous;
     previous = now;
@@ -8579,7 +10077,8 @@ function initFpsMonitor() {
       const avg = samples.reduce((sum, value) => sum + value, 0) / samples.length;
       fpsText.textContent = `${Math.round(avg)} FPS aprox.`;
     }
-    requestAnimationFrame(tick);
+    frames += 1;
+    if (frames < 180) requestAnimationFrame(tick);
   };
   requestAnimationFrame(tick);
 }
@@ -8587,7 +10086,8 @@ function initFpsMonitor() {
 function autoOptimizeExperience() {
   const hasLowMemory = typeof navigator.deviceMemory === "number" && navigator.deviceMemory <= 4;
   const hasLowCores = typeof navigator.hardwareConcurrency === "number" && navigator.hardwareConcurrency <= 4;
-  const shouldOptimize = hasLowMemory || hasLowCores;
+  const compactDevice = window.matchMedia("(max-width: 768px)").matches;
+  const shouldOptimize = hasLowMemory || hasLowCores || compactDevice;
   applyPerformanceMode(shouldOptimize);
   applyLowBlurMode(shouldOptimize);
   if (shouldOptimize) applyReduceEffects(true);
@@ -8723,6 +10223,10 @@ function renderComparison() {
   const dB = dinosaurs.find((d) => d.name === compareB.value);
   if (!dA || !dB) return;
   const dC = compareC ? dinosaurs.find((d) => d.name === compareC.value) : null;
+  const compared = [dA, dB, dC].filter(Boolean);
+  const longest = compared.reduce((best, current) => current.length > best.length ? current : best, compared[0]);
+  const fastest = compared.reduce((best, current) => current.speed > best.speed ? current : best, compared[0]);
+  const strongest = compared.reduce((best, current) => current.power > best.power ? current : best, compared[0]);
   compareResult.innerHTML = `
     <h3>${dC ? `${dA.common} vs ${dB.common} vs ${dC.common}` : `${dA.common} vs ${dB.common}`}</h3>
     ${metricBar("Longitud (m)", dA.length, dB.length, 35)}
@@ -8741,6 +10245,14 @@ function renderComparison() {
       </article>
     ` : ""}
   `;
+  if (compareInsights) {
+    compareInsights.innerHTML = `
+      <div class="map-stat"><strong>${longest.common}</strong><span>Mayor longitud</span></div>
+      <div class="map-stat"><strong>${fastest.common}</strong><span>Mas velocidad</span></div>
+      <div class="map-stat"><strong>${strongest.common}</strong><span>Mayor fuerza</span></div>
+      <div class="map-stat"><strong>${compared.length}</strong><span>Especies analizadas</span></div>
+    `;
+  }
 }
 
 function buildUniversalSearchIndex() {
@@ -8803,11 +10315,13 @@ function renderUniversalSearchResults() {
   const raw = universalSearchInput?.value?.trim() || "";
   const q = normalizeText(raw);
   if (!q) {
-    universalSearchResults.innerHTML = '<p class="result-meta">Prueba: T. rex, Fosiles, Cretacico, Asia o Timeline.</p>';
+    universalSearchResults.innerHTML = '<p class="result-meta">Prueba: T. rex, Spinosaurus, Fosiles, Cretacico, Asia, Timeline o Mapa.</p>';
     return;
   }
   const results = buildUniversalSearchIndex()
-    .filter((item) => normalizeText(`${item.label} ${item.subtitle || ""} ${item.kind}`).includes(q))
+    .map((item) => ({ ...item, score: normalizeText(item.label).startsWith(q) ? 100 : normalizeText(`${item.label} ${item.subtitle || ""} ${item.kind}`).includes(q) ? 60 : 0 }))
+    .filter((item) => item.score > 0)
+    .sort((a, b) => b.score - a.score || a.label.localeCompare(b.label))
     .slice(0, 8);
   if (!results.length) {
     universalSearchResults.innerHTML = '<p class="result-meta">Sin resultados para esa busqueda.</p>';
@@ -8816,7 +10330,7 @@ function renderUniversalSearchResults() {
   universalSearchResults.innerHTML = results.map((item, index) => `
     <button class="universal-search-item" data-universal-index="${index}" type="button">
       <strong>${item.label}</strong>
-      <small>${item.kind}${item.subtitle ? ` · ${item.subtitle}` : ""}</small>
+      <small>${item.kind}${item.subtitle ? ` Ã‚Â· ${item.subtitle}` : ""}</small>
     </button>
   `).join("");
   universalSearchResults.querySelectorAll("[data-universal-index]").forEach((btn, index) => {
@@ -8849,7 +10363,8 @@ function initSmartbar() {
     explorar: ["inicio", "enciclopedia", "album"],
     estudiar: ["timeline", "mapa", "fosiles"],
     descubrir: ["historia", "arbol", "simulador"],
-    jugar: ["comparador", "juego", "misiones"]
+    jugar: ["comparador", "juego", "misiones"],
+    sistema: ["release-center", "personalizacion", "devmode"]
   };
   smartbar.querySelectorAll("[data-smart-group]").forEach((button) => {
     button.addEventListener("click", () => {
@@ -8863,14 +10378,14 @@ function initSmartbar() {
 }
 
 function initAlbumControls() {
-  [albumSearchInput, albumPeriodFilter, albumDietFilter].filter(Boolean).forEach((el) => {
+  [albumSearchInput, albumPeriodFilter, albumDietFilter, albumContinentFilter].filter(Boolean).forEach((el) => {
     el.addEventListener("input", renderAlbum);
     el.addEventListener("change", renderAlbum);
   });
 }
 
 function initFossilControls() {
-  [fossilSearchInput, fossilEraFilter].filter(Boolean).forEach((el) => {
+  [fossilSearchInput, fossilEraFilter, fossilTypeFilter].filter(Boolean).forEach((el) => {
     el.addEventListener("input", renderFossils);
     el.addEventListener("change", renderFossils);
   });
@@ -8991,6 +10506,7 @@ function renderRegion(region) {
       <article class="lyonix-shell-stat"><strong>${list.length}</strong><span>Especies visibles</span></article>
       <article class="lyonix-shell-stat"><strong>${carnivores}/${herbivores}</strong><span>Carnivoros / Herbivoros</span></article>
       <article class="lyonix-shell-stat"><strong>${dominantPeriod?.period || "Mixto"}</strong><span>Periodo dominante</span></article>
+      <article class="lyonix-shell-stat"><strong>${Object.values(layers).filter(Boolean).length}</strong><span>Capas activas</span></article>
     `;
   }
   renderMapPins(region);
@@ -9014,7 +10530,7 @@ function renderMapPins(activeRegion) {
       <div class="map-pin" style="left:${point.x}%; top:${point.y}%;">
         <div class="map-pin-dot ${isActive ? "active" : ""}"></div>
         ${isActive ? `<div class="map-pin-ring"></div>` : ""}
-        <div class="map-pin-label">${name} · ${total}</div>
+        <div class="map-pin-label">${name} Ã‚Â· ${total}</div>
       </div>
     `;
   }).join("");
@@ -9106,10 +10622,10 @@ function renderRandomDino() {
   randomDinoCard.innerHTML = `
     <h3>${d.common}</h3>
     <p class="latin">${d.name}</p>
-    <p><strong>Periodo:</strong> ${d.period}</p>
-    <p><strong>Dieta:</strong> ${d.diet}</p>
+    <div class="lyonix-chip-row"><span class="lyonix-chip">${d.period}</span><span class="lyonix-chip">${d.diet}</span><span class="lyonix-chip">${d.continent}</span></div>
     <p><strong>Tamano:</strong> ${d.length} m</p>
     <p><strong>Velocidad:</strong> ${d.speed} km/h</p>
+    <p><strong>Habitat:</strong> ${d.habitat}</p>
     <p>${d.fact}</p>
     <button class="btn-mini" data-roar="${d.common}" type="button">Escuchar rugido</button>
     <button class="btn-mini" data-fav="${d.common}" type="button">${isFavorite(d.common) ? "Quitar favorito" : "Agregar favorito"}</button>
@@ -9497,7 +11013,9 @@ function applyPreset(name) {
     desierto: { accent: "#e7a85b", forest: "#8c5b2d", bg0: "#22160d", ink: "#f7e7d0", fontScale: 1, radius: 18, glass: 1.05, designMode: "solid", layoutMode: "compact" },
     volcanico: { accent: "#ff7b42", forest: "#842b1f", bg0: "#170d0d", ink: "#ffe5d7", fontScale: 1.02, radius: 22, glass: 1.12, designMode: "cinematic", layoutMode: "compact" },
     glaciar: { accent: "#9de8ff", forest: "#5b8ea3", bg0: "#0b1720", ink: "#eefcff", fontScale: 1.01, radius: 20, glass: 1.32, designMode: "glass", layoutMode: "airy" },
-    "selva-neon": { accent: "#5cff9a", forest: "#108a63", bg0: "#061712", ink: "#e9fff1", fontScale: 1, radius: 24, glass: 1.26, designMode: "glass", layoutMode: "balanced" }
+    "selva-neon": { accent: "#5cff9a", forest: "#108a63", bg0: "#061712", ink: "#e9fff1", fontScale: 1, radius: 24, glass: 1.26, designMode: "glass", layoutMode: "balanced" },
+    obsidiana: { accent: "#d9b06a", forest: "#3c7f7f", bg0: "#0c1016", ink: "#eef4ff", fontScale: 1.01, radius: 24, glass: 1.12, designMode: "solid", layoutMode: "compact" },
+    "aurora-premium": { accent: "#ffc98a", forest: "#5af0d5", bg0: "#081522", ink: "#f7fbff", fontScale: 1.03, radius: 26, glass: 1.34, designMode: "glass", layoutMode: "airy" }
   };
   if (!presets[name]) return;
   applyCustomization(presets[name]);
@@ -9680,6 +11198,7 @@ async function initUltraPerformancePanel() {
   applyHighRefreshMode(localStorage.getItem(HIGH_REFRESH_KEY) === "1", { persist: false });
   applyCompactUI(localStorage.getItem(COMPACT_UI_KEY) === "1", { persist: false });
   applyLowBlurMode(localStorage.getItem(LOW_BLUR_KEY) === "1", { persist: false });
+  autoOptimizeExperience();
 
   if (quickNoteInput) {
     quickNoteInput.value = localStorage.getItem(QUICK_NOTE_KEY) || "";
@@ -9814,7 +11333,7 @@ function initV4Experience() {
   });
 }
 
-function initV5Release() {
+function initV6Release() {
   renderReleaseCenter();
   renderEvolutionTree();
   fillSimulationSelects();
@@ -9822,13 +11341,13 @@ function initV5Release() {
 
   releaseFocusBtn?.addEventListener("click", () => {
     scrollToSection("release-center");
-      showToast("Centro 6.0 activo");
+      showToast("Centro 6.2 activo");
   });
   releaseResetTourBtn?.addEventListener("click", () => {
     storyChapterIndex = 0;
     renderStoryMode();
     setActiveScreen(0);
-    showToast("Ruta V6 reiniciada");
+    showToast("Ruta V6.2 reiniciada");
   });
   runSimulationBtn?.addEventListener("click", () => {
     runEcosystemSimulation();
@@ -9859,8 +11378,8 @@ function initV5Release() {
     renderLyonixNativeShell();
     if (lyonixInput) lyonixInput.value = "";
     if (lyonixGlobalInput) lyonixGlobalInput.value = "";
-    if (lyonixResult) lyonixResult.innerHTML = '<p class="result-meta">Nueva conversacion iniciada para LYONIX. Prueba: <strong>Que comia el Triceratops?</strong></p>';
-    if (lyonixGlobalResult) lyonixGlobalResult.innerHTML = '<p class="result-meta">Sesión reiniciada. Escribe una pregunta para buscar informacion desde la web y la base local.</p>';
+    if (lyonixResult) lyonixResult.innerHTML = '<p class="result-meta">Nueva conversacion iniciada para LYONIX. Prueba: <strong>Que comia el Triceratops?</strong> o <strong>Que fosiles del Spinosaurus hay?</strong></p>';
+    if (lyonixGlobalResult) lyonixGlobalResult.innerHTML = '<p class="result-meta">Sesion reiniciada. Escribe una pregunta para buscar informacion desde la web y la base local.</p>';
     showToast("Memoria de LYONIX reiniciada");
   });
 }
@@ -9877,9 +11396,9 @@ function getCommandItems() {
   const sectionItems = [
     { label: "Ir a Estado", type: "Seccion", action: () => openSettingsFromCommand("estado") },
     { label: "Ir a Version", type: "Seccion", action: () => openSettingsFromCommand("version") },
-    { label: "Ir a Novedades V6.0", type: "Seccion", action: () => scrollToSection("novedades") },
+    { label: "Ir a Novedades V6.2", type: "Seccion", action: () => scrollToSection("novedades") },
     { label: "Ir a Ultra rendimiento", type: "Seccion", action: () => scrollToSection("ultra") },
-    { label: "Ir a Centro 6.0", type: "Seccion", action: () => scrollToSection("release-center") },
+    { label: "Ir a Centro 6.2", type: "Seccion", action: () => scrollToSection("release-center") },
     { label: "Ir a Expediciones", type: "Seccion", action: () => scrollToSection("expediciones") },
     { label: "Ir a Modo Historia", type: "Seccion", action: () => scrollToSection("historia") },
     { label: "Ir a LYONIX intelligence", type: "Seccion", action: () => scrollToSection("enciclopedia") },
@@ -10059,9 +11578,338 @@ function initHeroQuickSearch() {
   });
 }
 
+function getStoredReviews() {
+  return safeParseJSON(safeGetStorage(OWNER_REVIEWS_KEY), []);
+}
+
+function saveStoredReviews(items) {
+  safeSetStorage(OWNER_REVIEWS_KEY, JSON.stringify(items));
+}
+
+function renderReviewList() {
+  if (!reviewList) return;
+  const reviews = getStoredReviews();
+  if (!reviews.length) {
+    reviewList.innerHTML = '<p class="result-meta">Todavia no hay resenas guardadas.</p>';
+    return;
+  }
+  reviewList.innerHTML = reviews.slice().reverse().slice(0, 8).map((item) => `
+    <article class="review-item">
+      <div class="review-head">
+        <div>
+          <h3>${escapeHtml(item.name || "Visitante")}</h3>
+          <p class="result-meta">${escapeHtml(item.type)} Ã‚Â· ${escapeHtml(item.date)}</p>
+        </div>
+        <span class="review-stars">${"?".repeat(Number(item.rating) || 0)}</span>
+      </div>
+      <p class="review-note"><strong>Le gusto:</strong> ${escapeHtml(item.message || "Sin comentario")}</p>
+      <p class="review-note"><strong>Mejorar:</strong> ${escapeHtml(item.improve || "Sin sugerencias")}</p>
+    </article>
+  `).join("");
+}
+
+function getReviewDraft() {
+  return safeParseJSON(safeGetStorage(OWNER_REVIEW_DRAFT_KEY), {});
+}
+
+function fillReviewDraft() {
+  const draft = getReviewDraft();
+  if (reviewNameInput) reviewNameInput.value = draft.name || "";
+  if (reviewTypeSelect) reviewTypeSelect.value = draft.type || "opinion";
+  if (reviewRatingSelect) reviewRatingSelect.value = draft.rating || "5";
+  if (reviewMessageInput) reviewMessageInput.value = draft.message || "";
+  if (reviewImproveInput) reviewImproveInput.value = draft.improve || "";
+}
+
+function saveReviewDraft({ silent = false } = {}) {
+  const draft = {
+    name: reviewNameInput?.value.trim() || "",
+    type: reviewTypeSelect?.value || "opinion",
+    rating: reviewRatingSelect?.value || "5",
+    message: reviewMessageInput?.value.trim() || "",
+    improve: reviewImproveInput?.value.trim() || ""
+  };
+  safeSetStorage(OWNER_REVIEW_DRAFT_KEY, JSON.stringify(draft));
+  if (reviewStatus) reviewStatus.textContent = "Borrador guardado en este navegador.";
+  if (!silent) showToast("Borrador de resena guardado");
+}
+
+function clearReviewDraft() {
+  safeSetStorage(OWNER_REVIEW_DRAFT_KEY, JSON.stringify({}));
+}
+
+function buildReviewPayload() {
+  const payload = {
+    name: reviewNameInput?.value.trim() || "Visitante",
+    type: reviewTypeSelect?.value || "opinion",
+    rating: reviewRatingSelect?.value || "5",
+    message: reviewMessageInput?.value.trim() || "",
+    improve: reviewImproveInput?.value.trim() || "",
+    date: new Date().toLocaleString("es-DO"),
+    page: window.location.href
+  };
+  if (!payload.message && !payload.improve) return null;
+  return payload;
+}
+
+function openReviewMail(entry) {
+  const subject = encodeURIComponent(`Nueva resena DinoVerse Ã‚Â· ${entry.type} Ã‚Â· ${entry.rating}/5`);
+  const body = encodeURIComponent(
+`Nombre: ${entry.name}
+Tipo: ${entry.type}
+Calificacion: ${entry.rating}/5
+Le gusto:
+${entry.message || "Sin comentario"}
+
+Debe mejorar:
+${entry.improve || "Sin sugerencias"}
+
+Pagina:
+${entry.page}
+
+Fecha:
+${entry.date}`
+  );
+  window.location.href = `mailto:${OWNER_EMAIL}?subject=${subject}&body=${body}`;
+}
+
+function openMailForOwner(subject, body) {
+  window.location.href = `mailto:${OWNER_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+
+function submitReview() {
+  const payload = buildReviewPayload();
+  if (!payload) {
+    if (reviewStatus) reviewStatus.textContent = "Escribe al menos algo que te gusto o algo que debemos mejorar.";
+    showToast("Completa la resena antes de enviarla");
+    return;
+  }
+  const reviews = getStoredReviews();
+  reviews.push(payload);
+  saveStoredReviews(reviews.slice(-50));
+  renderReviewList();
+  renderOwnerMetrics();
+  clearReviewDraft();
+  if (reviewStatus) reviewStatus.textContent = "Resena guardada y lista para enviar al correo del dueno.";
+  if (reviewMessageInput) reviewMessageInput.value = "";
+  if (reviewImproveInput) reviewImproveInput.value = "";
+  openReviewMail(payload);
+  showToast("Resena guardada");
+}
+
+function applyOwnerMode(enabled, { persist = true } = {}) {
+  document.body.classList.toggle("owner-mode", !!enabled);
+  if (devPanel) devPanel.hidden = !enabled;
+  if (devLockPanel) devLockPanel.hidden = enabled;
+  if (devModeStatus) devModeStatus.textContent = enabled ? "Desbloqueado para el dueno." : "Bloqueado.";
+  if (persist) safeSetStorage(OWNER_MODE_KEY, enabled ? "1" : "0");
+  renderOwnerMetrics();
+}
+
+function copyDiagnostics() {
+  const data = {
+    version: getSemanticVersion(),
+    theme: document.body.classList.contains("light") ? "light" : "dark",
+    ownerMode: document.body.classList.contains("owner-mode"),
+    favorites: favorites.length,
+    reviews: getStoredReviews().length,
+    url: window.location.href,
+    viewport: `${window.innerWidth}x${window.innerHeight}`,
+    userAgent: navigator.userAgent
+  };
+  navigator.clipboard?.writeText(JSON.stringify(data, null, 2))
+    .then(() => showToast("Diagnostico copiado"))
+    .catch(() => showToast("No se pudo copiar el diagnostico"));
+}
+
+function buildOwnerReport() {
+  const reviews = getStoredReviews();
+  const currentTheme = document.body.classList.contains("light") ? "light" : "dark";
+  const note = safeGetStorage(OWNER_NOTE_KEY) || "";
+  return {
+    version: getSemanticVersion(),
+    theme: currentTheme,
+    ownerMode: document.body.classList.contains("owner-mode"),
+    favorites: favorites.length,
+    reviews: reviews.length,
+    xp: explorerXP,
+    missions: completedMissions,
+    screen: currentScreenIndex + 1,
+    note,
+    url: window.location.href,
+    viewport: `${window.innerWidth}x${window.innerHeight}`,
+    generatedAt: new Date().toLocaleString("es-DO"),
+    draftSaved: !!(getReviewDraft().message || getReviewDraft().improve),
+    pwaInstalled: window.matchMedia("(display-mode: standalone)").matches
+  };
+}
+
+function renderOwnerMetrics() {
+  if (!ownerMetrics) return;
+  const report = buildOwnerReport();
+  const reviews = getStoredReviews();
+  ownerMetrics.innerHTML = `
+    <article class="owner-metric"><span>Version</span><strong>${escapeHtml(report.version)}</strong></article>
+    <article class="owner-metric"><span>Resenas</span><strong>${reviews.length}</strong></article>
+    <article class="owner-metric"><span>Favoritos</span><strong>${favorites.length}</strong></article>
+    <article class="owner-metric"><span>XP del usuario</span><strong>${explorerXP}</strong></article>
+    <article class="owner-metric"><span>Tema activo</span><strong>${escapeHtml(report.theme)}</strong></article>
+    <article class="owner-metric"><span>Pantalla actual</span><strong>${currentScreenIndex + 1}</strong></article>
+    <article class="owner-metric"><span>PWA</span><strong>${report.pwaInstalled ? "Instalada" : "Web"}</strong></article>
+  `;
+}
+
+function copyOwnerReport() {
+  const report = buildOwnerReport();
+  navigator.clipboard?.writeText(JSON.stringify(report, null, 2))
+    .then(() => showToast("Reporte del dueno copiado"))
+    .catch(() => showToast("No se pudo copiar el reporte"));
+}
+
+function exportOwnerBackup() {
+  const payload = {
+    report: buildOwnerReport(),
+    reviews: getStoredReviews(),
+    draft: getReviewDraft(),
+    autosave: safeParseJSON(safeGetStorage(AUTOSAVE_KEY), {}),
+    theme: safeParseJSON(safeGetStorage(CUSTOM_THEME_KEY), {}),
+    savedTheme: safeParseJSON(safeGetStorage(SAVED_THEME_SLOT_KEY), {}),
+    achievements: unlockedAchievements,
+    favorites,
+    ownerNote: safeGetStorage(OWNER_NOTE_KEY) || "",
+    reviewsByType: getReviewTypeSummary(getStoredReviews()),
+    lastScreenId: screenSections[currentScreenIndex]?.id || "",
+    pwaInstalled: window.matchMedia("(display-mode: standalone)").matches
+  };
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "dinoverse-owner-backup.json";
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast("Respaldo del dueno exportado");
+}
+
+function sendStoredReviewsToOwner() {
+  const reviews = getStoredReviews();
+  if (!reviews.length) {
+    showToast("No hay resenas para enviar");
+    return;
+  }
+  const body = reviews.slice(-12).map((item, index) => {
+    return `${index + 1}. ${item.name} Ã‚Â· ${item.type} Ã‚Â· ${item.rating}/5
+Le gusto: ${item.message || "Sin comentario"}
+Mejorar: ${item.improve || "Sin sugerencias"}
+Fecha: ${item.date}`;
+  }).join("\n\n");
+  openMailForOwner("Resumen de resenas DinoVerse", body);
+}
+
+function exportReviews() {
+  const reviews = getStoredReviews();
+  const blob = new Blob([JSON.stringify(reviews, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "dinoverse-resenas.json";
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast("Resenas exportadas");
+}
+
+function initOwnerCenter() {
+  applyOwnerMode(safeGetStorage(OWNER_MODE_KEY) === "1", { persist: false });
+  fillReviewDraft();
+  renderReviewList();
+  renderOwnerMetrics();
+  if (ownerNoteInput) ownerNoteInput.value = safeGetStorage(OWNER_NOTE_KEY) || "";
+  if (ownerPrivateStatus) ownerPrivateStatus.textContent = "Espacio privado local de este navegador.";
+
+  saveReviewDraftBtn?.addEventListener("click", () => saveReviewDraft());
+  sendReviewBtn?.addEventListener("click", submitReview);
+  [reviewNameInput, reviewTypeSelect, reviewRatingSelect, reviewMessageInput, reviewImproveInput].filter(Boolean).forEach((el) => {
+    el.addEventListener("input", () => saveReviewDraft({ silent: true }));
+    el.addEventListener("change", () => saveReviewDraft({ silent: true }));
+  });
+
+  applyOwnerStyleBtn?.addEventListener("click", () => {
+    const mode = ownerAccentPreset?.value || "cinematic";
+    const message = welcomeMessageInput?.value.trim() || "";
+    applyDesignMode(mode);
+    if (message) {
+      const lead = document.querySelector("#inicio .lead");
+      if (lead) lead.textContent = message;
+      safeSetStorage(OWNER_WELCOME_KEY, message);
+    }
+    showToast("Estilo del dueno aplicado");
+  });
+
+  resetWelcomeBtn?.addEventListener("click", () => {
+    safeSetStorage(OWNER_WELCOME_KEY, "");
+    const lead = document.querySelector("#inicio .lead");
+    if (lead) lead.textContent = "Explora especies, compara dinosaurios, revisa fosiles, estudia el mapa paleo, juega, descubre ecosistemas y usa LYONIX para encontrar respuestas claras en una experiencia mas elegante y mejor organizada.";
+    if (welcomeMessageInput) welcomeMessageInput.value = "";
+    showToast("Portada restaurada");
+  });
+
+  const savedWelcome = safeGetStorage(OWNER_WELCOME_KEY) || "";
+  if (savedWelcome) {
+    const lead = document.querySelector("#inicio .lead");
+    if (lead) lead.textContent = savedWelcome;
+    if (welcomeMessageInput) welcomeMessageInput.value = savedWelcome;
+  }
+
+  devUnlockBtn?.addEventListener("click", () => {
+    const value = devPasswordInput?.value || "";
+    if (value !== OWNER_PASSWORD) {
+      if (devModeStatus) devModeStatus.textContent = "Clave incorrecta.";
+      showToast("Clave incorrecta");
+      return;
+    }
+    applyOwnerMode(true);
+    if (devPasswordInput) devPasswordInput.value = "";
+    showToast("Centro del dueno V2 activado");
+  });
+
+  devLogoutBtn?.addEventListener("click", () => {
+    applyOwnerMode(false);
+    showToast("Centro del dueno V2 cerrado");
+  });
+
+  devCopyDiagnosticsBtn?.addEventListener("click", copyDiagnostics);
+  devCopyOwnerReportBtn?.addEventListener("click", copyOwnerReport);
+  devExportBackupBtn?.addEventListener("click", exportOwnerBackup);
+  devExportReviewsBtn?.addEventListener("click", exportReviews);
+  devSendReviewsBtn?.addEventListener("click", sendStoredReviewsToOwner);
+  devClearReviewsBtn?.addEventListener("click", () => {
+    saveStoredReviews([]);
+    renderReviewList();
+    renderOwnerMetrics();
+    showToast("Resenas borradas");
+  });
+  devResetProgressBtn?.addEventListener("click", () => {
+    resetAllProgressData();
+    renderOwnerMetrics();
+    showToast("Progreso reiniciado");
+  });
+  devOpenSettingsBtn?.addEventListener("click", () => {
+    settingsToggleBtn?.click();
+    showToast("Configuracion abierta");
+  });
+  devOpenFeedbackBtn?.addEventListener("click", () => {
+    scrollToSection("feedback");
+    showToast("Centro de resenas abierto");
+  });
+  ownerNoteInput?.addEventListener("input", () => {
+    safeSetStorage(OWNER_NOTE_KEY, ownerNoteInput.value);
+    if (ownerPrivateStatus) ownerPrivateStatus.textContent = "Nota privada guardada en este navegador.";
+  });
+}
+
 function initSettingsDrawer() {
   if (!settingsToggleBtn || !settingsDrawer || !settingsContent || !closeSettingsBtn) return;
-  const views = ["personalizacion", "funciones", "estado", "version"];
+  const views = ["estado", "personalizacion", "funciones", "feedback", "devmode", "version"];
   views.forEach((id) => {
     const section = document.getElementById(id);
     if (section && section.parentElement !== settingsContent) {
@@ -10115,7 +11963,7 @@ function initSettingsDrawer() {
     }
   });
 
-  document.querySelectorAll('a[href="#personalizacion"], a[href="#funciones"], a[href="#estado"], a[href="#version"]').forEach((link) => {
+  document.querySelectorAll('a[href="#personalizacion"], a[href="#funciones"], a[href="#feedback"], a[href="#devmode"], a[href="#estado"], a[href="#version"]').forEach((link) => {
     link.addEventListener("click", (e) => {
       e.preventDefault();
       const href = link.getAttribute("href") || "#personalizacion";
@@ -10166,7 +12014,7 @@ function initPWA() {
     requestActivation();
   };
 
-  applySystemStatus("Sistema listo", "La app revisara manualmente si existe una nueva version del sistema.");
+  applySystemStatus("Sistema V6.2 listo", "La app revisara manualmente si existe una nueva version del sistema y te explicara mejor el proceso de instalacion y actualizacion.");
 
   if (location.protocol === "file:") {
     applySystemStatus("Modo archivo", "Para instalar la PWA y recibir actualizaciones reales, abre DinoVerse desde un servidor local o en hosting HTTPS.");
@@ -10391,10 +12239,13 @@ function bindImageRecovery(img, fallback = DEFAULT_DINO_IMAGE) {
 function initHeroShowcase() {
   if (!heroShowcase) return;
   applyHeroSlide(heroSlideIndex);
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const compactDevice = window.matchMedia("(max-width: 640px)").matches;
+  if (reduceMotion || compactDevice || document.body.classList.contains("perf-lite")) return;
   heroSlideTimer = setInterval(() => {
     heroSlideIndex = (heroSlideIndex + 1) % heroSlides.length;
     applyHeroSlide(heroSlideIndex);
-  }, 5000);
+  }, 6500);
 }
 
 [searchInput, periodFilter, dietFilter, continentFilter, sizeFilter, sortFilter]
@@ -10545,6 +12396,10 @@ function setChromeHidden(hidden) {
 
 function applyOptionsCollapsed(collapsed, { persist = true } = {}) {
   document.body.classList.toggle("options-collapsed", !!collapsed);
+  if (collapsed) {
+    mainHeader?.classList.remove("nav-open");
+    menuToggle?.setAttribute("aria-expanded", "false");
+  }
   if (optionsToggleBtn) {
     optionsToggleBtn.textContent = collapsed ? "Mostrar menu" : "Ocultar menu";
     optionsToggleBtn.setAttribute("aria-label", collapsed ? "Mostrar menu de opciones" : "Ocultar menu de opciones");
@@ -10661,7 +12516,7 @@ initHeroQuickSearch();
 initSettingsDrawer();
 initScreenNavigation();
 initV4Experience();
-initV5Release();
+initV6Release();
 bindRegionButtons();
 bindMetricButtons();
 bindRankingScopeButtons();
@@ -10681,6 +12536,7 @@ initFossilControls();
 initTimelineJumps();
 initToolsPanel();
 initLyonixIntelligence();
+initOwnerCenter();
 updateLiveActivity();
 updateSessionTimer();
 sessionTimerInterval = setInterval(updateSessionTimer, 1000);
@@ -10788,3 +12644,4 @@ window.__dinoBootReady = "1";
 </script>
 </body>
 </html>
+
